@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
-router.route('/').get((req,res)=>{
-    res.send("First Route Setup successfully")
-})
+const signup = require('../Controller/auth-controller')
+router.route('/signup').get(signup)
 
 module.exports = router;
