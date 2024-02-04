@@ -13,8 +13,8 @@ const signup = async (req, res) => {
         // const saltRound = 10;
         // const hash_password = await bcrypt.hash(password, saltRound);
 
-        const data = await User.create({ username, email, phone, password });
-        res.status(200).json({ data });
+        const userCreated = await User.create({ username, email, phone, password });
+        res.status(200).json({ msg: "Registration Successfull", token: await userCreated.generateToken() });
 
     } catch (error) {
         res.status(500).send('Internal server Error at signup', error)
