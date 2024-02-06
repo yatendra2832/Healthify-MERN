@@ -2,11 +2,17 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const connectDb = require('./utils/db')
+const errorMiddleware = require('./Middleware/error-middleware')
 
+// Routers
 const authRouter = require('./Router/auth-router')
 
+// Middlewares
 app.use(express.json());
 app.use('/api/auth', authRouter);
+
+app.use(errorMiddleware)
+
 
 const PORT = process.env.PORT || 5000;
 
