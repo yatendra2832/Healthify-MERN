@@ -6,10 +6,12 @@ const errorMiddleware = require('./Middleware/error-middleware')
 
 // Routers
 const authRouter = require('./Router/auth-router')
+const contactRouter = require('./Router/contact-router')
 
 // Middlewares
 app.use(express.json());
 app.use('/api/auth', authRouter);
+app.use('/api/form', contactRouter);
 
 app.use(errorMiddleware)
 
