@@ -26,7 +26,7 @@ const DoctorProfile = ({
           </div>
           <div className="col-md-8">
             <div className="card-body">
-              <h2 className="card-title">{doctorName}</h2>
+              <h2 className="card-title text-primary">{doctorName}</h2>
               <p className="card-text">
                 <strong>Specialty:</strong> {specialty}
               </p>
