@@ -1,10 +1,40 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Importing Navbar1 and its all pages
+import Navbar1 from "./components/Navbar1";
+
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contactus from "./pages/Contactus";
+import Doctors from "./pages/Doctors";
+import Patients from "./pages/Patients";
+import Appointment from "./pages/Appointment";
+import Emergency from "./pages/Emergency";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+
+// Importing Navbar2 and all its pages
+import Navbar2 from "./components/Navbar2";
+import BloodTest from "./pages/BloodTest";
+import DoctorConsultation from "./pages/DoctorConsultation";
+import GeneticTesting from "./pages/GeneticTesting";
+import Xray from "./pages/Xray";
+import Surgery from "./pages/Surgery";
+import Supplement from "./pages/Supplement";
+import Offers from "./pages/Offers";
+import HealthTips from "./pages/HealthTips";
+
+// importing Footer of the website
+import Footer from "./components/Footer";
+
 function App() {
   return (
     <>
       <BrowserRouter>
+        <Navbar1 />
+        <Navbar2 />
         <Routes>
+          {/* Navbar 1 Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/doctors" element={<Doctors />} />
@@ -12,7 +42,20 @@ function App() {
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/contactus" element={<Contactus />} />
           <Route path="/emergency" element={<Emergency />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+
+          {/* Navbar 2 Routes */}
+          <Route path="/bloodtest" element={<BloodTest />} />
+          <Route path="/xray" element={<Xray />} />
+          <Route path="/genetictesting" element={<GeneticTesting />} />
+          <Route path="/doctorconsultation" element={<DoctorConsultation />} />
+          <Route path="/surgery" element={<Surgery />} />
+          <Route path="/supplement" element={<Supplement />} />
+          <Route path="healthtips" element={<HealthTips />} />
+          <Route path="offers" element={<Offers />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );
