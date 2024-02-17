@@ -56,12 +56,16 @@ const About = () => {
 
       {/* Out teams */}
       <div className="team my-4 mx-4">
-        <h2 className="text-center text-primary fw-bold my-4 ">Our Team</h2>
+        <h2 className="text-center text-primary fw-bold my-4">Our Team</h2>
         <div className="row justify-content-center">
           <div className="col-md-4 mb-4">
-            <div className="card shadow-sm">
-              <img src="/images/team/doctorteam1.jpeg" alt="Doctor Team 1" />
-              <div className="card-body">
+            <div className="card border-0 shadow-sm">
+              <img
+                src="/images/team/doctorteam1.jpeg"
+                alt="Doctor Team 1"
+                className="card-img-top rounded-4 p-2"
+              />
+              <div className="card-body text-center">
                 <p className="card-text">
                   Meet Dr. John Doe, a highly experienced medical professional.
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -70,9 +74,13 @@ const About = () => {
             </div>
           </div>
           <div className="col-md-4 mb-4">
-            <div className="card shadow-sm">
-              <img src="/images/team/doctor2.jpeg" alt="Doctor 2" />
-              <div className="card-body">
+            <div className="card border-0 shadow-sm">
+              <img
+                src="/images/team/doctor2.jpeg"
+                alt="Doctor 2"
+                className="card-img-top rounded-4 p-2"
+              />
+              <div className="card-body text-center">
                 <p className="card-text">
                   Introducing Dr. Jane Smith, our expert in surgical procedures.
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -81,13 +89,13 @@ const About = () => {
             </div>
           </div>
           <div className="col-md-4 mb-4">
-            <div className="card shadow-sm ">
+            <div className="card border-0 shadow-sm">
               <img
                 src="/images/team/doctor3.webp"
                 alt="Doctor 3"
-                className="w-100"
+                className="w-100 rounded-4 p-2"
               />
-              <div className="card-body">
+              <div className="card-body text-center">
                 <p className="card-text">
                   Meet Dr. Sarah Johnson, our expert in medical research. She
                   has a wealth of experience in her field.
