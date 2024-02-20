@@ -1,0 +1,6 @@
+.healthCard:hover {
+  background-color: #007bff;
+  transform: translateY(-10px);
+  transition: background 0.5s, transform 0.5s;
+  color: white;
+}
