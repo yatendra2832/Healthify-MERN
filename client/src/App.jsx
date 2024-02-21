@@ -27,6 +27,8 @@ import HealthTips from "./pages/HealthTips";
 // importing Footer of the website
 import Footer from "./components/Footer";
 
+// importing the user dashboard
+import UserDashboard from "./pages/UserDashboard";
 function App() {
   return (
     <>
@@ -54,6 +56,9 @@ function App() {
           <Route path="/supplement" element={<Supplement />} />
           <Route path="healthtips" element={<HealthTips />} />
           <Route path="offers" element={<Offers />} />
+
+          {/* USer Dashboard Route */}
+          <Route path="/userdashboard" element={<UserDashboard />} />
         </Routes>
         <Footer />
       </BrowserRouter>

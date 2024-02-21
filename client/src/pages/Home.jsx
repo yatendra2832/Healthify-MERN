@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import BottomNavbar from "../components/BottomNavbar";
 import MainCarousel from "../components/CarouselCard/MainCarousel";
 import Slider from "react-slick";
@@ -97,10 +97,13 @@ const Home = () => {
     },
   ];
   const settings = {
-    dots:true,
+    dots: true,
     infinite: true,
     slidesToScroll: 1,
     slidesToShow: 3,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 1200, // Larger screen and below
