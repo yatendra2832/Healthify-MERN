@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Signup = () => {
+  // Signup form logic
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    phone: "",
+    password: "",
+  });
+
+  // handling form input
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+
+  // Signup Carousel
   const slides = [
     {
       image: "/images/Login_Signup/boxicon.png",
@@ -32,7 +52,6 @@ const Signup = () => {
       heading: "Complete",
     },
   ];
-
   const settings = {
     dots: true,
     infinite: true,
@@ -79,6 +98,8 @@ const Signup = () => {
                 placeholder="Your Username"
                 required
                 autoComplete="off"
+                value={user.username}
+                onChange={handleInput}
               />
             </div>
 
@@ -94,6 +115,8 @@ const Signup = () => {
                 placeholder="name@example.com"
                 required
                 autoComplete="off"
+                value={user.email}
+                onChange={handleInput}
               />
             </div>
 
@@ -109,6 +132,8 @@ const Signup = () => {
                 placeholder="Your Phone Number"
                 required
                 autoComplete="off"
+                value={user.phone}
+                onChange={handleInput}
               />
             </div>
 
@@ -124,6 +149,8 @@ const Signup = () => {
                 placeholder="Your Password"
                 required
                 autoComplete="off"
+                value={user.password}
+                onChange={handleInput}
               />
             </div>
 
