@@ -3,6 +3,52 @@ import { useState } from "react";
 const Appointment = () => {
   const [showCancellationPolicy, setShowCancellationPolicy] = useState(false);
 
+  // Handling the appointment form submission
+  const [appointment, setAppointment] = useState({
+    fullName: "",
+    dob: "",
+    gender: "", // You can set a default value
+
+    // contactInformation
+    contactNumber: "",
+    email: "",
+    address: "",
+
+    // appointmentDetails
+    reasonForAppointment: "",
+    preferredDate: "",
+    preferredTime: "",
+    appointmentType: "", // You can set a default value
+    preferredProvider: "",
+
+    // insuranceDetails
+    insuranceProvider: "",
+    policyNumber: "",
+
+    medicalHistory: "",
+    currentMedications: "",
+    allergies: "",
+    chronicConditions: "",
+    pastSurgeries: "",
+
+    // emergencyContact
+    name: "",
+    relationship: "",
+    phone: "",
+
+    cancellationPolicy: false,
+  });
+
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setAppointment({
+      ...appointment,
+      [name]: value,
+    });
+  };
+
   const handleReadMoreClick = () => {
     setShowCancellationPolicy(!showCancellationPolicy);
   };
@@ -19,20 +65,38 @@ const Appointment = () => {
             <div className="form-group col-md-8 col-lg-6 mb-2">
               <label htmlFor="fullName">Full Name*</label>
               <input
+                name="fullName"
                 type="text"
                 className="form-control"
                 id="fullName"
                 placeholder="John Doe"
                 required
+                value={appointment.fullName}
+                onChange={handleInput}
               />
             </div>
             <div className="form-group col-md-8 col-lg-6 mb-2">
               <label htmlFor="dob">Date of Birth*</label>
-              <input type="date" className="form-control" id="dob" required />
+              <input
+                type="date"
+                className="form-control"
+                id="dob"
+                required
+                name="dob"
+                value={appointment.dob}
+                onChange={handleInput}
+              />
             </div>
             <div className="form-group col-md-8 col-lg-6">
               <label htmlFor="gender">Gender*</label>
-              <select className="form-control" id="gender" required>
+              <select
+                className="form-control"
+                id="gender"
+                required
+                name="gender"
+                value={appointment.gender}
+                onChange={handleInput}
+              >
                 <option value="" disabled selected>
                   Select Gender
                 </option>
@@ -50,30 +114,39 @@ const Appointment = () => {
               <label htmlFor="contactNumber">Contact Number*</label>
               <input
                 type="tel"
+                name="contactNumber"
                 className="form-control"
                 id="contactNumber"
                 placeholder="123-456-7890"
                 required
+                value={appointment.contactNumber}
+                onChange={handleInput}
               />
             </div>
             <div className="form-group col-md-8 col-lg-6 mb-2">
               <label htmlFor="email">Email Address*</label>
               <input
                 type="email"
+                name="email"
                 className="form-control"
                 id="email"
                 placeholder="john.doe@example.com"
                 required
+                value={appointment.email}
+                onChange={handleInput}
               />
             </div>
             <div className="form-group col-md-8 col-lg-6 mb-2">
               <label htmlFor="address">Home Address*</label>
               <input
                 type="text"
+                name="address"
                 className="form-control"
                 id="address"
                 placeholder="123 Main St, City, Country"
                 required
+                value={appointment.address}
+                onChange={handleInput}
               />
             </div>
           </div>
@@ -88,8 +161,11 @@ const Appointment = () => {
               </label>
               <select
                 className="form-control"
+                name="reasonForAppointment"
                 id="reasonForAppointment"
                 required
+                value={appointment.reasonForAppointment}
+                onChange={handleInput}
               >
                 <option value="" disabled selected>
                   Select Reason
@@ -107,7 +183,10 @@ const Appointment = () => {
                 type="date"
                 className="form-control"
                 id="preferredDate"
+                name="preferredDate"
                 required
+                value={appointment.preferredDate}
+                onChange={handleInput}
               />
             </div>
 
@@ -117,14 +196,24 @@ const Appointment = () => {
                 type="time"
                 className="form-control"
                 id="preferredTime"
+                name="preferredTime"
                 required
+                value={appointment.preferredTime}
+                onChange={handleInput}
               />
             </div>
 
             {/* Type of Appointment */}
             <div className="form-group col-md-8 col-lg-6 mb-2">
               <label htmlFor="appointmentType">Type of Appointment*</label>
-              <select className="form-control" id="appointmentType" required>
+              <select
+                className="form-control"
+                id="appointmentType"
+                name="appointmentType"
+                required
+                value={appointment.appointmentType}
+                onChange={handleInput}
+              >
                 <option value="" disabled selected>
                   Select Appointment Type
                 </option>
@@ -142,7 +231,10 @@ const Appointment = () => {
                 type="text"
                 className="form-control"
                 id="preferredProvider"
+                name="preferredProvider"
                 placeholder="Enter preferred provider's name"
+                value={appointment.preferredProvider}
+                onChange={handleInput}
               />
             </div>
           </div>
@@ -156,7 +248,10 @@ const Appointment = () => {
                 type="text"
                 className="form-control"
                 id="insuranceProvider"
+                name="insuranceProvider"
                 placeholder="XYZ Insurance"
+                value={appointment.insuranceProvider}
+                onChange={handleInput}
               />
             </div>
             <div className="form-group col-md-8 col-lg-6 mb-2">
@@ -165,7 +260,10 @@ const Appointment = () => {
                 type="text"
                 className="form-control"
                 id="policyNumber"
+                name="policyNumber"
                 placeholder="123456789"
+                value={appointment.policyNumber}
+                onChange={handleInput}
               />
             </div>
           </div>
@@ -180,7 +278,10 @@ const Appointment = () => {
                 type="text"
                 className="form-control"
                 id="medications"
+                name="currentMedications"
                 placeholder="List any current medications"
+                value={appointment.currentMedications}
+                onChange={handleInput}
               />
             </div>
 
@@ -191,7 +292,10 @@ const Appointment = () => {
                 type="text"
                 className="form-control"
                 id="allergies"
+                name="allergies"
                 placeholder="List any allergies"
+                value={appointment.allergies}
+                onChange={handleInput}
               />
             </div>
 
@@ -202,7 +306,10 @@ const Appointment = () => {
                 type="text"
                 className="form-control"
                 id="chronicConditions"
+                name="chronicConditions"
                 placeholder="List any chronic conditions"
+                value={appointment.chronicConditions}
+                onChange={handleInput}
               />
             </div>
 
@@ -215,7 +322,10 @@ const Appointment = () => {
                 type="text"
                 className="form-control"
                 id="pastSurgeries"
+                name="pastSurgeries"
                 placeholder="List any past surgeries or hospitalizations"
+                value={appointment.pastSurgeries}
+                onChange={handleInput}
               />
             </div>
 
@@ -224,8 +334,11 @@ const Appointment = () => {
               <textarea
                 className="form-control"
                 id="medicalHistory"
+                name="medicalHistory"
                 rows="3"
                 placeholder="Briefly describe your medical history"
+                value={appointment.medicalHistory}
+                onChange={handleInput}
               ></textarea>
             </div>
           </div>
@@ -241,7 +354,10 @@ const Appointment = () => {
                 type="text"
                 className="form-control"
                 id="emergencyContactName"
+                name="name"
                 placeholder="Emergency Contact Name"
+                value={appointment.name}
+                onChange={handleInput}
               />
             </div>
             <div className="form-group col-md-8 col-lg-6 mb-2">
@@ -250,7 +366,10 @@ const Appointment = () => {
                 type="text"
                 className="form-control"
                 id="relationship"
+                name="relationship"
                 placeholder="Relationship"
+                value={appointment.relationship}
+                onChange={handleInput}
               />
             </div>
           </div>
@@ -264,7 +383,10 @@ const Appointment = () => {
               type="tel"
               className="form-control"
               id="emergencyContactPhone"
+              name="phone"
               placeholder="123-456-7890"
+              value={appointment.phone}
+              onChange={handleInput}
             />
           </div>
 
@@ -300,6 +422,9 @@ const Appointment = () => {
                 type="checkbox"
                 className="form-check-input"
                 id="exampleCheck1"
+                name="cancellationPolicy"
+                value={appointment.cancellationPolicy}
+                onChange={handleInput}
               />
               <label className="form-check-label" htmlFor="exampleCheck1">
                 I agree to the terms and conditions

@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Contactus = () => {
+  const [contact, setContact] = useState({
+    username: "",
+    email: "",
+    phone: "",
+    message: "",
+    reason: "",
+    attachments: "",
+  });
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setContact({ ...contact, [name]: value });
+  };
   return (
     <>
       <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative my-4 mx-4">
@@ -28,7 +42,10 @@ const Contactus = () => {
                     type="text"
                     className="form-control"
                     id="name"
+                    name="username"
                     placeholder="Your Name"
+                    onChange={handleInput}
+                    value={contact.username}
                   />
                 </div>
                 <div className="mb-3">
@@ -39,7 +56,10 @@ const Contactus = () => {
                     type="email"
                     className="form-control"
                     id="email"
+                    name="email"
                     placeholder="Your Email"
+                    onChange={handleInput}
+                    value={contact.email}
                   />
                 </div>
                 <div className="mb-3">
@@ -50,7 +70,10 @@ const Contactus = () => {
                     type="tel"
                     className="form-control"
                     id="phone"
+                    name="phone"
                     placeholder="Your Phone Number"
+                    onChange={handleInput}
+                    value={contact.phone}
                   />
                 </div>
                 <div className="mb-3">
@@ -60,15 +83,24 @@ const Contactus = () => {
                   <textarea
                     className="form-control"
                     id="message"
+                    name="message"
                     rows="5"
                     placeholder="Your Message"
+                    onChange={handleInput}
+                    value={contact.message}
                   ></textarea>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="reason" className="form-label">
                     Reason for Contact:
                   </label>
-                  <select className="form-select" id="reason">
+                  <select
+                    className="form-select"
+                    id="reason"
+                    name="reason"
+                    onChange={handleInput}
+                    value={contact.reason}
+                  >
                     <option value="general">General Inquiry</option>
                     <option value="appointment">Appointment Scheduling</option>
                     <option value="billing">Billing and Insurance</option>
@@ -86,6 +118,9 @@ const Contactus = () => {
                     type="file"
                     className="form-control-file"
                     id="attachments"
+                    name="attachments"
+                    onChange={handleInput}
+                    value={contact.attachments}
                   />
                 </div>
               </div>

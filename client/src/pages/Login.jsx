@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Login = () => {
+  // Handling login form
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setUser({ ...user, [name]: value });
+  };
+
+  // Slider
   const slides = [
     {
       image: "/images/Login_Signup/boxicon.png",
@@ -32,7 +46,6 @@ const Login = () => {
       heading: "Complete",
     },
   ];
-
   const settings = {
     dots: true,
     infinite: true,
@@ -80,6 +93,8 @@ const Login = () => {
                 placeholder="name@example.com"
                 required
                 autoComplete="off"
+                onChange={handleInput}
+                value={user.email}
               />
             </div>
 
@@ -95,6 +110,8 @@ const Login = () => {
                 placeholder="Your Password"
                 required
                 autoComplete="off"
+                onChange={handleInput}
+                value={user.password}
               />
             </div>
             <button
