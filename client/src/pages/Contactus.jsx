@@ -15,6 +15,24 @@ const Contactus = () => {
 
     setContact({ ...contact, [name]: value });
   };
+
+  // handling Submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(contact);
+    try {
+      const response = await fetch("http://localhost:5000/api/form/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contact),
+      });
+      console.log(response);
+    } catch (error) {
+      console.log("Contact form error", error);
+    }
+  };
   return (
     <>
       <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative my-4 mx-4">
@@ -32,7 +50,7 @@ const Contactus = () => {
             <h2 className="text-center text-primary fw-bold fs-1">
               Contact Us
             </h2>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="row ">
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">
@@ -44,6 +62,7 @@ const Contactus = () => {
                     id="name"
                     name="username"
                     placeholder="Your Name"
+                    required
                     onChange={handleInput}
                     value={contact.username}
                   />
@@ -58,6 +77,7 @@ const Contactus = () => {
                     id="email"
                     name="email"
                     placeholder="Your Email"
+                    required
                     onChange={handleInput}
                     value={contact.email}
                   />
@@ -71,6 +91,7 @@ const Contactus = () => {
                     className="form-control"
                     id="phone"
                     name="phone"
+                    required
                     placeholder="Your Phone Number"
                     onChange={handleInput}
                     value={contact.phone}
@@ -86,6 +107,7 @@ const Contactus = () => {
                     name="message"
                     rows="5"
                     placeholder="Your Message"
+                    required
                     onChange={handleInput}
                     value={contact.message}
                   ></textarea>
@@ -98,6 +120,7 @@ const Contactus = () => {
                     className="form-select"
                     id="reason"
                     name="reason"
+                    required
                     onChange={handleInput}
                     value={contact.reason}
                   >
