@@ -36,17 +36,81 @@ const Appointment = () => {
     relationship: "",
     phone: "",
 
-    cancellationPolicy: false,
+    cancellationPolicy:"",
   });
 
-  const handleInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
+  // const handleInput = (e) => {
+  //   const name = e.target.name;
+  //   const value = e.target.value;
 
-    setAppointment({
-      ...appointment,
-      [name]: value,
-    });
+  //   setAppointment({
+  //     ...appointment,
+  //     [name]: value,
+  //   });
+  // };
+
+  const handleInput = (event) => {
+    const { name, value, type, checked } = event.target;
+    const newValue = type === 'checkbox' ? checked : value;
+    setAppointment(prevState => ({
+      ...prevState,
+      [name]: newValue
+    }));
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/form/appointment",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(appointment),
+        }
+      );
+
+      if (response.ok) {
+        setAppointment({
+          fullName: "",
+          dob: "",
+          gender: "", // You can set a default value
+
+          // contactInformation
+          contactNumber: "",
+          email: "",
+          address: "",
+
+          // appointmentDetails
+          reasonForAppointment: "",
+          preferredDate: "",
+          preferredTime: "",
+          appointmentType: "", // You can set a default value
+          preferredProvider: "",
+
+          // insuranceDetails
+          insuranceProvider: "",
+          policyNumber: "",
+
+          medicalHistory: "",
+          currentMedications: "",
+          allergies: "",
+          chronicConditions: "",
+          pastSurgeries: "",
+
+          // emergencyContact
+          name: "",
+          relationship: "",
+          phone: "",
+
+          cancellationPolicy: false,
+        });
+      }
+      console.log(response);
+    } catch (error) {
+      console.log("Error from the appointment form", error);
+    }
   };
 
   const handleReadMoreClick = () => {
@@ -58,7 +122,7 @@ const Appointment = () => {
         Medical Appointment Form
       </h2>
       <div className="container w-100">
-        <form>
+        <form onSubmit={handleSubmit}>
           {/* Personal Information */}
           <h3 className="text-primary my-4">Personal Information</h3>
           <div className="row ">
@@ -423,7 +487,7 @@ const Appointment = () => {
                 className="form-check-input"
                 id="exampleCheck1"
                 name="cancellationPolicy"
-                value={appointment.cancellationPolicy}
+                checked={appointment.cancellationPolicy}
                 onChange={handleInput}
               />
               <label className="form-check-label" htmlFor="exampleCheck1">
