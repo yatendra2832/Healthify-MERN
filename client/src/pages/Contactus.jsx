@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const Contactus = () => {
   const [contact, setContact] = useState({
     username: "",
@@ -9,6 +8,8 @@ const Contactus = () => {
     reason: "",
     attachments: "",
   });
+
+  // Handling input
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -28,6 +29,9 @@ const Contactus = () => {
         },
         body: JSON.stringify(contact),
       });
+      if (response.ok) {
+        setContact({ username: "", email: "", phone: "", password: "" });
+      }
       console.log(response);
     } catch (error) {
       console.log("Contact form error", error);
