@@ -12,7 +12,9 @@ import Appointment from "./pages/Appointment";
 import Emergency from "./pages/Emergency";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 
+import Error from "./pages/Error";
 // Importing Navbar2 and all its pages
 import Navbar2 from "./components/Navbar2";
 import BloodTest from "./pages/BloodTest";
@@ -46,6 +48,8 @@ function App() {
           <Route path="/emergency" element={<Emergency />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="*" element={<Error />} />
 
           {/* Navbar 2 Routes */}
           <Route path="/bloodtest" element={<BloodTest />} />

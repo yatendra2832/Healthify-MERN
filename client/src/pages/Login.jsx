@@ -11,7 +11,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const storeTokenInLS = useAuth();
+  const {storeTokenInLS} = useAuth();
 
   const navigate = useNavigate();
 

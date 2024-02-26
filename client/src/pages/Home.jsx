@@ -134,7 +134,7 @@ const Home = () => {
       </div>
 
       {/* Cards */}
-      <h1 class=" text-center fw-bold mt-3 text-primary">
+      <h1 className=" text-center fw-bold mt-3 text-primary">
         Health Scan & Imaging Test
       </h1>
       <Slider {...settings}>

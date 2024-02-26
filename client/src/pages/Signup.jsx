@@ -18,7 +18,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   // useAuth token
-  const storeTokenInLS = useAuth();
+  const { storeTokenInLS } = useAuth();
 
   // handling form input
   const handleInput = (e) => {
@@ -44,7 +44,7 @@ const Signup = () => {
       });
       if (response.ok) {
         const res_data = await response.json();
-        
+
         // Store the token in the LS
         storeTokenInLS(res_data.token);
 
