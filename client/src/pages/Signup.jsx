@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
+import { useNavigate } from "react-router-dom";
+
+import { useAuth } from "../store/auth";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,6 +15,10 @@ const Signup = () => {
     phone: "",
     password: "",
   });
+  const navigate = useNavigate();
+
+  // useAuth token
+  const storeTokenInLS = useAuth();
 
   // handling form input
   const handleInput = (e) => {
@@ -22,6 +29,33 @@ const Signup = () => {
       ...user,
       [name]: value,
     });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      if (response.ok) {
+        const res_data = await response.json();
+        
+        // Store the token in the LS
+        storeTokenInLS(res_data.token);
+
+        setUser({ username: "", email: "", phone: "", password: "" });
+        navigate("/");
+      }
+
+      // console.log(response);
+    } catch (error) {
+      console.log("Error at the signup form", error);
+    }
   };
 
   // Signup Carousel
@@ -85,7 +119,7 @@ const Signup = () => {
       <div className="col col-md-6 p-4 d-flex flex-column position-static">
         <div className="container mt-1 ">
           <h2 className="text-center text-primary fw-bold fs-1">Signup</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="username" className="form-label">
                 Username
