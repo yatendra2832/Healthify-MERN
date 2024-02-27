@@ -1,0 +1,22 @@
+
+.error-page h1 span   {
+    background-image: linear-gradient(135deg, #00aeff, #e52e71);
+    background-size: cover;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 4.2rem;
+    font-weight: bolder;
+    
+}
+
+.error-page p{
+    background-image: linear-gradient(135deg, #00ccff, #e52e2e);
+    background-size: cover;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 4.2rem;
+    font-weight: bolder;
+}
+
