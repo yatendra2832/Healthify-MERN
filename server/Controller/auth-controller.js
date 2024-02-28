@@ -1,5 +1,6 @@
 const User = require('../Models/user-model')
 const bcrypt = require('bcrypt');
+// signup logic
 const signup = async (req, res) => {
     try {
         const { username, email, phone, password } = req.body;
@@ -22,6 +23,7 @@ const signup = async (req, res) => {
     }
 }
 
+// Login logic
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -45,4 +47,14 @@ const login = async (req, res) => {
     }
 }
 
-module.exports = { signup, login }
+// user logic
+const user = async (req, res) => {
+    try {
+        const userData = req.user;
+        return res.status(200).json({ msg: userData });
+    } catch (error) {
+        console.log('Error from the user route', error)
+    }
+
+}
+module.exports = { signup, login, user }
