@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../store/auth";
 const UserProfile = () => {
+  const { user } = useAuth();
   return (
     <div className="dropdown mx-4">
       <a
@@ -15,14 +17,17 @@ const UserProfile = () => {
           height="32"
           className="rounded-circle me-2"
         />
-        <strong>Hi,username</strong>
+        <strong>Hi,{user.username}</strong>
       </a>
       <ul
         className="dropdown-menu dropdown-menu-primary text-small shadow "
         data-popper-placement="top-start"
       >
         <li>
-          <Link to={"/userdashboard"} className="text-decoration-none dropdown-item">
+          <Link
+            to={"/userdashboard"}
+            className="text-decoration-none dropdown-item"
+          >
             {" "}
             UserDashboard
           </Link>

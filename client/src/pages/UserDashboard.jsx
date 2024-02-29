@@ -1,9 +1,14 @@
 import React from "react";
 import UserDashboardCard from "../components/Card/UserDashboardCard";
+import { useAuth } from "../store/auth";
 const UserDashboard = () => {
+  const { user } = useAuth();
   return (
     <>
-      <h1 className="text-center text-primary fw-bold">Users Dashboard</h1>
+      <h1 className="text-center text-primary fw-bold">User Dashboard</h1>
+      <div className="d-flex justify-content-center">
+       <p className=" border  border-3 shadow-sm border-light shadow-warning rounded-5 px-4  fs-4  "> Welcome {user.username}</p>
+      </div>
       <div>
         {/* Row 1 */}
         <div className="container px-2 py-2" id="featured-3">
