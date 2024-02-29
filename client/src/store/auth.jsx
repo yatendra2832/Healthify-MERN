@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
 
   const storeTokenInLS = (serverToken) => {
     setToken(serverToken);
-    return localStorage.setItem("token", serverToken);
+    localStorage.setItem("token", serverToken);
   };
 
   let isLoggedIn = !!token;
@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   // Logout
   const LogoutUser = () => {
     setToken("");
+    setUser("");
     return localStorage.removeItem("token");
   };
 

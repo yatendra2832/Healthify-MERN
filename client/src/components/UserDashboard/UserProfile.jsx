@@ -38,9 +38,13 @@ const UserProfile = () => {
           </a>
         </li>
         <li>
-          <a className="dropdown-item" href="#">
+        <Link
+            to={"/profile"}
+            className="text-decoration-none dropdown-item"
+          >
+            {" "}
             Profile
-          </a>
+          </Link>
         </li>
         <li>
           <hr className="dropdown-divider" />
