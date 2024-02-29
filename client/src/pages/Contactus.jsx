@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "../store/auth";
 const Contactus = () => {
   const [contact, setContact] = useState({
     username: "",
@@ -8,6 +9,13 @@ const Contactus = () => {
     reason: "",
     attachments: "",
   });
+  const { user } = useAuth();
+  const [userData, setUserData] = useState(true);
+
+  if (userData && user) {
+    setContact({ username: user.username, email: user.email,phone:user.phone, message: "" });
+    setUserData(false);
+  }
 
   // Handling input
   const handleInput = (e) => {
