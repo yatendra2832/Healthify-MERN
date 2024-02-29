@@ -31,6 +31,7 @@ import Footer from "./components/Footer";
 
 // importing the user dashboard
 import UserDashboard from "./pages/UserDashboard";
+import Profile from "./components/UserDashboard/Profile";
 function App() {
   return (
     <>
@@ -63,6 +64,7 @@ function App() {
 
           {/* USer Dashboard Route */}
           <Route path="/userdashboard" element={<UserDashboard />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <Footer />
       </BrowserRouter>
