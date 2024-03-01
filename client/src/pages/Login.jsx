@@ -11,7 +11,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const {storeTokenInLS} = useAuth();
+  const { storeTokenInLS } = useAuth();
 
   const navigate = useNavigate();
 
@@ -33,15 +33,18 @@ const Login = () => {
         },
         body: JSON.stringify(user),
       });
-      if (response.ok) {
-        const res_data = await response.json();
 
+      const res_data = await response.json();
+
+      if (response.ok) {
         // Store the token in the LS
         storeTokenInLS(res_data.token);
 
         setUser({ email: "", password: "" });
         alert("Login Successful");
         navigate("/");
+      }else{
+        alert(res_data.extraDetails)
       }
     } catch (error) {
       console.log("Login Error", error);
