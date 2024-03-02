@@ -1,14 +1,14 @@
-const express =require('express');
+const express = require('express');
 const router = express.Router();
 const adminController = require('../Controller/admin-controller')
 const authMiddleware = require("../Middleware/auth-middleware")
-
-router.route("/users").get(authMiddleware,adminController.getAllUsers);
-
-
-router.route('/contacts').get(authMiddleware,adminController.getAllContacts)
+const adminMiddleware = require("../Middleware/admin-middleware");
+router.route("/users").get(authMiddleware, adminMiddleware, adminController.getAllUsers);
 
 
-router.route('/appointments').get(authMiddleware,adminController.getAllAppointments)
+router.route('/contacts').get(authMiddleware, adminMiddleware, adminController.getAllContacts)
 
-module.exports= router;
+
+router.route('/appointments').get(authMiddleware, adminMiddleware, adminController.getAllAppointments)
+
+module.exports = router;
