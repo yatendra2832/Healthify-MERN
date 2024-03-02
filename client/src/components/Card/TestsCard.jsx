@@ -24,6 +24,7 @@ const TestsCard = ({
           <div class=" col-12 col-md-8 ">
             <p class="fw-semibold ">{content}</p>
             <button class="btn btn-danger m-4 ">{buttonText}</button>
+            <button className="btn btn-warning m-4 ">Book Test </button>
           </div>
         </div>
       </div>

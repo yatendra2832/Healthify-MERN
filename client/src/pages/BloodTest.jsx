@@ -4,7 +4,7 @@ const BloodTest = () => {
   return (
     <div className="bg-primary text-white m-4 border rounded-5 ">
       <div className="container">
-        <h1 className="text-center my-4 fw-bold">
+        <h1 className="text-center my-2 fw-bold">
           The Excellence of{" "}
           <span className="text-warning">Blood Test Labs</span>
         </h1>
@@ -21,7 +21,8 @@ const BloodTest = () => {
               8. Contribution to Healthcare <hr />
               9. Positive Feedback <hr />
             </p>
-            <button className="btn btn-danger  mb-2 w-25">Know More</button>
+            <button className="btn btn-danger  mb-2  mx-4">Know More</button>
+            <button className="btn btn-warning  mb-2  mx-4">Book Blood Test</button>
           </div>
           <div className="col-md-6">
             <img
