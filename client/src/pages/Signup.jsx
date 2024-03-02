@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import { useAuth } from "../store/auth";
 
 import "slick-carousel/slick/slick.css";
@@ -48,11 +48,11 @@ const Signup = () => {
       if (response.ok) {
         // Store the token in the LS
         storeTokenInLS(res_data.token);
-
+        toast.success("Registration Successfull ")
         setUser({ username: "", email: "", phone: "", password: "" });
         navigate("/");
       } else {
-        alert(res_data.extraDetails ? res_data.extraDetails : res_data.message);
+        toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message);
       }
 
       // console.log(response);

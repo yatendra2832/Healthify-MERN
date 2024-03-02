@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 const Appointment = () => {
   const [showCancellationPolicy, setShowCancellationPolicy] = useState(false);
 
@@ -72,6 +73,7 @@ const Appointment = () => {
       );
 
       if (response.ok) {
+        toast.success("Appointment Form Submitted successfully");
         setAppointment({
           fullName: "",
           dob: "",
@@ -109,7 +111,7 @@ const Appointment = () => {
       }
       console.log(response);
     } catch (error) {
-      console.log("Error from the appointment form", error);
+      toast.error("Error from the appointment form", error);
     }
   };
 

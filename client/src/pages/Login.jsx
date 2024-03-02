@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -39,15 +41,14 @@ const Login = () => {
       if (response.ok) {
         // Store the token in the LS
         storeTokenInLS(res_data.token);
-
+        toast.success("Login Successful");
         setUser({ email: "", password: "" });
-        alert("Login Successful");
         navigate("/");
-      }else{
-        alert(res_data.extraDetails)
+      } else {
+        toast.error(res_data.extraDetails);
       }
     } catch (error) {
-      console.log("Login Error", error);
+      toast.error("Login Error", error);
     }
   };
 
