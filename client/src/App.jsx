@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 // Importing Navbar1 and its all pages
 import Navbar1 from "./components/Navbar1";
@@ -32,12 +32,21 @@ import Footer from "./components/Footer";
 // importing the user dashboard
 import UserDashboard from "./pages/UserDashboard";
 import Profile from "./components/UserDashboard/Profile";
+
+// importing the admin panel
+import Admin_Layout from "./components/AdminPanel/Admin_Layout";
+import AdminUsers from "./pages/Admin-Users";
+import AdminContacts from "./pages/Admin-Contacts";
+import AdminAppointments from "./pages/Admin-Appointments";
+
 function App() {
   return (
     <>
       <BrowserRouter>
+      
         <Navbar1 />
         <Navbar2 />
+
         <Routes>
           {/* Navbar 1 Routes */}
           <Route path="/" element={<Home />} />
@@ -62,9 +71,16 @@ function App() {
           <Route path="healthtips" element={<HealthTips />} />
           <Route path="offers" element={<Offers />} />
 
-          {/* USer Dashboard Route */}
+          {/* User Dashboard Route */}
           <Route path="/userdashboard" element={<UserDashboard />} />
           <Route path="/profile" element={<Profile />} />
+
+          {/* Admin Panel */}
+          <Route path="/admin" element={<Admin_Layout />}>
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="contacts" element={<AdminContacts />} />
+            <Route path="appointments" element={<AdminAppointments />} />
+          </Route>
         </Routes>
         <Footer />
       </BrowserRouter>
