@@ -8,6 +8,10 @@ const adminMiddleware = require("../Middleware/admin-middleware");
 // getting all users
 router.route("/users").get(authMiddleware, adminMiddleware, adminController.getAllUsers);
 
+//getting user by id 
+router.route('/users/:id').get(authMiddleware,adminMiddleware,adminController.getUserById);
+
+
 // Deleting a Particular user
 router.route('/users/delete/:id').delete(authMiddleware, adminMiddleware, adminController.deleteUserById)
 
@@ -16,6 +20,8 @@ router.route('/users/delete/:id').delete(authMiddleware, adminMiddleware, adminC
 router.route('/contacts').get(authMiddleware, adminMiddleware, adminController.getAllContacts)
 // Deleting a Particular user
 router.route('/contacts/delete/:id').delete(authMiddleware, adminMiddleware, adminController.deleteContactById)
+
+// Appointments
 
 router.route('/appointments').get(authMiddleware, adminMiddleware, adminController.getAllAppointments)
 router.route('/appointments/delete/:id').delete(authMiddleware,adminMiddleware,adminController.deleteAppointmentById)

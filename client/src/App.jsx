@@ -38,6 +38,7 @@ import Admin_Layout from "./components/AdminPanel/Admin_Layout";
 import AdminUsers from "./pages/Admin-Users";
 import AdminContacts from "./pages/Admin-Contacts";
 import AdminAppointments from "./pages/Admin-Appointments";
+import AdminUpdate from "./pages/AdminUpdate";
 
 function App() {
   return (
@@ -80,6 +81,7 @@ function App() {
             <Route path="users" element={<AdminUsers />} />
             <Route path="contacts" element={<AdminContacts />} />
             <Route path="appointments" element={<AdminAppointments />} />
+            <Route path="users/:id/edit" element={<AdminUpdate/>} />
           </Route>
         </Routes>
         <Footer />
