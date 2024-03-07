@@ -11,6 +11,8 @@ router.route("/users").get(authMiddleware, adminMiddleware, adminController.getA
 //getting user by id 
 router.route('/users/:id').get(authMiddleware,adminMiddleware,adminController.getUserById);
 
+// updating user by id
+router.route('/users/update/:id').put(authMiddleware,adminMiddleware,adminController.updateUserById);
 
 // Deleting a Particular user
 router.route('/users/delete/:id').delete(authMiddleware, adminMiddleware, adminController.deleteUserById)
