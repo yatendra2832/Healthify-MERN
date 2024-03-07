@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
+import {Link} from "react-router-dom"
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const { AuthorizationToken } = useAuth();
@@ -37,7 +38,7 @@ const AdminUsers = () => {
         getAllUsersData();
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
   useEffect(() => {
@@ -64,7 +65,9 @@ const AdminUsers = () => {
                   <td>{curUser.email}</td>
                   <td>{curUser.phone}</td>
                   <td>
-                    <button className="btn btn-warning">Edit</button>
+                    <Link to={`/admin/users/${curUser._id}/edit`} >
+                      <button className="btn btn-warning">Edit</button>
+                    </Link>
                   </td>
                   <td>
                     <button

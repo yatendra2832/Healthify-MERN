@@ -1,7 +1,9 @@
 const User = require('../Models/user-model')
 const Contact = require('../Models/contact-model')
 const Appointment = require('../Models/appointment-model')
-// Users 
+
+// -------------------------------------------------------------------------------
+// -----------------------------USERS---------------------------------------------
 // getting all users
 const getAllUsers = async (req, res) => {
     try {
@@ -13,6 +15,17 @@ const getAllUsers = async (req, res) => {
     } catch (error) {
         next(error);
 
+    }
+}
+
+// getting user by id 
+const getUserById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await User.findOne({ _id: id }, { password: 0 })
+        return res.status(200).json(data);
+    } catch (error) {
+        next(error)
     }
 }
 
@@ -29,8 +42,9 @@ const deleteUserById = async (req, res, next) => {
 }
 
 
+// --------------------------------------------------------------------------------
+// ---------------------------------- CONTACTS-------------------------------------
 
-// Contacts
 // Getting all the contacts
 const getAllContacts = async (req, res) => {
     try {
@@ -57,8 +71,9 @@ const deleteContactById = async (req, res, next) => {
     }
 }
 
+// ------------------------------------------------------------------------------------------
+// ----------------------------------------APPOINTMENTS--------------------------------------
 
-// Appointments
 // Getting all the appointments data
 const getAllAppointments = async (req, res) => {
     try {
@@ -85,4 +100,4 @@ const deleteAppointmentById = async (req, res, next) => {
 }
 
 
-module.exports = { getAllUsers, getAllContacts, getAllAppointments, deleteUserById, deleteContactById,deleteAppointmentById }
+module.exports = { getAllUsers, getAllContacts, getAllAppointments, deleteUserById, deleteContactById, deleteAppointmentById, getUserById }
