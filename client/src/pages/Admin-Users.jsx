@@ -20,6 +20,26 @@ const AdminUsers = () => {
       console.log(error);
     }
   };
+
+  const deleteUser = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/admin/users/delete/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: AuthorizationToken,
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        getAllUsersData();
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
   useEffect(() => {
     getAllUsersData();
   }, []);
@@ -47,7 +67,12 @@ const AdminUsers = () => {
                     <button className="btn btn-warning">Edit</button>
                   </td>
                   <td>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => deleteUser(curUser._id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );

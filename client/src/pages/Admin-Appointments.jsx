@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 
 const AdminAppointments = () => {
@@ -20,11 +20,26 @@ const AdminAppointments = () => {
     setAppointments(data);
   };
 
+  const deleteAppointment = async (id) => {
+    const response = await fetch(
+      `http://localhost:5000/api/admin/appointments/delete/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: AuthorizationToken,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    if (response.ok) {
+      getAllAppointmentsData();
+    }
+  };
+
   useEffect(() => {
     getAllAppointmentsData();
   }, []);
-
-  
 
   return (
     <>
@@ -44,7 +59,10 @@ const AdminAppointments = () => {
             {appointments.map((curAppointment, index) => {
               return (
                 <tr key={index}>
-                  <td>{curAppointment.fullName}{'/'+curAppointment.gender}</td>
+                  <td>
+                    {curAppointment.fullName}
+                    {"/" + curAppointment.gender}
+                  </td>
                   <td>{curAppointment.contactNumber}</td>
                   <td>
                     {curAppointment.preferredDate + "/"}+
@@ -56,7 +74,12 @@ const AdminAppointments = () => {
                     <div className="d-flex justify-content-around">
                       {/* Add buttons for actions like edit, delete, or view details */}
                       <button className="btn btn-warning">Edit</button>
-                      <button className="btn btn-danger">Delete</button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => deleteAppointment(curAppointment._id)}
+                      >
+                        Delete
+                      </button>
                       <button className="btn btn-info">View Details</button>
                     </div>
                   </td>

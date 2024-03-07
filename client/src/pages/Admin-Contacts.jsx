@@ -18,9 +18,28 @@ const AdminContacts = () => {
       console.log(error);
     }
   };
+
+  const deleteContact = async (id) => {
+    try {
+      const response =await fetch(`http://localhost:5000/api/admin/contacts/delete/${id}`,{
+        method:"DELETE",
+        headers:{
+          Authorization:AuthorizationToken
+        },
+      })
+
+      const data = await response.json();
+      if(response.ok){
+        getAllContactsData()
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getAllContactsData();
   }, []);
+
   return (
     <>
       <div className="container">
@@ -51,7 +70,12 @@ const AdminContacts = () => {
                     <button className="btn btn-warning">Edit</button>
                   </td>
                   <td>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => deleteContact(curContact._id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );

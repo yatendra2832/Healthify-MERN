@@ -18,6 +18,5 @@ router.route('/contacts').get(authMiddleware, adminMiddleware, adminController.g
 router.route('/contacts/delete/:id').delete(authMiddleware, adminMiddleware, adminController.deleteContactById)
 
 router.route('/appointments').get(authMiddleware, adminMiddleware, adminController.getAllAppointments)
-router.route('/appointments/delete/:id').get(authMiddleware, adminMiddleware, adminController.deleteAppointmentById)
-
+router.route('/appointments/delete/:id').delete(authMiddleware,adminMiddleware,adminController.deleteAppointmentById)
 module.exports = router;
