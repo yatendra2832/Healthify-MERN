@@ -1,7 +1,7 @@
 const User = require('../Models/user-model')
 const Contact = require('../Models/contact-model')
 const Appointment = require('../Models/appointment-model')
-// Users //
+// Users 
 // getting all users
 const getAllUsers = async (req, res) => {
     try {
@@ -15,6 +15,20 @@ const getAllUsers = async (req, res) => {
 
     }
 }
+
+// deleteuserbyid
+const deleteUserById = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        await User.deleteOne({ _id: id });
+        return res.status(200).json({ message: "User Deleted Successfully" });
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+
 
 // Contacts
 // Getting all the contacts
@@ -30,6 +44,20 @@ const getAllContacts = async (req, res) => {
     }
 }
 
+//Deleting a Particular contact
+// deleteuContactbyid
+const deleteContactById = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        await Contact.deleteOne({ _id: id });
+        return res.status(200).json({ message: "Contact Deleted Successfully" });
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+
 // Appointments
 // Getting all the appointments data
 const getAllAppointments = async (req, res) => {
@@ -44,5 +72,17 @@ const getAllAppointments = async (req, res) => {
     }
 }
 
+// deleteuContactbyid
+const deleteAppointmentById = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        await Appointment.deleteOne({ _id: id });
+        return res.status(200).json({ message: "Appointment Deleted Successfully" });
 
-module.exports = { getAllUsers, getAllContacts, getAllAppointments }
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+module.exports = { getAllUsers, getAllContacts, getAllAppointments, deleteUserById, deleteContactById,deleteAppointmentById }
