@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 
+import { CiCalendarDate } from "react-icons/ci";
+import { IoTime } from "react-icons/io5";
+import { MdOutlineUnfoldMore } from "react-icons/md";
+import { MdContacts } from "react-icons/md";
+import { FaInfoCircle } from "react-icons/fa";
+import { VscGroupByRefType } from "react-icons/vsc";
+import { MdDelete } from "react-icons/md";
+import { FaRegUserCircle } from "react-icons/fa";
+
 const AdminAppointments = () => {
   const { AuthorizationToken } = useAuth();
   const [appointments, setAppointments] = useState([]);
@@ -43,15 +52,30 @@ const AdminAppointments = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="table-responsive px-4 mx-4">
         <table className="table shadow table-striped">
           <thead>
             <tr>
-              <th>Patient Name/Gender</th>
-              <th>Contact</th>
-              <th>Date/Time</th>
-              <th>Reason</th>
-              <th>Appointment Type</th>
+              <th>
+                Patient Name/Gender
+                <FaRegUserCircle className="fs-5 mx-1" />{" "}
+              </th>
+              <th>
+                Contact <MdContacts className="fs-5 mx-1" />
+              </th>
+              <th>
+                Date
+                <CiCalendarDate className="fs-5 mx-1" />
+                /Time
+                <IoTime className="fs-5 mx-1" />
+              </th>
+              <th>
+                Reason <FaInfoCircle className="fs-5 mx-1" />
+              </th>
+              <th>
+                Appointment Type
+                <VscGroupByRefType className="fs-5 mx-1" />
+              </th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -73,14 +97,16 @@ const AdminAppointments = () => {
                   <td>
                     <div className="d-flex justify-content-around">
                       {/* Add buttons for actions like edit, delete, or view details */}
-                      <button className="btn btn-warning">Edit</button>
                       <button
                         className="btn btn-danger"
                         onClick={() => deleteAppointment(curAppointment._id)}
                       >
-                        Delete
+                        Delete <MdDelete className="fs-5 mx-1" />
                       </button>
-                      <button className="btn btn-info">View Details</button>
+                      <button className="btn btn-info">
+                        View Details{" "}
+                        <MdOutlineUnfoldMore className="fs-5 mx-1" />
+                      </button>
                     </div>
                   </td>
                 </tr>

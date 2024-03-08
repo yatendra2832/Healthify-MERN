@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+
+import { MdDeleteForever } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
+
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const { AuthorizationToken } = useAuth();
@@ -46,15 +53,26 @@ const AdminUsers = () => {
   }, []);
   return (
     <>
-      <div className="container">
+      <div className="table-responsive px-4 mx-4">
         <table className="table shadow table-striped">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>Edit</th>
-              <th>Delete</th>
+              <th>
+                Name <FaRegUserCircle className="fs-5 mx-1" />{" "}
+              </th>
+              <th>
+                Email <MdEmail className="fs-5 mx-1" />
+              </th>
+              <th>
+                Phone
+                <FaPhoneAlt className="fs-5 mx-1" />
+              </th>
+              <th>
+                Edit <FaEdit className="fs-5 mx-1" />
+              </th>
+              <th>
+                Delete <MdDeleteForever className="fs-5 mx-1" />
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -65,7 +83,7 @@ const AdminUsers = () => {
                   <td>{curUser.email}</td>
                   <td>{curUser.phone}</td>
                   <td>
-                    <Link to={`/admin/users/${curUser._id}/edit`} >
+                    <Link to={`/admin/users/${curUser._id}/edit`}>
                       <button className="btn btn-warning">Edit</button>
                     </Link>
                   </td>

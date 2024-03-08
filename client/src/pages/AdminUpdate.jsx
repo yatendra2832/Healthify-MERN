@@ -24,13 +24,7 @@ const AdminUpdate = () => {
       );
       const data = await response.json();
       setUser(data);
-<<<<<<< HEAD
-    } catch (error) {
-      console.log(error)
-    }
-=======
     } catch (error) {}
->>>>>>> 602c83616481721fb29e5206a75d38ad6e8d1a5a
   };
 
   useEffect(() => {
@@ -71,15 +65,9 @@ const AdminUpdate = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="container-fluid mx-4 px-4 mb-4">
-      <div className="row">
-        <div className="col-md-8 col-lg-4 col-sm-12 border rounded-5 p-4 shadow-lg">
-=======
     <div className="container-fluid m-4 p-4">
       <div className="row">
         <div className="col-md-8 col-lg-4 col-sm-12 border rounded-4 p-4">
->>>>>>> 602c83616481721fb29e5206a75d38ad6e8d1a5a
           <h1 className="text-center text-primary ">Update User Data</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
