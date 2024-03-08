@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
+import { Link } from "react-router-dom";
 
 import { CiCalendarDate } from "react-icons/ci";
 import { IoTime } from "react-icons/io5";
@@ -103,10 +104,14 @@ const AdminAppointments = () => {
                       >
                         Delete <MdDelete className="fs-5 mx-1" />
                       </button>
-                      <button className="btn btn-info">
-                        View Details{" "}
-                        <MdOutlineUnfoldMore className="fs-5 mx-1" />
-                      </button>
+                      <Link
+                        to={`/admin/appointments/${curAppointment._id}`}
+                      >
+                        <button className="btn btn-info">
+                          View Details
+                          <MdOutlineUnfoldMore className="fs-5 mx-1" />
+                        </button>
+                      </Link>
                     </div>
                   </td>
                 </tr>

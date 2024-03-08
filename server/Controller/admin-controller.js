@@ -114,5 +114,16 @@ const deleteAppointmentById = async (req, res, next) => {
     }
 }
 
+// Getting appointment by id 
+const getAppointmentById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await Appointment.findOne({ _id: id })
+        return res.status(200).json(data);
+    } catch (error) {
+        next(error)
+    }
+}
 
-module.exports = { getAllUsers, getAllContacts, getAllAppointments, deleteUserById, deleteContactById, deleteAppointmentById, getUserById,updateUserById }
+
+module.exports = { getAllUsers, getAllContacts, getAllAppointments, deleteUserById, deleteContactById, deleteAppointmentById, getUserById,updateUserById ,getAppointmentById}
