@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
+
+import { MdDeleteForever } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
+import { MdMessage } from "react-icons/md";
+import { GrAttachment } from "react-icons/gr";
+import { FaInfoCircle } from "react-icons/fa";
+
 const AdminContacts = () => {
   const [contacts, setContacts] = useState([]);
   const { AuthorizationToken } = useAuth();
@@ -21,16 +30,19 @@ const AdminContacts = () => {
 
   const deleteContact = async (id) => {
     try {
-      const response =await fetch(`http://localhost:5000/api/admin/contacts/delete/${id}`,{
-        method:"DELETE",
-        headers:{
-          Authorization:AuthorizationToken
-        },
-      })
+      const response = await fetch(
+        `http://localhost:5000/api/admin/contacts/delete/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: AuthorizationToken,
+          },
+        }
+      );
 
       const data = await response.json();
-      if(response.ok){
-        getAllContactsData()
+      if (response.ok) {
+        getAllContactsData();
       }
     } catch (error) {
       console.log(error);
@@ -42,18 +54,31 @@ const AdminContacts = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="table-responsive px-4 mx-4">
         <table className="table shadow table-striped">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Message</th>
-              <th>Reason</th>
-              <th>Attachments</th>
-              <th>Edit</th>
-              <th>Delete</th>
+              <th>
+                Name <FaRegUserCircle className="fs-5 mx-1" />{" "}
+              </th>
+              <th>
+                Email <MdEmail className="fs-5 mx-1" />
+              </th>
+              <th>
+                Phone
+                <FaPhoneAlt className="fs-5 mx-1" />
+              </th>
+              <th>
+                Message
+                <MdMessage className="fs-5 mx-1" />
+              </th>
+              <th>Reason <FaInfoCircle className="fs-5 mx-1" /></th>
+              <th>
+                Attachments <GrAttachment className="fs-5 mx-1" />
+              </th>
+              <th>
+                Delete <MdDeleteForever className="fs-5 mx-1" />
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -66,9 +91,6 @@ const AdminContacts = () => {
                   <td>{curContact.message}</td>
                   <td>{curContact.reason}</td>
                   <td>{curContact.attachments}</td>
-                  <td>
-                    <button className="btn btn-warning">Edit</button>
-                  </td>
                   <td>
                     <button
                       className="btn btn-danger"
