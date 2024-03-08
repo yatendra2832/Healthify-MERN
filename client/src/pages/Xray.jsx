@@ -1,6 +1,15 @@
 import React from "react";
 import TestsCard from "../components/Card/TestsCard";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const Xray = () => {
+  AOS.init({
+    delay: 800,
+    duration: 1000,
+  });
+
   const TestData = [
     {
       title: "Digital X-Rays",
@@ -65,9 +74,19 @@ const Xray = () => {
       <h1 className="text-center text-primary fw-bold my-2">
         Test <span className="text-warning">&</span> Scans
       </h1>
-      <div>
+      {/* <div >
         {TestData.map((test, index) => (
           <TestsCard key={index} {...test} />
+        ))}
+      </div> */}
+      <div>
+        {TestData.map((test, index) => (
+          <div
+            key={index}
+            data-aos={`fade-${index % 2 === 0 ? "up" : "down"}`}
+          >
+            <TestsCard {...test} />
+          </div>
         ))}
       </div>
     </>
