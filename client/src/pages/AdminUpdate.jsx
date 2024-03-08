@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../store/auth";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
 const AdminUpdate = () => {
-  const { AuthorizationToken } = useAuth();
-  const [data, setData] = useState({
+  const [user, setUser] = useState({
     username: "",
     email: "",
     phone: "",
   });
-  const params = useParams();
 
-  const getSingleUserData = async () => {
+  const params = useParams();
+  const { AuthorizationToken } = useAuth();
+  const getSingleUserData = async (id) => {
     try {
       const response = await fetch(
         `http://localhost:5000/api/admin/users/${params.id}`,
@@ -22,9 +23,9 @@ const AdminUpdate = () => {
         }
       );
       const data = await response.json();
-      setData(data);
+      setUser(data);
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   };
 
@@ -32,67 +33,105 @@ const AdminUpdate = () => {
     getSingleUserData();
   }, []);
 
-  const handleInput = () => {};
+  const handleInput = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setUser({ ...user, [name]: value });
+  };
+
+  // updating data
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/admin/users/update/${params.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: AuthorizationToken,
+          },
+          body: JSON.stringify(user),
+        }
+      );
+      if (response.ok) {
+        toast.success("Updated Successfully");
+      } else {
+        toast.error("Not updated...");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="container">
-      <h2 className="text-center text-primary fw-bold fs-1 mb-5">
-        Update User
-      </h2>
-      <form className="row g-3">
-        <div className="col-md-6">
-          <label htmlFor="username" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            name="username"
-            className="form-control"
-            id="username"
-            placeholder="Your Username"
-            required
-            autoComplete="off"
-            onChange={handleInput}
-            value={data.username}
-          />
+    <div className="container-fluid mx-4 px-4 mb-4">
+      <div className="row">
+        <div className="col-md-8 col-lg-4 col-sm-12 border rounded-5 p-4 shadow-lg">
+          <h1 className="text-center text-primary ">Update User Data</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="username" className="form-label">
+                Username
+              </label>
+              <input
+                type="text"
+                name="username"
+                className="form-control"
+                id="username"
+                placeholder="Your Username"
+                required
+                autoComplete="off"
+                value={user.username}
+                onChange={handleInput}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="email" className="form-label">
+                Email address
+              </label>
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                id="email"
+                placeholder="name@example.com"
+                required
+                autoComplete="off"
+                value={user.email}
+                onChange={handleInput}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="phone" className="form-label">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                className="form-control"
+                id="phone"
+                placeholder="Your Phone Number"
+                required
+                autoComplete="off"
+                value={user.phone}
+                onChange={handleInput}
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary w-75 d-block mx-auto"
+            >
+              Submit
+            </button>
+          </form>
         </div>
-        <div className="col-md-6">
-          <label htmlFor="email" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            id="email"
-            placeholder="name@example.com"
-            required
-            autoComplete="off"
-            onChange={handleInput}
-            value={data.email}
-          />
-        </div>
-        <div className="col-md-6">
-          <label htmlFor="phone" className="form-label">
-            Phone Number
-          </label>
-          <input
-            type="tel"
-            name="phone"
-            className="form-control"
-            id="phone"
-            placeholder="Your Phone Number"
-            required
-            autoComplete="off"
-            onChange={handleInput}
-            value={data.phone}
-          />
-        </div>
-        <div className="col-12 text-center">
-          <button type="submit" className="btn btn-primary w-25 mb-4">
-            Submit
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
