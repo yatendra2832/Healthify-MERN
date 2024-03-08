@@ -1,5 +1,6 @@
 .healthCard:hover {
-  background-color: #007bff;
+  /* background: linear-gradient(to right, #007bff, #f07357); */
+  background: linear-gradient(to right, #007bff, #011e3d);
   transform: translateY(-10px);
   transition: background 0.5s, transform 0.5s;
   color: white;
