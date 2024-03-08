@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import UserProfile from "./UserDashboard/UserProfile";
 const Navbar1 = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
   return (
     <nav className="navbar navbar-expand-lg bg-primary border-bottom sticky-top">
       <div className="container-fluid">
@@ -67,10 +67,17 @@ const Navbar1 = () => {
             </ul>
           </div>
 
-          <div className="d-flex justify-content-start ">
+          <div className="d-flex justify-content-center ">
             {isLoggedIn ? (
               <>
-                <UserProfile />
+                {user.isAdmin && (
+                  <Link to={"/admin"}>
+                    <button className="btn btn-warning">
+                      Admin_Panel
+                    </button>
+                  </Link>
+                )}
+                <UserProfile className="mx-4"/>
               </>
             ) : (
               <>
