@@ -39,12 +39,12 @@ import AdminUsers from "./pages/Admin-Users";
 import AdminContacts from "./pages/Admin-Contacts";
 import AdminAppointments from "./pages/Admin-Appointments";
 import AdminUpdate from "./pages/AdminUpdate";
+import AdminAppointmentDetails from "./pages/AdminAppointment-Details";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-      
         <Navbar1 />
         <Navbar2 />
 
@@ -81,7 +81,11 @@ function App() {
             <Route path="users" element={<AdminUsers />} />
             <Route path="contacts" element={<AdminContacts />} />
             <Route path="appointments" element={<AdminAppointments />} />
-            <Route path="users/:id/edit" element={<AdminUpdate/>} />
+            <Route path="users/:id/edit" element={<AdminUpdate />} />
+            <Route
+              path="appointments/:id"
+              element={<AdminAppointmentDetails />}
+            />
           </Route>
         </Routes>
         <Footer />
