@@ -33,9 +33,9 @@ const getUserById = async (req, res) => {
 const updateUserById =async(req,res) =>{
     try {
         const id = req.params.id;
-        const updateUserData = req.body;
+         
         const updateData = await User.updateOne({_id:id}, {
-            $set:updateUserData
+            $set:req.body
         })
 
         return res.status(200).json(updateData)
