@@ -1,33 +1,42 @@
-import React,{useState,useEffect} from "react";
-import { NavLink, Outlet,useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, Navigate, Outlet, useLocation } from "react-router-dom";
+import { useAuth } from "../../store/auth";
+
 import { FaUser, FaAddressBook, FaBriefcase, FaHome } from "react-icons/fa";
+
 const Admin_Layout = () => {
+  const { user, isLoading } = useAuth();
   const location = useLocation();
-  const [pageTitle, setPageTitle] = useState('');
+  const [pageTitle, setPageTitle] = useState("");
 
   useEffect(() => {
     switch (location.pathname) {
-      case '/admin':
-        setPageTitle('Admin Panel');
+      case "/admin":
+        setPageTitle("Admin Panel");
         break;
-      case '/admin/users':
-        setPageTitle('Admin Panel - Users Data');
+      case "/admin/users":
+        setPageTitle("Admin Panel - Users Data");
         break;
-      case '/admin/contacts':
-        setPageTitle('Admin Panel - Contacts');
+      case "/admin/contacts":
+        setPageTitle("Admin Panel - Contacts");
         break;
-      case '/admin/appointments':
-        setPageTitle('Admin Panel - Appointments');
+      case "/admin/appointments":
+        setPageTitle("Admin Panel - Appointments");
         break;
       default:
-        setPageTitle('Admin Panel');
+        setPageTitle("Admin Panel");
         break;
     }
   }, [location]);
 
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+  if (!user.isAdmin) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <>
-      
       <div className=" p-3 ">
         <NavLink to={"/admin"} className="nav-link">
           {" "}
