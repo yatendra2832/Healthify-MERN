@@ -1,12 +1,19 @@
 import React from "react";
 import DoctorProfile from "../components/Card/DoctorProfile";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Doctors = () => {
+  AOS.init({
+    delay: 400,
+    duration: 1000,
+  });
+
   return (
     <>
-      <h2 className="text-center m-4">
+      <h2 className="text-center m-4  ">
         Our <span className="fw-bold text-primary ">Doctors</span>
       </h2>
-      <div>
+      <div data-aos="fade-left">
         <DoctorProfile
           imgSrc="/images/Doctorspage/doctor2.png"
           altText="Doctor 2"
@@ -22,7 +29,8 @@ const Doctors = () => {
           paymentOptions="Cash, Credit Cards, Insurance"
           languagesSpoken="English, French"
         />
-
+      </div>
+      <div data-aos="fade-right">
         <DoctorProfile
           imgSrc="/images/Doctorspage/doctor3.png"
           altText="Doctor 3"
@@ -38,7 +46,8 @@ const Doctors = () => {
           paymentOptions="Cash, Credit Cards, Insurance"
           languagesSpoken="English, Spanish"
         />
-
+      </div>
+      <div data-aos="zoom-in-down">
         <DoctorProfile
           imgSrc="/images/Doctorspage/doctor4.png"
           altText="Doctor 4"
@@ -54,7 +63,8 @@ const Doctors = () => {
           paymentOptions="Cash, Credit Cards, Insurance"
           languagesSpoken="English"
         />
-
+      </div>
+      <div data-aos="zoom-in-down">
         <DoctorProfile
           imgSrc="/images/Doctorspage/doctor5.png"
           altText="Doctor 5"
