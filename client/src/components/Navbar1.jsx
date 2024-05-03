@@ -72,12 +72,10 @@ const Navbar1 = () => {
               <>
                 {user.isAdmin && (
                   <Link to={"/admin"}>
-                    <button className="btn btn-warning">
-                      Admin_Panel
-                    </button>
+                    <button className="btn btn-warning">Admin_Panel</button>
                   </Link>
                 )}
-                <UserProfile className="mx-4"/>
+                <UserProfile user={user} className="mx-4" />
               </>
             ) : (
               <>
