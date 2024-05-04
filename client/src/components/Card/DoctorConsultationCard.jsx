@@ -4,10 +4,10 @@ const DoctorConsultationCard = ({
   imgSrc,
   altText,
   experience,
-  name,
+  doctorName,
   qualifications,
-  specialities,
-  languages,
+  specialty,
+  languagesSpoken,
   nextAvailability,
   consultationFees,
 }) => {
@@ -19,13 +19,17 @@ const DoctorConsultationCard = ({
         </div>
         <div className="col-md-7">
           <div className="p-4 d-flex flex-column h-100">
-            <h3 className="mb-3">{name}</h3>
+            <h3 className="mb-3">{doctorName}</h3>
             <p className="fw-bold text-primary mb-2">{qualifications}</p>
             <p className="mb-2">
-              <span className="fw-bold ">Specialities:</span> {specialities}
+              <span className="fw-bold ">Specialities:</span> {specialty}
             </p>
             <p className="mb-2">
-              <span className="fw-bold">Languages known:</span> {languages}
+              <span className="fw-bold ">Experience:</span> {experience}
+            </p>
+            <p className="mb-2">
+              <span className="fw-bold">Languages known:</span>{" "}
+              {languagesSpoken}
             </p>
             <p className="mb-2">
               <span className="fw-bold">Next available at:</span>{" "}

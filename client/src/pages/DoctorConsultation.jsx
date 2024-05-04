@@ -1,212 +1,31 @@
 import React from "react";
 import DoctorConsultationCard from "../components/Card/DoctorConsultationCard";
+import { useAuth } from "../store/auth";
 const DoctorConsultation = () => {
-  const doctorsData = [
-    {
-      imgSrc: "/images/Doctorspage/femaledoctor1.jpeg",
-      altText: "Doctor 1",
-      experience: "21 Years of Experience",
-      name: "Dr. Priya Sharma",
-      qualifications: "M.B.B.S, MD - Obstetrics & Gynecology",
-      specialities: "Obstetrics & Gynecology",
-      languages: "Hindi, English, Marathi",
-      nextAvailability: "08:00 AM, Tomorrow",
-      consultationFees: 299,
-      officeLocation: "123 ABC Street, Mumbai, Maharashtra",
-    },
-    {
-      imgSrc: "/images/Doctorspage/femaledoctor2.jpeg",
-      altText: "Doctor 2",
-      experience: "18 Years of Experience",
-      name: "Dr. Aisha Khan",
-      qualifications: "M.B.B.S, MS - Obstetrics & Gynecology",
-      specialities: "Maternal-Fetal Medicine",
-      languages: "English, Urdu",
-      nextAvailability: "09:30 AM, Tomorrow",
-      consultationFees: 250,
-      officeLocation: "456 XYZ Street, Delhi, Delhi",
-    },
-    {
-      imgSrc: "/images/Doctorspage/femaledoctor3.jpeg",
-      altText: "Doctor 3",
-      experience: "15 Years of Experience",
-      name: "Dr. Ananya Deshmukh",
-      qualifications: "M.B.B.S, MD - Obstetrics & Gynecology",
-      specialities: "Reproductive Endocrinology & Infertility",
-      languages: "Hindi, English, Marathi",
-      nextAvailability: "10:00 AM, Tomorrow",
-      consultationFees: 280,
-      officeLocation: "789 PQR Street, Bangalore, Karnataka",
-    },
-    {
-      imgSrc: "/images/Doctorspage/femaledoctor4.jpeg",
-      altText: "Doctor 4",
-      experience: "20 Years of Experience",
-      name: "Dr. Nandini Reddy",
-      qualifications: "M.B.B.S, MD - Gynecology",
-      specialities: "Urogynecology",
-      languages: "English, Telugu",
-      nextAvailability: "11:30 AM, Tomorrow",
-      consultationFees: 320,
-      officeLocation: "101 RST Street, Hyderabad, Telangana",
-    },
-    {
-      imgSrc: "/images/Doctorspage/femaledoctor5.jpeg",
-      altText: "Doctor 5",
-      experience: "17 Years of Experience",
-      name: "Dr. Sanjana Gupta",
-      qualifications: "M.B.B.S, MD - Obstetrics & Gynecology",
-      specialities: "Gynecologic Oncology",
-      languages: "Hindi, English",
-      nextAvailability: "12:00 PM, Tomorrow",
-      consultationFees: 270,
-      officeLocation: "111 UVW Street, Chennai, Tamil Nadu",
-    },
-    {
-      imgSrc: "/images/Doctorspage/femaledoctor6.jpeg",
-      altText: "Doctor 6",
-      experience: "16 Years of Experience",
-      name: "Dr. Divya Patel",
-      qualifications: "M.B.B.S, MS - Obstetrics & Gynecology",
-      specialities: "Pediatric & Adolescent Gynecology",
-      languages: "English, Gujarati",
-      nextAvailability: "01:30 PM, Tomorrow",
-      consultationFees: 290,
-      officeLocation: "121 XYZ Street, Kolkata, West Bengal",
-    },
-    {
-      imgSrc: "/images/Doctorspage/femaledoctor7.jpeg",
-      altText: "Doctor 7",
-      experience: "19 Years of Experience",
-      name: "Dr. Meera Singh",
-      qualifications: "M.B.B.S, MD - Obstetrics & Gynecology",
-      specialities: "Minimally Invasive Gynecologic Surgery",
-      languages: "Hindi, English, Punjabi",
-      nextAvailability: "02:00 PM, Tomorrow",
-      consultationFees: 310,
-      officeLocation: "131 ABC Street, Pune, Maharashtra",
-    },
-    {
-      imgSrc: "/images/Doctorspage/femaledoctor8.jpeg",
-      altText: "Doctor 8",
-      experience: "14 Years of Experience",
-      name: "Dr. Renuka Sharma",
-      qualifications: "M.B.B.S, DGO",
-      specialities: "Obstetrics",
-      languages: "Hindi, English, Marathi",
-      nextAvailability: "03:30 PM, Tomorrow",
-      consultationFees: 260,
-      officeLocation: "141 UVW Street, Ahmedabad, Gujarat",
-    },
-    {
-      imgSrc: "/images/Doctorspage/femaledoctor9.jpeg",
-      altText: "Doctor 9",
-      experience: "22 Years of Experience",
-      name: "Dr. Shruti Trivedi",
-      qualifications: "M.B.B.S, MD - Obstetrics & Gynecology",
-      specialities: "Gynecologic Pathology",
-      languages: "Hindi, English, Gujarati",
-      nextAvailability: "04:00 PM, Tomorrow",
-      consultationFees: 330,
-      officeLocation: "151 XYZ Street, Jaipur, Rajasthan",
-    },
-
-    // Male Doctors
-    {
-      imgSrc: "/images/Doctorspage/maledoctor1.jpeg",
-      altText: "Doctor 1",
-      experience: "20 Years of Experience",
-      name: "Dr. Rajesh Kumar",
-      qualifications: "M.B.B.S, MD - Orthopedics",
-      specialities: "Orthopedics",
-      languages: "Hindi, English",
-      nextAvailability: "10:00 AM, Tomorrow",
-      consultationFees: 350,
-      officeLocation: "123 ABC Street, Mumbai, Maharashtra",
-    },
-    {
-      imgSrc: "/images/Doctorspage/maledoctor2.jpeg",
-      altText: "Doctor 2",
-      experience: "15 Years of Experience",
-      name: "Dr. Amit Singh",
-      qualifications: "M.B.B.S, MS - General Surgery",
-      specialities: "General Surgery",
-      languages: "Hindi, English, Punjabi",
-      nextAvailability: "11:00 AM, Tomorrow",
-      consultationFees: 300,
-      officeLocation: "456 XYZ Street, Delhi, Delhi",
-    },
-    {
-      imgSrc: "/images/Doctorspage/maledoctor3.jpeg",
-      altText: "Doctor 3",
-      experience: "18 Years of Experience",
-      name: "Dr. Sameer Joshi",
-      qualifications: "M.B.B.S, MD - Urology",
-      specialities: "Urology",
-      languages: "Hindi, English, Marathi",
-      nextAvailability: "12:00 PM, Tomorrow",
-      consultationFees: 320,
-      officeLocation: "789 PQR Street, Bangalore, Karnataka",
-    },
-    {
-      imgSrc: "/images/Doctorspage/maledoctor4.jpeg",
-      altText: "Doctor 4",
-      experience: "17 Years of Experience",
-      name: "Dr. Karthik Reddy",
-      qualifications: "M.B.B.S, MS - Ophthalmology",
-      specialities: "Ophthalmology",
-      languages: "English, Telugu",
-      nextAvailability: "01:30 PM, Tomorrow",
-      consultationFees: 280,
-      officeLocation: "101 RST Street, Hyderabad, Telangana",
-    },
-    {
-      imgSrc: "/images/Doctorspage/maledoctor5.jpeg",
-      altText: "Doctor 5",
-      experience: "16 Years of Experience",
-      name: "Dr. Anand Gupta",
-      qualifications: "M.B.B.S, MD - Psychiatry",
-      specialities: "Psychiatry",
-      languages: "Hindi, English",
-      nextAvailability: "02:00 PM, Tomorrow",
-      consultationFees: 290,
-      officeLocation: "111 UVW Street, Chennai, Tamil Nadu",
-    },
-    {
-      imgSrc: "/images/Doctorspage/maledoctor6.jpeg",
-      altText: "Doctor 6",
-      experience: "19 Years of Experience",
-      name: "Dr. Rohan Patel",
-      qualifications: "M.B.B.S, MD - Cardiology",
-      specialities: "Cardiology",
-      languages: "English, Gujarati",
-      nextAvailability: "03:30 PM, Tomorrow",
-      consultationFees: 310,
-      officeLocation: "121 XYZ Street, Kolkata, West Bengal",
-    },
-    {
-      imgSrc: "/images/Doctorspage/maledoctor1.jpeg",
-      altText: "Doctor 7",
-      experience: "14 Years of Experience",
-      name: "Dr. Vikram Sharma",
-      qualifications: "M.B.B.S, MD - Dermatology",
-      specialities: "Dermatology",
-      languages: "Hindi, English, Punjabi",
-      nextAvailability: "04:00 PM, Tomorrow",
-      consultationFees: 260,
-      officeLocation: "131 ABC Street, Pune, Maharashtra",
-    },
-  ];
+  const { doctors } = useAuth();
   return (
     <>
       <h1 className="text-center text-primary fw-bold my-4">
         Doctor Consultation
       </h1>
       <div>
-        {doctorsData.map((doctor, index) => (
-          <DoctorConsultationCard key={index} {...doctor} />
+        {doctors.map((doctor, index) => (
+          <div key={index}>
+            <DoctorConsultationCard
+              imgSrc={doctor.imgSrc}
+              altText={doctor.altText}
+              doctorName={doctor.doctorName}
+              specialty={doctor.specialty}
+              qualifications={doctor.qualifications}
+              experience={doctor.experience}
+              languagesSpoken={doctor.languagesSpoken}
+              nextAvailability={doctor.nextAvailability}
+              consultationFees={doctor.consultationFees}
+            />
+          </div>
         ))}
       </div>
+      <hr />
     </>
   );
 };
