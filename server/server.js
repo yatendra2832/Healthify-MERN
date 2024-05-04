@@ -10,6 +10,7 @@ const authRouter = require('./Router/auth-router')
 const contactRouter = require('./Router/contact-router')
 const appointmentRouter = require('./Router/appointment-router')
 const adminRouter = require('./Router/admin-router')
+const doctorRouter = require('./Router/doctor-router')
 // Middlewares
 //cors policy handling
 const corsOptions = {
@@ -23,6 +24,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/form', contactRouter);
 app.use('/api/form', appointmentRouter);
 app.use('/api/admin',adminRouter)
+app.use('/api/doctor',doctorRouter)
 app.use(errorMiddleware)
 
 
