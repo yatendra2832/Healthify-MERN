@@ -54,6 +54,8 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [doctors, setDoctors] = useState([]);
+
   const AuthorizationToken = `Bearer ${token}`;
 
   const storeTokenInLS = (serverToken) => {
@@ -61,6 +63,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("token", serverToken);
   };
 
+  // fetfching user data
   const fetchUserData = async () => {
     try {
       setIsLoading(true);
@@ -83,26 +86,48 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Logic for logout the user
   const LogoutUser = () => {
     setToken(""); // Clear token
     setUser(""); // Clear user data
     localStorage.removeItem("token"); // Remove token from localStorage
   };
 
+  //To Fetch all the Doctors Data
+  const getDoctors = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/doctor/doctorsData",
+        {
+          method: "GET",
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        // console.log(data);
+        setDoctors(data);
+      }
+    } catch (error) {
+      console.log(`Services Frontend Error: ${error}`);
+    }
+  };
+
   useEffect(() => {
     if (token) {
       fetchUserData();
     }
+    getDoctors();
   }, [token]);
   return (
     <AuthContext.Provider
       value={{
-        isLoggedIn :!!token,
+        isLoggedIn: !!token,
         LogoutUser,
         storeTokenInLS,
         user,
         AuthorizationToken,
-        isLoading
+        isLoading,
+        doctors
       }}
     >
       {children}
