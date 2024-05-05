@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const DoctorConsultationCard = ({
   imgSrc,
   altText,
@@ -10,11 +10,12 @@ const DoctorConsultationCard = ({
   languagesSpoken,
   nextAvailability,
   consultationFees,
+  id
 }) => {
   return (
     <div className="col-md-8 my-4 mx-4 border-primary shadow-lg mx-auto rounded-4">
       <div className="row g-0 border overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative rounded-4">
-        <div className="col-md-4 d-flex align-items-center p-4 m-4 shadow-sm rounded-2 bg-white ">
+        <div className="col-md-4 d-flex align-items-center  m-4 shadow-sm rounded-2 bg-white ">
           <img src={imgSrc} alt={altText} className="img-fluid rounded " />
         </div>
         <div className="col-md-7">
@@ -40,9 +41,11 @@ const DoctorConsultationCard = ({
               {consultationFees}
             </p>
             <div className="mt-3">
-              <button className="btn btn-warning me-2" type="button">
-                View Profile
-              </button>
+              <Link to={`/doctorconsultation/${id}`}>
+                <button className="btn btn-warning mx-2">
+                  View Profile
+                </button>
+              </Link>
               <button className="btn btn-primary" type="button">
                 Book an Appointment
               </button>

@@ -21,6 +21,7 @@ const DoctorConsultation = () => {
               languagesSpoken={doctor.languagesSpoken}
               nextAvailability={doctor.nextAvailability}
               consultationFees={doctor.consultationFees}
+              id={doctor._id}
             />
           </div>
         ))}

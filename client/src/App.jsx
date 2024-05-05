@@ -40,6 +40,7 @@ import AdminContacts from "./pages/Admin-Contacts";
 import AdminAppointments from "./pages/Admin-Appointments";
 import AdminUpdate from "./pages/AdminUpdate";
 import AdminAppointmentDetails from "./pages/AdminAppointment-Details";
+import DoctorProfile from "./pages/DoctorProfile";
 
 function App() {
   return (
@@ -62,6 +63,9 @@ function App() {
           <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<Error />} />
 
+          {/* Doctor Routes */}
+          <Route path="/doctorconsultation/:id" element={<DoctorProfile />} />
+
           {/* Navbar 2 Routes */}
           <Route path="/bloodtest" element={<BloodTest />} />
           <Route path="/xray" element={<Xray />} />
@@ -69,8 +73,8 @@ function App() {
           <Route path="/doctorconsultation" element={<DoctorConsultation />} />
           <Route path="/surgery" element={<Surgery />} />
           <Route path="/supplement" element={<Supplement />} />
-          <Route path="healthtips" element={<HealthTips />} />
-          <Route path="offers" element={<Offers />} />
+          <Route path="/healthtips" element={<HealthTips />} />
+          <Route path="/offers" element={<Offers />} />
 
           {/* User Dashboard Route */}
           <Route path="/userdashboard" element={<UserDashboard />} />
