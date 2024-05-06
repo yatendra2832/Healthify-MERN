@@ -32,6 +32,7 @@ import Footer from "./components/Footer";
 // importing the user dashboard
 import UserDashboard from "./pages/UserDashboard";
 import Profile from "./components/UserDashboard/Profile";
+import MyBookings from "./pages/MyBookings";
 
 // importing the admin panel
 import Admin_Layout from "./components/AdminPanel/Admin_Layout";
@@ -40,6 +41,8 @@ import AdminContacts from "./pages/Admin-Contacts";
 import AdminAppointments from "./pages/Admin-Appointments";
 import AdminUpdate from "./pages/AdminUpdate";
 import AdminAppointmentDetails from "./pages/AdminAppointment-Details";
+
+//
 import DoctorProfile from "./pages/DoctorProfile";
 
 function App() {
@@ -79,6 +82,7 @@ function App() {
 
           {/* User Dashboard Route */}
           <Route path="/userdashboard" element={<UserDashboard />} />
+          <Route path="userdashboard/mybookings" element={<MyBookings />} />
           <Route path="/profile" element={<Profile />} />
 
           {/* Admin Panel */}

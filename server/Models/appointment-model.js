@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose');
 
 const appointmentSchema = new Schema({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User', // Assuming 'User' is the name of your user model
+        required: true
+    },
     //    personalInformation
     fullName: {
         type: String,

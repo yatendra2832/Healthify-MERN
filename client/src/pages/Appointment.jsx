@@ -2,10 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../store/auth";
+
 const Appointment = () => {
   const [showCancellationPolicy, setShowCancellationPolicy] = useState(false);
-
   const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const { user } = useAuth();
+
   const params = useParams();
 
   // Fetch doctor's data by ID
@@ -38,6 +41,7 @@ const Appointment = () => {
 
   // Handling the appointment form submission
   const [appointment, setAppointment] = useState({
+    userId: "",
     fullName: "",
     dob: "",
     gender: "", // You can set a default value
@@ -81,6 +85,7 @@ const Appointment = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const userId = user._id;
     try {
       const response = await fetch(
         "http://localhost:5000/api/form/appointment",
@@ -89,7 +94,10 @@ const Appointment = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(appointment),
+          body: JSON.stringify({
+            ...appointment,
+            userId: userId, // Include the user ID in the request body
+          }),
         }
       );
 
