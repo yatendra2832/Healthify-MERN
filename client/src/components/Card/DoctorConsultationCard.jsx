@@ -10,7 +10,7 @@ const DoctorConsultationCard = ({
   languagesSpoken,
   nextAvailability,
   consultationFees,
-  id
+  id,
 }) => {
   return (
     <div className="col-md-8 my-4 mx-4 border-primary shadow-lg mx-auto rounded-4">
@@ -42,13 +42,12 @@ const DoctorConsultationCard = ({
             </p>
             <div className="mt-3">
               <Link to={`/doctorconsultation/${id}`}>
-                <button className="btn btn-warning mx-2">
-                  View Profile
-                </button>
+                <button className="btn btn-warning mx-2">View Profile</button>
               </Link>
-              <button className="btn btn-primary" type="button">
-                Book an Appointment
-              </button>
+              {/* Pass doctor data as state to the Appointment component */}
+              <Link to={`/appointment/${id}`}>
+                <button className="btn btn-primary">Book an Appointment</button>
+              </Link>
             </div>
           </div>
         </div>

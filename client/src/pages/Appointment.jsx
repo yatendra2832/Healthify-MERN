@@ -1,8 +1,40 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 const Appointment = () => {
   const [showCancellationPolicy, setShowCancellationPolicy] = useState(false);
+
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const params = useParams();
+
+  // Fetch doctor's data by ID
+  useEffect(() => {
+    const fetchDoctor = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/doctor/doctorsdata/${params.id}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setSelectedDoctor(data);
+          // Pre-fill doctor's details in the appointment form
+          setAppointment((prevState) => ({
+            ...prevState,
+            preferredProvider: data.doctorName,
+          }));
+        }
+      } catch (error) {
+        console.log("Error fetching doctor's data:", error);
+      }
+    };
+    if (params.id) {
+      fetchDoctor();
+    } else {
+      // Reset selectedDoctor if params.id is not present
+      setSelectedDoctor(null);
+    }
+  }, [params.id]);
 
   // Handling the appointment form submission
   const [appointment, setAppointment] = useState({
@@ -37,25 +69,14 @@ const Appointment = () => {
     relationship: "",
     phone: "",
 
-    cancellationPolicy:"",
+    cancellationPolicy: "",
   });
-
-  // const handleInput = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-
-  //   setAppointment({
-  //     ...appointment,
-  //     [name]: value,
-  //   });
-  // };
-
   const handleInput = (event) => {
     const { name, value, type, checked } = event.target;
-    const newValue = type === 'checkbox' ? checked : value;
-    setAppointment(prevState => ({
+    const newValue = type === "checkbox" ? checked : value;
+    setAppointment((prevState) => ({
       ...prevState,
-      [name]: newValue
+      [name]: newValue,
     }));
   };
   const handleSubmit = async (e) => {
@@ -218,9 +239,15 @@ const Appointment = () => {
           </div>
 
           {/* Appointment Details */}
-          <h3 className="text-primary my-4">Appointment Details</h3>
+          <h3 className="text-primary my-2">Appointment Details</h3>
           <div className="row">
             {/* Reason for Appointment */}
+            <p className="text-danger fw-bold">
+              {selectedDoctor && selectedDoctor.nextAvailability
+                ? `Next Availability: ${selectedDoctor.nextAvailability}`
+                : ""}
+            </p>
+
             <div className="form-group col-md-8 col-lg-6 mb-2">
               <label htmlFor="reasonForAppointment">
                 Reason for Appointment*
@@ -241,7 +268,6 @@ const Appointment = () => {
                 <option value="specificConcern">Specific Concern</option>
               </select>
             </div>
-
             {/* Preferred Date and Time */}
             <div className="form-group col-md-8 col-lg-6 mb-2">
               <label htmlFor="preferredDate">Preferred Date*</label>
@@ -255,7 +281,6 @@ const Appointment = () => {
                 onChange={handleInput}
               />
             </div>
-
             <div className="form-group col-md-8 col-lg-6 mb-2">
               <label htmlFor="preferredTime">Preferred Time*</label>
               <input
@@ -268,7 +293,6 @@ const Appointment = () => {
                 onChange={handleInput}
               />
             </div>
-
             {/* Type of Appointment */}
             <div className="form-group col-md-8 col-lg-6 mb-2">
               <label htmlFor="appointmentType">Type of Appointment*</label>
@@ -287,7 +311,6 @@ const Appointment = () => {
                 <option value="telehealth">Telehealth</option>
               </select>
             </div>
-
             {/* Preferred Healthcare Provider */}
             <div className="form-group col-md-8 col-lg-6 mb-2">
               <label htmlFor="preferredProvider">

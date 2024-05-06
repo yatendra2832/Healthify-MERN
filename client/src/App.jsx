@@ -65,6 +65,7 @@ function App() {
 
           {/* Doctor Routes */}
           <Route path="/doctorconsultation/:id" element={<DoctorProfile />} />
+          <Route path="/appointment/:id" element={<Appointment />} />
 
           {/* Navbar 2 Routes */}
           <Route path="/bloodtest" element={<BloodTest />} />
