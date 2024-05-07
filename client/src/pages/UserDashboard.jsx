@@ -1,5 +1,6 @@
 import React from "react";
 import UserDashboardCard from "../components/Card/UserDashboardCard";
+import { Link } from "react-router-dom";
 import { useAuth } from "../store/auth";
 const UserDashboard = () => {
   const { user } = useAuth();
@@ -7,18 +8,23 @@ const UserDashboard = () => {
     <>
       <h1 className="text-center text-primary fw-bold">User Dashboard</h1>
       <div className="d-flex justify-content-center">
-       <p className=" border  border-3 shadow-sm border-light shadow-warning rounded-5 px-4  fs-4  "> Welcome {user.username}</p>
+        <p className=" border  border-3 shadow-sm border-light shadow-warning rounded-5 px-4  fs-4  ">
+          {" "}
+          Welcome {user.username}
+        </p>
       </div>
       <div>
         {/* Row 1 */}
         <div className="container px-2 py-2" id="featured-3">
           <div className="row g-4">
             <div className="col col-md-6 col-lg-4">
-              <UserDashboardCard
-                imageSrc="/images/userDashboard/my-booking.png"
-                altText="my booking"
-                title="My Bookings"
-              />
+              <Link to={"/userdashboard/mybookings"} className="text-decoration-none">
+                <UserDashboardCard
+                  imageSrc="/images/userDashboard/my-booking.png"
+                  altText="my booking"
+                  title="My Bookings"
+                />
+              </Link>
             </div>{" "}
             <div className="col col-md-6 col-lg-4">
               <UserDashboardCard
