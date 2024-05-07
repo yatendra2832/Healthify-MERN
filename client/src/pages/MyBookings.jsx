@@ -37,17 +37,17 @@ const MyBookings = () => {
 
         {myappointment.map((appointment, index) => (
           <div key={index} className="card mb-3 border rounded-4 shadow-lg ">
-            <div className="card-body">
-              <div className="accordion" id="accordionPanelsStayOpenExample">
+            <div className="card-body ">
+              <div className="accordion" id={`accordion-${index}`}>
                 <div className="accordion-item">
                   <h2 className="accordion-header">
                     <button
-                      className="accordion-button"
+                      className={`accordion-button ${appointment.isCollapsed ? '' : 'collapsed'}`}
                       type="button"
                       data-bs-toggle="collapse"
-                      data-bs-target="#panelsStayOpen-collapseOne"
+                      data-bs-target={`#panelsStayOpen-collapse-${index}`}
                       aria-expanded="true"
-                      aria-controls="panelsStayOpen-collapseOne"
+                      aria-controls={`panelsStayOpen-collapse-${index}`}
                     >
                       <h3 className="card-title text-primary">
                         <button type="button" class="btn btn-primary">
@@ -60,8 +60,10 @@ const MyBookings = () => {
                     </button>
                   </h2>
                   <div
-                    id="panelsStayOpen-collapseOne"
-                    className="accordion-collapse collapse show"
+                    id={`panelsStayOpen-collapse-${index}`}
+                    className="accordion-collapse collapse"
+                    aria-labelledby={`accordion-${index}`}
+                    data-bs-parent={`#accordion-${index}`}
                   >
                     <div className="accordion-body">
                       <h3 className="card-title text-primary  border-bottom border-2">
