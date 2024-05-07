@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
+import { Link } from "react-router-dom";
 const MyBookings = () => {
   const { AuthorizationToken } = useAuth();
   const [myappointment, setMyappointments] = useState([]);
@@ -31,9 +32,27 @@ const MyBookings = () => {
   return (
     <>
       <div className="container mt-4 ">
-        <h2 className="text-primary fw-bold text-center mb-4">
-          Appointment Confirmation
-        </h2>
+        {myappointment.length > 0 ? (
+          <h2 className="text-primary fw-bold text-center mb-4">
+            Your Upcoming Appointments and Tests
+          </h2>
+        ) : (
+          <div className="text-center">
+            <h2 className="text-primary fw-bold mb-2">No Bookings Yet</h2>
+            <p className="lead mb-4">
+              You haven't scheduled any appointments or tests with us.
+            </p>
+            <p className="mb-4">
+              Ready to take the next step in your healthcare journey?
+            </p>
+            <Link to={"/doctorconsultation"}>
+              {" "}
+              <a href="#" className="btn btn-primary ">
+                Schedule Now
+              </a>
+            </Link>
+          </div>
+        )}
 
         {myappointment.map((appointment, index) => (
           <div key={index} className="card mb-3 border rounded-4 shadow-lg ">
@@ -42,7 +61,9 @@ const MyBookings = () => {
                 <div className="accordion-item">
                   <h2 className="accordion-header">
                     <button
-                      className={`accordion-button ${appointment.isCollapsed ? '' : 'collapsed'}`}
+                      className={`accordion-button ${
+                        appointment.isCollapsed ? "" : "collapsed"
+                      }`}
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target={`#panelsStayOpen-collapse-${index}`}
