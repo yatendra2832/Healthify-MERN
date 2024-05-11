@@ -1,30 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useAuth } from "../store/auth";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAuth } from '../store/auth';
+import { toast } from 'react-toastify';
+
 const AdminUpdate = () => {
   const [user, setUser] = useState({
-    username: "",
-    email: "",
-    phone: "",
+    username: '',
+    email: '',
+    phone: '',
   });
 
-  const params = useParams();
+  const { id } = useParams();
   const { AuthorizationToken } = useAuth();
-  const getSingleUserData = async (id) => {
+
+  const getSingleUserData = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/admin/users/${params.id}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: AuthorizationToken,
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
+        method: 'GET',
+        headers: {
+          Authorization: AuthorizationToken,
+        },
+      });
       const data = await response.json();
       setUser(data);
-    } catch (error) {}
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
   };
 
   useEffect(() => {
@@ -32,35 +33,29 @@ const AdminUpdate = () => {
   }, []);
 
   const handleInput = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-
+    const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
 
-  // updating data
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/admin/users/update/${params.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: AuthorizationToken,
-          },
-          body: JSON.stringify(user),
-        }
-      );
+      const response = await fetch(`http://localhost:5000/api/admin/users/update/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: AuthorizationToken,
+        },
+        body: JSON.stringify(user),
+      });
       if (response.ok) {
-        toast.success("Updated Successfully");
+        toast.success('Updated Successfully');
       } else {
-        toast.error("Not updated...");
+        toast.error('Not updated...');
       }
     } catch (error) {
-      console.log(error);
+      console.error('Error updating user data:', error);
     }
   };
 
@@ -68,59 +63,32 @@ const AdminUpdate = () => {
     <div className="container-fluid m-4 p-4">
       <div className="row">
         <div className="col-md-8 col-lg-4 col-sm-12 border rounded-4 p-4">
-          <h1 className="text-center text-primary ">Update User Data</h1>
+          <h1 className="text-center text-primary">Update User Data</h1>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="username" className="form-label">
-                Username
-              </label>
-              <input
-                type="text"
-                name="username"
-                className="form-control"
-                id="username"
-                placeholder="Your Username"
-                required
-                autoComplete="off"
-                value={user.username}
-                onChange={handleInput}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="email" className="form-label">
-                Email address
-              </label>
-              <input
-                type="email"
-                name="email"
-                className="form-control"
-                id="email"
-                placeholder="name@example.com"
-                required
-                autoComplete="off"
-                value={user.email}
-                onChange={handleInput}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label htmlFor="phone" className="form-label">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                className="form-control"
-                id="phone"
-                placeholder="Your Phone Number"
-                required
-                autoComplete="off"
-                value={user.phone}
-                onChange={handleInput}
-              />
-            </div>
-
+            <InputField
+              label="Username"
+              type="text"
+              name="username"
+              value={user.username}
+              onChange={handleInput}
+              required
+            />
+            <InputField
+              label="Email address"
+              type="email"
+              name="email"
+              value={user.email}
+              onChange={handleInput}
+              required
+            />
+            <InputField
+              label="Phone Number"
+              type="tel"
+              name="phone"
+              value={user.phone}
+              onChange={handleInput}
+              required
+            />
             <button
               type="submit"
               className="btn btn-primary w-75 d-block mx-auto"
@@ -130,6 +98,34 @@ const AdminUpdate = () => {
           </form>
         </div>
       </div>
+    </div>
+  );
+};
+
+const InputField = ({
+  label,
+  type,
+  name,
+  value,
+  onChange,
+  required,
+}) => {
+  return (
+    <div className="mb-4">
+      <label htmlFor={name} className="form-label">
+        {label}
+      </label>
+      <input
+        type={type}
+        name={name}
+        className="form-control"
+        id={name}
+        placeholder={label}
+        value={value}
+        onChange={onChange}
+        required={required}
+        autoComplete="off"
+      />
     </div>
   );
 };

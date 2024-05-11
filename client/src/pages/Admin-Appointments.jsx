@@ -104,9 +104,7 @@ const AdminAppointments = () => {
                       >
                         Delete <MdDelete className="fs-5 mx-1" />
                       </button>
-                      <Link
-                        to={`/admin/appointments/${curAppointment._id}`}
-                      >
+                      <Link to={`/admin/appointments/${curAppointment._id}`}>
                         <button className="btn btn-info">
                           View Details
                           <MdOutlineUnfoldMore className="fs-5 mx-1" />

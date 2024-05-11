@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../store/auth";
@@ -14,31 +14,29 @@ const Appointment = () => {
 
   const params = useParams();
 
-  // Fetch doctor's data by ID
-  useEffect(() => {
-    const fetchDoctor = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:5000/api/doctor/doctorsdata/${params.id}`
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setSelectedDoctor(data);
-          // console.log(data.consultationFees); that will return the consultation fees
-          // Pre-fill doctor's details in the appointment form
-          setAppointment((prevState) => ({
-            ...prevState,
-            preferredProvider: data.doctorName,
-          }));
-        }
-      } catch (error) {
-        console.log("Error fetching doctor's data:", error);
+  // Fetch doctor's data by IDconst
+  const fetchDoctor = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/doctor/doctorsdata/${params.id}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setSelectedDoctor(data);
+        setAppointment((prevState) => ({
+          ...prevState,
+          preferredProvider: data.doctorName,
+        }));
       }
-    };
+    } catch (error) {
+      console.log("Error fetching doctor's data:", error);
+    }
+  }, [params.id]);
+
+  useEffect(() => {
     if (params.id) {
       fetchDoctor();
     } else {
-      // Reset selectedDoctor if params.id is not present
       setSelectedDoctor(null);
     }
   }, [params.id]);
@@ -79,14 +77,20 @@ const Appointment = () => {
 
     cancellationPolicy: "",
   });
-  const handleInput = (event) => {
+  // const handleInput = (event) => {
+  //   const { name, value, type, checked } = event.target;
+  //   const newValue = type === "checkbox" ? checked : value;
+  //   setAppointment((prevState) => ({
+  //     ...prevState,
+  //     [name]: newValue,
+  //   }));
+  // };
+  const handleInput = useCallback((event) => {
     const { name, value, type, checked } = event.target;
     const newValue = type === "checkbox" ? checked : value;
-    setAppointment((prevState) => ({
-      ...prevState,
-      [name]: newValue,
-    }));
-  };
+    setAppointment((prevState) => ({ ...prevState, [name]: newValue }));
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userId = user._id;
