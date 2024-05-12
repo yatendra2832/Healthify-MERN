@@ -4,12 +4,15 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import CancellationPolicy from "../components/AppointmentForm/CancellationPolicy";
-
 import InputField from "../components/AppointmentForm/InputField";
+
+import axios from "axios";
+import PaymentCard from "../components/Payment/PaymentCard";
 
 const Appointment = () => {
   const [showCancellationPolicy, setShowCancellationPolicy] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [amount, setAmount] = useState("");
   const { user } = useAuth();
 
   const params = useParams();
@@ -23,6 +26,7 @@ const Appointment = () => {
       if (response.ok) {
         const data = await response.json();
         setSelectedDoctor(data);
+        setAmount(data.consultationFees);
         setAppointment((prevState) => ({
           ...prevState,
           preferredProvider: data.doctorName,
@@ -77,14 +81,7 @@ const Appointment = () => {
 
     cancellationPolicy: "",
   });
-  // const handleInput = (event) => {
-  //   const { name, value, type, checked } = event.target;
-  //   const newValue = type === "checkbox" ? checked : value;
-  //   setAppointment((prevState) => ({
-  //     ...prevState,
-  //     [name]: newValue,
-  //   }));
-  // };
+
   const handleInput = useCallback((event) => {
     const { name, value, type, checked } = event.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -155,12 +152,52 @@ const Appointment = () => {
   const handleReadMoreClick = () => {
     setShowCancellationPolicy(!showCancellationPolicy);
   };
+
+  const checkoutHandler = async (amount) => {
+    try {
+      const {
+        data: { key },
+      } = await axios.get("http://localhost:5000/api/payment/getkey");
+
+      const {
+        data: { order },
+      } = await axios.post("http://localhost:5000/api/payment/checkout", {
+        amount,
+      });
+
+      const options = {
+        key,
+        amount: order.amount,
+        currency: "INR",
+        name: "Healthify",
+        description: "Consultation Fees",
+        image: "/images/homepage/logo2.svg",
+        order_id: order.id,
+        callback_url: "http://localhost:5000/api/payment/paymentverification",
+        prefill: {
+          name: user.username,
+          email: user.email,
+          contact: user.phone,
+        },
+        notes: {
+          address: " A-100, A Block, Govindpuram New Delhi",
+        },
+        theme: {
+          color: "#007bff",
+        },
+      };
+      const razor = new window.Razorpay(options);
+      razor.open();
+    } catch (error) {
+      console.error("Error during checkout:", error);
+    }
+  };
+
   return (
     <>
       <h2 className="mt-4 text-primary fw-bold text-center">
         Medical Appointment Form
       </h2>
-      {/* <h2>{selectedDoctor.consultationFees}</h2> */}
       <div className="container w-100">
         <form onSubmit={handleSubmit}>
           {/* Personal Information */}
@@ -379,7 +416,11 @@ const Appointment = () => {
               onChange={handleInput}
             />
           </div>
-
+          <PaymentCard
+            amount={amount}
+            checkoutHandler={checkoutHandler}
+            doctor={appointment.preferredProvider}
+          />
           {/* Cancellation Policy */}
           <CancellationPolicy
             showCancellationPolicy={showCancellationPolicy}
