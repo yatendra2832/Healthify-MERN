@@ -11,6 +11,7 @@ const contactRouter = require('./Router/contact-router')
 const appointmentRouter = require('./Router/appointment-router')
 const adminRouter = require('./Router/admin-router')
 const doctorRouter = require('./Router/doctor-router')
+const paymentRouter = require('./Router/payment-router')
 // Middlewares
 //cors policy handling
 const corsOptions = {
@@ -20,11 +21,13 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRouter);
 app.use('/api/form', contactRouter);
 app.use('/api/form', appointmentRouter);
-app.use('/api/admin',adminRouter)
-app.use('/api/doctor',doctorRouter)
+app.use('/api/admin', adminRouter)
+app.use('/api/doctor', doctorRouter)
+app.use('/api/payment', paymentRouter)
 app.use(errorMiddleware)
 
 
