@@ -15,10 +15,7 @@ const DoctorProfile = ({
   paymentOptions,
   languagesSpoken,
 }) => {
-  AOS.init({
-    delay: 400,
-    duration: 500,
-  });
+ 
 
   return (
     <div className="container mt-2 mb-5">
