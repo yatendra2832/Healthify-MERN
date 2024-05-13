@@ -6,6 +6,7 @@ import AppointmentDetails from "./AppointmentDetails";
 import InsuranceDetails from "./InsuranceDetails";
 import MedicalHistory from "./MedicalHistory";
 import EmergencyContact from "./EmergencyContact";
+import CancellationPolicy from "./CancellationPolicy";
 
 const AppointmentForm = ({
   appointment,
@@ -34,6 +35,7 @@ const AppointmentForm = ({
       <MedicalHistory appointment={appointment} handleInput={handleInput} />
       {/* Emergency Contact */}
       <EmergencyContact appointment={appointment} handleInput={handleInput} />
+      <CancellationPolicy appointment={appointment} handleInput={handleInput} />
       {/* Submit Button */}
       <button type="submit" className="btn btn-primary mb-4">
         Submit Appointment

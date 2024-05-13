@@ -5,16 +5,20 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../store/auth";
 import axios from "axios";
 
-import CancellationPolicy from "../components/AppointmentForm/CancellationPolicy";
+// import for the components
 import AppointmentForm from "../components/AppointmentForm/AppointmentForm";
 import PaymentForm from "../components/Payment/PaymentForm";
 
+// import the MUI
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+
 const Appointment = () => {
-  const [showCancellationPolicy, setShowCancellationPolicy] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [amount, setAmount] = useState("");
   const { user } = useAuth();
   const params = useParams();
+  const [value, setValue] = useState(0); // State for the currently selected tab
 
   // Fetch doctor's data by ID
   const fetchDoctor = useCallback(async () => {
@@ -104,6 +108,7 @@ const Appointment = () => {
 
       if (response.ok) {
         toast.success("Appointment Form Submitted successfully");
+        setValue(1); // Switch to the payment tab after successful form submission
         setAppointment({
           fullName: "",
           dob: "",
@@ -143,10 +148,6 @@ const Appointment = () => {
     } catch (error) {
       toast.error("Error from the appointment form", error);
     }
-  };
-
-  const handleReadMoreClick = () => {
-    setShowCancellationPolicy(!showCancellationPolicy);
   };
 
   const checkoutHandler = async (amount) => {
@@ -189,33 +190,41 @@ const Appointment = () => {
     }
   };
 
+  // Handle tab change
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <>
       <h2 className="mt-4 text-primary fw-bold text-center">
         Medical Appointment Form
-      </h2>
+      </h2>{" "}
       <div className="container w-100">
-        {" "}
-        <div className="container w-100">
-          <AppointmentForm
-            appointment={appointment}
-            handleInput={handleInput}
-            handleSubmit={handleSubmit}
-            selectedDoctor={selectedDoctor}
-          />
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="icon label tabs example"
+        >
+          <Tab label="Appointment Form" />
+          <Tab label="Payment" />
+        </Tabs>
+        {value === 0 && (
+          <div>
+            <AppointmentForm
+              appointment={appointment}
+              handleInput={handleInput}
+              handleSubmit={handleSubmit}
+              selectedDoctor={selectedDoctor}
+            />
+          </div>
+        )}
+        {value === 1 && (
           <PaymentForm
             amount={amount}
             checkoutHandler={checkoutHandler}
             selectedDoctor={selectedDoctor}
           />
-          {/* Cancellation Policy */}
-          <CancellationPolicy
-            showCancellationPolicy={showCancellationPolicy}
-            handleReadMoreClick={handleReadMoreClick}
-            appointment={appointment}
-            handleInputChange={handleInput}
-          />
-        </div>
+        )}
       </div>
     </>
   );
