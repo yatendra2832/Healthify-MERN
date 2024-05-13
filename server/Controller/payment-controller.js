@@ -42,7 +42,8 @@ const paymentVerification = async (req, res) => {
                 razorpay_signature,
                 razorpay_payment_id
             })
-            // res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
+            res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
+            console.log("Successful: ", razorpay_payment_id)
         } else {
             res.status(400).json({
                 success: false,

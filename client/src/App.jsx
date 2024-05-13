@@ -45,6 +45,9 @@ import AdminAppointmentDetails from "./pages/AdminAppointment-Details";
 //
 import DoctorProfile from "./pages/DoctorProfile";
 
+//
+import PaymentSuccess from "./components/Payment/PaymentSuccess";
+
 function App() {
   return (
     <>
@@ -96,6 +99,8 @@ function App() {
               element={<AdminAppointmentDetails />}
             />
           </Route>
+
+          <Route path="/paymentsuccess" element={<PaymentSuccess />} />
         </Routes>
         <Footer />
       </BrowserRouter>
