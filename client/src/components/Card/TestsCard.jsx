@@ -5,20 +5,20 @@ const CardImage = ({ imgSrc, altText, linkHref }) => (
     <img
       src={imgSrc}
       alt={altText}
-      className="card-img img-fluid rounded h-100 p-4"
+      className="card-img img-fluid rounded-4 h-100 p-2"
     />
   </a>
 );
 
-const CardContent = ({ title, content, buttonText }) => (
+const CardContent = ({ title, content }) => (
   <div className="card-body">
     <h1 className="card-title text-center mb-4 fw-bold">
       The Excellence of <span className="text-warning ">{title}</span>
     </h1>
     <p className="card-text  mb-4">{content}</p>
-    <div className="container ">
-      <button className="btn btn-danger  me-3">{buttonText}</button>
-      <button className="btn btn-warning ">Book Test</button>
+    <div className="d-flex justify-content-center">
+      <button className="btn btn-danger mx-4">Know More</button>
+      <button className="btn btn-warning mx-4">Book Test</button>
     </div>
   </div>
 );
