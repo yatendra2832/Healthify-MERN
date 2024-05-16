@@ -13,4 +13,15 @@ const testsData = async (req, res) => {
     }
 }
 
-module.exports = { testsData }
+const getTestById = async (req, res) => {
+    try {
+        const id = req.params.id
+        const test = await Test.findOne({ _id: id })
+        return res.status(200).json(test)
+    } catch (error) {
+        console.log("Error occured at Test Controller :", error)
+    }
+
+}
+
+module.exports = { testsData ,getTestById}

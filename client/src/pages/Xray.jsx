@@ -23,6 +23,7 @@ const Xray = () => {
       });
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         setTestData(data);
       } else {
         throw new Error("Failed to fetch data");
@@ -48,8 +49,8 @@ const Xray = () => {
       ) : (
         <div>
           {testData.map((test, index) => (
-            <div key={index} data-aos="fade-up">
-              <TestsCard {...test} />
+            <div key={test._id} data-aos="fade-up">
+              <TestsCard {...test} id={test._id} />
             </div>
           ))}
         </div>
