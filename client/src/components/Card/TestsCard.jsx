@@ -16,12 +16,12 @@ const CardContent = ({ title, content, id }) => (
     <h1 className="card-title text-center mb-4 fw-bold">
       The Excellence of <span className="text-warning ">{title}</span>
     </h1>
-    <p className="card-text  mb-4">{content}</p>
+    <p className="card-text  mb-4 fs-5 fst-italic">{content}</p>
     <div className="d-flex justify-content-center">
       <Link to={`/tests/${id}`}>
-        <button className="btn btn-danger mx-4">Know More</button>
+        <button className="btn btn-danger mx-4 ">Know More</button>
       </Link>
-      <button className="btn btn-warning mx-4">Book Test</button>
+      <button className="btn btn-warning  mx-4">Book Test</button>
     </div>
   </div>
 );

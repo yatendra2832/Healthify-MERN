@@ -19,6 +19,14 @@ const testSchema = new mongoose.Schema({
     },
     linkHref: {
         type: String,
+    },
+    aboutTest: {
+        type: String,
+        required: true
+    },
+    typesOfTest: {
+        type: Array,
+        required: true
     }
 })
 
