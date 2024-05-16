@@ -47,6 +47,7 @@ import DoctorProfile from "./pages/DoctorProfile";
 
 //
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
+import AboutTest from "./components/Test&Scans/AboutTest";
 
 function App() {
   return (
@@ -75,7 +76,7 @@ function App() {
 
           {/* Navbar 2 Routes */}
           <Route path="/bloodtest" element={<BloodTest />} />
-          <Route path="/xray" element={<Xray />} />
+          <Route path="/tests" element={<Xray />} />
           <Route path="/genetictesting" element={<GeneticTesting />} />
           <Route path="/doctorconsultation" element={<DoctorConsultation />} />
           <Route path="/surgery" element={<Surgery />} />
@@ -101,6 +102,9 @@ function App() {
           </Route>
 
           <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+
+          {/* Tests Routes */}
+          <Route path="/tests/:id" element={<AboutTest />} />
         </Routes>
         <Footer />
       </BrowserRouter>

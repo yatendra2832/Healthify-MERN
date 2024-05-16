@@ -29,7 +29,7 @@ const Navbar2 = () => {
                 </Link>
               </li>
               <li className="nav-item ">
-                <Link className="nav-link " to="/xray">
+                <Link className="nav-link " to="/tests">
                   X-Rays & Scans
                 </Link>
               </li>
