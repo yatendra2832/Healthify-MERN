@@ -48,11 +48,15 @@ import DoctorProfile from "./pages/DoctorProfile";
 //
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
 import AboutTest from "./components/Test&Scans/AboutTest";
+import TermsCondition from "./pages/TermsCondition";
+
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar1 />
         <Navbar2 />
 
@@ -105,6 +109,7 @@ function App() {
 
           {/* Tests Routes */}
           <Route path="/tests/:id" element={<AboutTest />} />
+          <Route path="/terms&condition" element={<TermsCondition />} />
         </Routes>
         <Footer />
       </BrowserRouter>
