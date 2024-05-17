@@ -18,6 +18,7 @@ const GeneticTesting = () => {
         imgSrc="/images/TestImage/dexascan.jpg"
         altText="Labs"
         linkHref="#"
+        id={"6647a0a4dcf995ff27f01da1"}
       />
 
       <div className="container my-5 bg-primary p-4 rounded-4">
@@ -69,8 +70,6 @@ const GeneticTesting = () => {
           </div>
         </div>
       </div>
-
-    
     </>
   );
 };

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 const TestInfo = ({ id }) => {
-  const [data, setData] = useState("");
+  const [data, setData] = useState({
+    imgSrc: "",
+    altText: "",
+    title: "",
+    aboutTest: "",
+    typeOfTest: [],
+  });
 
   const getTestById = async () => {
     try {
@@ -18,7 +24,8 @@ const TestInfo = ({ id }) => {
   };
   useEffect(() => {
     getTestById();
-  });
+  }, []);
+
   return (
     <div className="shadow p-4 m-4 bg-light rounded">
       <div className="row flex-lg-row-reverse align-items-center g-5 py-5">
@@ -38,6 +45,19 @@ const TestInfo = ({ id }) => {
               What is <span className="text-primary">{data.title}</span>
             </h1>
             <p className="fs-5 fst-italic ">{data.aboutTest}</p>
+            <div>
+              <h2 className="mb-3 text-center ">List of Test Types</h2>
+              <ul className="list-group">
+                {data.typeOfTest.map((testType, index) => (
+                  <li
+                    key={index}
+                    className="list-group-item text-center fs-5 text-primary"
+                  >
+                    {testType}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
