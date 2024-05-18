@@ -21,7 +21,9 @@ const CardContent = ({ title, content, id }) => (
       <Link to={`/tests/${id}`}>
         <button className="btn btn-danger mx-4 ">Know More</button>
       </Link>
-      <button className="btn btn-warning  mx-4">Book Test</button>
+      <Link to={`/tests/booking/${id}`}>
+        <button className="btn btn-warning  mx-4">Book Test</button>
+      </Link>
     </div>
   </div>
 );
