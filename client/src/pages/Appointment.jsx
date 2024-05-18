@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../store/auth";
+import useCheckout from "../hooks/Checkout";
 import axios from "axios";
 
 // import for the components
@@ -17,6 +18,7 @@ const Appointment = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [amount, setAmount] = useState("");
   const { user } = useAuth();
+  const { checkoutHandler } = useCheckout();
   const params = useParams();
   const [value, setValue] = useState(0); // State for the currently selected tab
 
@@ -147,46 +149,6 @@ const Appointment = () => {
       console.log(response);
     } catch (error) {
       toast.error("Error from the appointment form", error);
-    }
-  };
-
-  const checkoutHandler = async (amount) => {
-    try {
-      const {
-        data: { key },
-      } = await axios.get("http://localhost:5000/api/payment/getkey");
-
-      const {
-        data: { order },
-      } = await axios.post("http://localhost:5000/api/payment/checkout", {
-        amount,
-      });
-
-      const options = {
-        key,
-        amount: order.amount,
-        currency: "INR",
-        name: "Healthify",
-        description: "Consultation Fees",
-        image: "/images/homepage/logo2.svg",
-        order_id: order.id,
-        callback_url: "http://localhost:5000/api/payment/paymentverification",
-        prefill: {
-          name: user.username,
-          email: user.email,
-          contact: user.phone,
-        },
-        notes: {
-          address: "A-100, A Block, Govindpuram New Delhi",
-        },
-        theme: {
-          color: "#007bff",
-        },
-      };
-      const razor = new window.Razorpay(options);
-      razor.open();
-    } catch (error) {
-      console.error("Error during checkout:", error);
     }
   };
 
