@@ -1,13 +1,13 @@
 // BookTest.js
 import React, { useEffect, useState } from "react";
 import BookingForm from "../components/Test&Scans/BookingForm";
+import TestsPayment from "../components/Test&Scans/TestsPayment";
+import useCheckout from "../hooks/Checkout";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import PaymentForm from "../components/Payment/PaymentForm";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import { useParams } from "react-router-dom";
 
@@ -46,6 +46,8 @@ const BookTest = () => {
     file: null,
     testType: "",
   });
+
+  const { checkoutHandler } = useCheckout();
 
   const fetchTestdata = async () => {
     try {
@@ -140,8 +142,13 @@ const BookTest = () => {
           )}
           {value === 1 && (
             <div>
-              <h1>Payment Form</h1>
-              <PaymentForm formData={formData} />
+              <h1 className="text-primary text-center">Payment</h1>
+              <TestsPayment
+                formData={formData}
+                amount={500}
+                checkoutHandler={checkoutHandler}
+                testName={formData.testType}
+              />
             </div>
           )}
         </Box>
