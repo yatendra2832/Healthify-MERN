@@ -19,7 +19,6 @@ import Error from "./pages/Error";
 import Navbar2 from "./components/Navbar2";
 import BloodTest from "./pages/BloodTest";
 import DoctorConsultation from "./pages/DoctorConsultation";
-import GeneticTesting from "./pages/GeneticTesting";
 import Xray from "./pages/Xray";
 import Surgery from "./pages/Surgery";
 import Supplement from "./pages/Supplement";
@@ -82,7 +81,6 @@ function App() {
           {/* Navbar 2 Routes */}
           <Route path="/bloodtest" element={<BloodTest />} />
           <Route path="/tests" element={<Xray />} />
-          <Route path="/genetictesting" element={<GeneticTesting />} />
           <Route path="/doctorconsultation" element={<DoctorConsultation />} />
           <Route path="/surgery" element={<Surgery />} />
           <Route path="/supplement" element={<Supplement />} />

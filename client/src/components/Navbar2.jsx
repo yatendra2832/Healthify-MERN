@@ -33,11 +33,7 @@ const Navbar2 = () => {
                   X-Rays & Scans
                 </Link>
               </li>
-              <li className="nav-item ">
-                <Link className="nav-link " to="/geneticTesting">
-                  Genetic Testing
-                </Link>
-              </li>
+            
               <li className="nav-item ">
                 <Link className="nav-link " to="/doctorconsultation">
                   Doctor Consultation
