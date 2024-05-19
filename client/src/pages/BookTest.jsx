@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import BookingForm from "../components/Test&Scans/BookingForm";
 import TestsPayment from "../components/Test&Scans/TestsPayment";
 import useCheckout from "../hooks/Checkout";
+import { toast } from "react-toastify";
+import { useAuth } from "../store/auth";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -40,14 +42,27 @@ const BookTest = () => {
   const [value, setValue] = useState(0);
   const [isPaymentEnabled, setIsPaymentEnabled] = useState(false);
   const [formData, setFormData] = useState({
+    userId: "",
     patientName: "",
     phoneNumber: "",
     location: "",
     file: null,
     testType: "",
+    date: "",
   });
 
   const { checkoutHandler } = useCheckout();
+  const { user } = useAuth();
+
+  // Update formData.userId when user changes
+  useEffect(() => {
+    if (user) {
+      setFormData((prevData) => ({
+        ...prevData,
+        userId: user._id,
+      }));
+    }
+  }, [user]);
 
   const fetchTestdata = async () => {
     try {
@@ -87,7 +102,8 @@ const BookTest = () => {
       formData.phoneNumber.trim() === "" ||
       formData.location === "" ||
       formData.file === null ||
-      formData.testType === ""
+      formData.testType === "" ||
+      formData.date === ""
     ) {
       alert("Please fill in all fields");
       return;
@@ -104,11 +120,36 @@ const BookTest = () => {
     }));
   };
 
-  const handleFileChange = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      file: e.target.files[0],
-    }));
+ 
+
+  const handlePaymentSuccess = async (paymentId) => {
+    try {
+      // Append paymentId to the existing form data object
+      const formDataToSubmit = {
+        ...formData,
+        paymentId,
+      };
+
+      const response = await fetch(
+        "http://localhost:5000/api/testbooking/booking",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formDataToSubmit),
+        }
+      );
+
+      if (response.ok) {
+        toast.success("Test Booking Submitted Successfully");
+      } else {
+        alert("Failed to submit form data after payment.");
+      }
+    } catch (error) {
+      console.error("Error during form submission after payment", error);
+      alert("An error occurred. Please try again.");
+    }
   };
 
   return (
@@ -133,7 +174,6 @@ const BookTest = () => {
               <BookingForm
                 formData={formData}
                 handleFormChange={handleFormChange}
-                handleFileChange={handleFileChange}
                 handleContinue={handleContinue}
                 locations={locations}
                 testTypes={testTypes}
@@ -144,9 +184,10 @@ const BookTest = () => {
             <div>
               <h1 className="text-primary text-center">Payment</h1>
               <TestsPayment
-                formData={formData}
                 amount={500}
-                checkoutHandler={checkoutHandler}
+                checkoutHandler={(amount) =>
+                  checkoutHandler(amount, handlePaymentSuccess)
+                }
                 testName={formData.testType}
               />
             </div>
