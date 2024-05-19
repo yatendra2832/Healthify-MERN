@@ -4,18 +4,16 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 const TestForm = ({
   formData,
   handleFormChange,
-  handleFileChange,
   handleContinue,
   locations,
   testTypes,
 }) => {
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={1}>
       <Grid item xs={12}>
         <TextField
           fullWidth
@@ -67,20 +65,25 @@ const TestForm = ({
         </TextField>
       </Grid>
       <Grid item xs={12}>
-        <Button
-          variant="contained"
-          component="label"
-          startIcon={<CloudUploadIcon />}
+        <TextField
           fullWidth
-        >
-          Upload Prescription
-          <input
-            type="file"
-            accept=".pdf,.doc,.docx"
-            style={{ display: "none" }}
-            onChange={handleFileChange}
-          />
-        </Button>
+          type="date"
+          label="Date"
+          name="date"
+          InputLabelProps={{ shrink: true }} // To ensure the label does not overlap with the placeholder
+          value={formData.date || ""}
+          onChange={handleFormChange}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          type="file"
+          variant="outlined"
+          fullWidth
+          name="file"
+          value={formData.file}
+          onChange={handleFormChange} // Use handleFileChange to capture file changes
+        />
       </Grid>
       <Grid item xs={12}>
         <Button
