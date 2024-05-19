@@ -13,12 +13,13 @@ const adminRouter = require('./Router/admin-router')
 const doctorRouter = require('./Router/doctor-router')
 const paymentRouter = require('./Router/payment-router')
 const testRouter = require('./Router/test-router')
+const testBookingRouter = require('./Router/testBooking-router')
 // Middlewares
 //cors policy handling
 const corsOptions = {
     origin: "http://localhost:5173",
-    mehtods: "GET,POST,DELETE,PUT,PATCH,HEAD",
-    creadentials: true
+    methods: "GET,POST,DELETE,PUT,PATCH,HEAD",
+    credentials: true
 }
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -30,6 +31,7 @@ app.use('/api/admin', adminRouter)
 app.use('/api/doctor', doctorRouter)
 app.use('/api/payment', paymentRouter)
 app.use('/api/tests', testRouter)
+app.use('/api/testbooking', testBookingRouter)
 
 app.use(errorMiddleware)
 
