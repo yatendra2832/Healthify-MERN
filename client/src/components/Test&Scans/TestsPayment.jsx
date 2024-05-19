@@ -8,7 +8,12 @@ import {
   Container,
 } from "@mui/material";
 
-const TestPayment = ({ amount, checkoutHandler, testName }) => {
+const TestPayment = ({
+  amount,
+  checkoutHandler,
+  testName,
+  handlePaymentSuccess,
+}) => {
   return (
     <Container sx={{ my: 4 }}>
       <Card
@@ -35,7 +40,7 @@ const TestPayment = ({ amount, checkoutHandler, testName }) => {
             variant="contained"
             color="primary"
             size="large"
-            onClick={() => checkoutHandler(amount)}
+            onClick={() => checkoutHandler(amount, handlePaymentSuccess)}
           >
             Pay Now
           </Button>

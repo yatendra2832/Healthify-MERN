@@ -7,14 +7,13 @@ const useCheckout = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const checkoutHandler = async (amount) => {
+  const checkoutHandler = async (amount, onSuccess) => {
     setLoading(true);
     setError(null);
     try {
       const {
         data: { key },
       } = await axios.get("http://localhost:5000/api/payment/getkey");
-
       const {
         data: { order },
       } = await axios.post("http://localhost:5000/api/payment/checkout", {
@@ -40,6 +39,11 @@ const useCheckout = () => {
         },
         theme: {
           color: "#007bff",
+        },
+        handler: function (response) {
+          // Capture payment ID and call the success callback
+          const paymentId = response.razorpay_payment_id;
+          if (onSuccess) onSuccess(paymentId);
         },
       };
 
