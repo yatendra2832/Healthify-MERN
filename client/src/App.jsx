@@ -40,7 +40,7 @@ import AdminContacts from "./pages/Admin-Contacts";
 import AdminAppointments from "./pages/Admin-Appointments";
 import AdminUpdate from "./pages/AdminUpdate";
 import AdminAppointmentDetails from "./pages/AdminAppointment-Details";
-
+import AdminTestbookings from "./pages/Admin-Testbookings";
 //
 import DoctorProfile from "./pages/DoctorProfile";
 
@@ -97,6 +97,7 @@ function App() {
             <Route path="users" element={<AdminUsers />} />
             <Route path="contacts" element={<AdminContacts />} />
             <Route path="appointments" element={<AdminAppointments />} />
+            <Route path="testbookings" element={<AdminTestbookings />} />
             <Route path="users/:id/edit" element={<AdminUpdate />} />
             <Route
               path="appointments/:id"

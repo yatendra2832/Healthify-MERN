@@ -3,6 +3,7 @@ import { NavLink, Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../store/auth";
 
 import { FaUser, FaAddressBook, FaBriefcase, FaHome } from "react-icons/fa";
+import { GrDocumentTest } from "react-icons/gr";
 
 const Admin_Layout = () => {
   const { user, isLoading } = useAuth();
@@ -22,6 +23,9 @@ const Admin_Layout = () => {
         break;
       case "/admin/appointments":
         setPageTitle("Admin Panel - Appointments");
+        break;
+      case "/admin/testbookings":
+        setPageTitle("Admin Panel - Tests Bookings");
         break;
       default:
         setPageTitle("Admin Panel");
@@ -74,6 +78,14 @@ const Admin_Layout = () => {
               className="nav-link fw-bold fs-6 mx-4 text-primary"
             >
               <FaBriefcase className="mx-2 fs-6" /> Appointments
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              to="/admin/testbookings"
+              className="nav-link fw-bold fs-6 mx-4 text-primary"
+            >
+              <GrDocumentTest className="mx-2 fs-5" /> Test Bookings
             </NavLink>
           </li>
         </ul>
