@@ -46,50 +46,71 @@ const Admin_Layout = () => {
           {" "}
           <h1 className="text-primary fw-bold text-center  ">{pageTitle}</h1>
         </NavLink>
-        <hr />
-        <ul className=" d-flex justify-content-evenly w-100 list-unstyled ">
-          <li className="nav-item ">
-            <NavLink
-              to={"/"}
-              className="nav-link fw-bold fs-6 mx-4 text-primary"
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className="container-fluid">
+            <img
+              src="/images/homepage/software-engineer.png"
+              alt="se"
+              width={50}
+              height={50}
+            />
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
             >
-              <FaHome className="mx-2 fs-6" /> Home
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              to="/admin/users"
-              className="nav-link fw-bold fs-6 mx-4 text-primary"
-            >
-              <FaUser className="mx-2 fs-6" /> Users
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              to="/admin/contacts"
-              className="nav-link fw-bold fs-6 mx-4 text-primary"
-            >
-              <FaAddressBook className="mx-2 fs-6" /> Contacts
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              to="/admin/appointments"
-              className="nav-link fw-bold fs-6 mx-4 text-primary"
-            >
-              <FaBriefcase className="mx-2 fs-6" /> Appointments
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              to="/admin/testbookings"
-              className="nav-link fw-bold fs-6 mx-4 text-primary"
-            >
-              <GrDocumentTest className="mx-2 fs-5" /> Test Bookings
-            </NavLink>
-          </li>
-        </ul>
-        <hr />
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav w-100 justify-content-evenly">
+                <li className="nav-item ">
+                  <NavLink
+                    to={"/"}
+                    className="nav-link fw-bold fs-6 mx-4 text-primary"
+                  >
+                    <FaHome className="mx-2 fs-6" /> Home
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    to="/admin/users"
+                    className="nav-link fw-bold fs-6 mx-4 text-primary"
+                  >
+                    <FaUser className="mx-2 fs-6" /> Users
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    to="/admin/contacts"
+                    className="nav-link fw-bold fs-6 mx-4 text-primary"
+                  >
+                    <FaAddressBook className="mx-2 fs-6" /> Contacts
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    to="/admin/appointments"
+                    className="nav-link fw-bold fs-6 mx-4 text-primary"
+                  >
+                    <FaBriefcase className="mx-2 fs-6" /> Appointments
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    to="/admin/testbookings"
+                    className="nav-link fw-bold fs-6 mx-4 text-primary"
+                  >
+                    <GrDocumentTest className="mx-2 fs-5" /> Test Bookings
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
       </div>
 
       <Outlet />
