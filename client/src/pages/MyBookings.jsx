@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 import { Link } from "react-router-dom";
+import TestBookingDetails from "../components/UserDashboard/TestBookingdetails";
+
 const MyBookings = () => {
   const { AuthorizationToken } = useAuth();
-  const [myappointment, setMyappointments] = useState([]);
+  const [myAppointments, setMyAppointments] = useState([]);
+  const [myTests, setMyTests] = useState([]);
   const getAppointmentData = async () => {
     try {
       const response = await fetch(
@@ -17,7 +20,7 @@ const MyBookings = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setMyappointments(data);
+        setMyAppointments(data);
         // console.log(data);
       }
     } catch (error) {
@@ -25,14 +28,34 @@ const MyBookings = () => {
     }
   };
 
+  const getTestBookingData = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/testbooking/mytest",
+        {
+          method: "GET",
+          headers: {
+            Authorization: AuthorizationToken,
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setMyTests(data);
+      }
+    } catch (error) {
+      console.log("Error at MyBookings (Test): ", error.message);
+    }
+  };
   useEffect(() => {
     getAppointmentData();
+    getTestBookingData();
   }, []);
 
   return (
     <>
       <div className="container mt-4 ">
-        {myappointment.length > 0 ? (
+        {myAppointments.length > 0 || myTests.length > 0 ? (
           <h2 className="text-primary fw-bold text-center mb-4">
             Your Upcoming Appointments and Tests
           </h2>
@@ -54,7 +77,7 @@ const MyBookings = () => {
           </div>
         )}
 
-        {myappointment.map((appointment, index) => (
+        {myAppointments.map((appointment, index) => (
           <div key={index} className="card mb-3 border rounded-4 shadow-lg ">
             <div className="card-body ">
               <div className="accordion" id={`accordion-${index}`}>
@@ -71,7 +94,7 @@ const MyBookings = () => {
                       aria-controls={`panelsStayOpen-collapse-${index}`}
                     >
                       <h3 className="card-title text-primary">
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" className="btn btn-primary">
                           Appointment{" "}
                           <span class="badge text-bg-secondary">
                             {index + 1}
@@ -100,6 +123,7 @@ const MyBookings = () => {
                       <p>
                         <strong>Gender:</strong> {appointment.gender}
                       </p>
+
                       <h3 className="card-title mt-4 text-primary border-bottom border-2">
                         Contact Information
                       </h3>
@@ -199,6 +223,10 @@ const MyBookings = () => {
               {/* TODO */}
             </div>
           </div>
+        ))}
+
+        {myTests.map((test, index) => (
+          <TestBookingDetails key={index} test={test} index={index} />
         ))}
       </div>
     </>

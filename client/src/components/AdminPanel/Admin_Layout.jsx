@@ -42,7 +42,7 @@ const Admin_Layout = () => {
   return (
     <>
       <div className=" p-3 ">
-        <NavLink to={"/admin"} className="nav-link">
+        <NavLink to={location.pathname} className="nav-link">
           {" "}
           <h1 className="text-primary fw-bold text-center  ">{pageTitle}</h1>
         </NavLink>
