@@ -5,7 +5,9 @@ const Patients = () => {
     <>
       {" "}
       <h2 className="text-center m-4">
-        Our <span className="fw-bold text-primary ">Patients</span> Review
+        <strong className=" border-4 border-bottom p-2 rounded-5 border-warning fst-italic">
+          Our Patients Review
+        </strong>
       </h2>
       <div>
         {/* First Set of Patient Reviews */}
@@ -81,7 +83,7 @@ const Patients = () => {
               imageSrc="/images/patient/patient6.jpg"
             />
           </div>
-          </div>
+        </div>
       </div>
     </>
   );

@@ -9,14 +9,11 @@ const About = () => {
         <div className="row">
           <div className="col-md-7">
             <h1
-              className="fw-bold my-4"
-              style={{
-                color: "#007BFF",
-                fontSize: "2rem",
-                marginBottom: "20px",
-              }}
+              className=" my-4"
             >
-              Why Choose Healthify ?
+              <strong className=" border-4 border-bottom p-2 rounded-5 border-warning fst-italic">
+                Why Choose Healthify ?
+              </strong>
             </h1>
             <p
               className="my-4"

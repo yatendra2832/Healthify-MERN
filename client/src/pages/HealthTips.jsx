@@ -3,7 +3,12 @@ import HealthTipsCard from "../components/Card/HealthTipsCard";
 const HealthTips = () => {
   return (
     <>
-      <h1 className="text-primary text-center fw-bold">Health Tips</h1>
+      <h1 className="text-primary text-center fst-italic ">
+        <strong className=" border-4 border-bottom p-2 rounded-5 border-warning ">
+          {" "}
+          Health Tips
+        </strong>
+      </h1>
       <div className="container">
         <div className="row  ">
           <HealthTipsCard

@@ -40,8 +40,10 @@ const Xray = () => {
 
   return (
     <>
-      <h1 className="text-center text-primary fw-bold my-2">
-        Test <span className="text-warning">&</span> Scans
+      <h1 className="text-center text-primary fst-italic my-4">
+        <strong className=" border-4 border-bottom p-2 rounded-5 border-warning ">
+          Test <span className="text-warning">&</span> Scans
+        </strong>
       </h1>
       {loading ? (
         <div>Loading...</div>

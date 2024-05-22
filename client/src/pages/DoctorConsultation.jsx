@@ -45,8 +45,10 @@ const DoctorConsultation = () => {
 
   return (
     <>
-      <h1 className="text-center text-primary fw-bold my-4">
-        Doctor Consultation
+      <h1 className="text-center text-primary fst-italic  my-4">
+        <strong className=" border-4 border-bottom p-2 rounded-5 border-warning ">
+          Doctor Consultation
+        </strong>
       </h1>
       {/* Filter UI */}
       <FilterDoctor

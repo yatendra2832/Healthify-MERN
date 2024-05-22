@@ -7,7 +7,9 @@ const Doctors = () => {
   return (
     <>
       <h2 className="text-center m-4  ">
-        Our <span className="fw-bold text-primary ">Doctors</span>
+        <strong className=" border-4 border-bottom p-2 rounded-5 border-warning fst-italic">
+          Our Doctors
+        </strong>
       </h2>
       {doctors.map((doctor, index) => (
         <div key={index}>

@@ -27,17 +27,17 @@ const LabTestCard = ({
                 </strong>
               </div>
             </div>
-            <div className="d-flex justify-content-around  mt-2 listheight  ">
-              <ul>
+            <div className="d-flex justify-content-between  mt-2 listheight  ">
+              <ul className="list-unstyled">
                 {parametersNames.slice(0, 4).map((parameter, index) => (
                   <li key={index} className="fs-6 ">
                     {parameter}
                   </li>
                 ))}
               </ul>
-              <ul>
+              <ul className="list-unstyled">
                 {parametersNames.slice(4).map((parameter, index) => (
-                  <li key={index} className="fs-6">
+                  <li key={index} className="fs-6 ">
                     {parameter}
                   </li>
                 ))}

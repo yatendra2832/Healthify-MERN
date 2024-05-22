@@ -158,8 +158,10 @@ const Appointment = () => {
   };
   return (
     <>
-      <h2 className="mt-4 text-primary fw-bold text-center">
-        Medical Appointment Form
+      <h2 className="mt-4 text-primary  text-center">
+        <strong className=" border-4 border-bottom p-2 rounded-5 border-warning fst-italic ">
+          Medical Appointment Form
+        </strong>{" "}
       </h2>{" "}
       <div className="container w-100">
         <Tabs

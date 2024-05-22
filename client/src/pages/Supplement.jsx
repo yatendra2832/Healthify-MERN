@@ -24,7 +24,11 @@ const Supplement = () => {
   };
   return (
     <>
-      <h1 className="text-center text-primary fw-bold my-2">Supplements</h1>
+      <h1 className="text-center text-primary fst-italic my-2">
+        {" "}
+        <strong className=" border-4 border-bottom p-2 rounded-5 border-warning "> Supplements</strong>
+       
+      </h1>
       <div className="container my-4">
         <SupplementCard
           imgSrc="/images/supplementimg/digestplus.jpg"

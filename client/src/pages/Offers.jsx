@@ -3,7 +3,12 @@ import OfferCard from "../components/Card/OfferCard";
 const Offers = () => {
   return (
     <>
-    <h1 className="text-center text-primary fw-bold">Offers</h1>
+      <h1 className="text-center text-primary fst-italic">
+        {" "}
+        <strong className=" border-4 border-bottom p-2 rounded-5 border-warning ">
+          Offers & Packages
+        </strong>
+      </h1>
       <div className="row mb-2 my-4 mx-4">
         <OfferCard
           imgSrc="/images/offerimg/offer1.jpg"
