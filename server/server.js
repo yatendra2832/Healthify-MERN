@@ -14,6 +14,7 @@ const doctorRouter = require('./Router/doctor-router')
 const paymentRouter = require('./Router/payment-router')
 const testRouter = require('./Router/test-router')
 const testBookingRouter = require('./Router/testBooking-router')
+const labtestcardRouter = require('./Router/labtestcard-router')
 // Middlewares
 //cors policy handling
 const corsOptions = {
@@ -32,6 +33,8 @@ app.use('/api/doctor', doctorRouter)
 app.use('/api/payment', paymentRouter)
 app.use('/api/tests', testRouter)
 app.use('/api/testbooking', testBookingRouter)
+app.use('/api/labtestcards', labtestcardRouter)
+
 
 app.use(errorMiddleware)
 
