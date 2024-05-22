@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LabTestCard from "../components/LabTest/LabTestCard";
 const BloodTest = () => {
+  const [cardsData, setCardsData] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/labtestcards", {
+        method: "GET",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setCardsData(data);
+      }
+    } catch (error) {
+      console.error("Error at labtest card fetching", error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
-      <div className="bg-primary text-white m-4 border rounded-5 ">
+      <div className="bg-primary text-white m-1 border rounded-2 mb-4 ">
         <div className="container">
           <h1 className="text-center my-2 fw-bold">
             The Excellence of{" "}
@@ -37,7 +55,19 @@ const BloodTest = () => {
           </div>
         </div>
       </div>
-      <LabTestCard />
+      <hr className="text-danger" />
+      <div className=" container mb-5">
+        <h1 className="text-center text-primary fst-italic mb-4">
+          <strong className=" border-4 border-bottom p-2 rounded-5 border-warning ">
+            Popular Tests
+          </strong>
+        </h1>
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 my-4">
+          {cardsData.map((card, index) => (
+            <LabTestCard key={index} {...card} />
+          ))}
+        </div>
+      </div>
     </>
   );
 };

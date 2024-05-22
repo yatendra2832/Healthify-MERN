@@ -1,0 +1,19 @@
+.fixed-height-card {
+  min-height: 450px; /* Adjust this value based on your design requirements */
+}
+
+.mainheading {
+  height: 30px;
+}
+
+.parameterheight {
+  height: 20px;
+}
+.listheight {
+  height: 200px;
+}
+.bottombutton {
+  height: 130px;
+}
+
+
