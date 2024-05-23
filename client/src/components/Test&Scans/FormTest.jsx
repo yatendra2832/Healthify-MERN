@@ -27,7 +27,7 @@ const FormTest = ({ id }) => {
       <div className="container col-xl-10 col-xxl-8 p-2 bg-tertiary">
         <div className="row align-items-center g-lg-5">
           <div className="col-lg-7 text-center text-lg-start">
-            <h2 className="display-4 fw-bold lh-1 mb-3">
+            <h2 className="display-4 fw-bold lh-1 mb-3 fst-italic">
               {data.title}{" "}
               <span className="text-primary">Centres near you in </span>{" "}
               Location

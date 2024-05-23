@@ -5,7 +5,7 @@ import "aos/dist/aos.css";
 
 const API_URL = "http://localhost:5000/api/tests";
 const AOS_OPTIONS = {
-  delay: 800,
+  delay: 500,
   duration: 1000,
 };
 

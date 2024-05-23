@@ -51,6 +51,7 @@ import TermsCondition from "./pages/TermsCondition";
 
 import ScrollToTop from "./components/ScrollToTop";
 import BookTest from "./pages/BookTest";
+import LabTestDetails from "./components/LabTest/LabTestDetails";
 
 function App() {
   return (
@@ -111,6 +112,9 @@ function App() {
           <Route path="/tests/:id" element={<AboutTest />} />
           <Route path="tests/booking/:id" element={<BookTest />} />
           <Route path="/terms&condition" element={<TermsCondition />} />
+
+          {/* LabTest Routes */}
+          <Route path="/bloodtest/:id" element={<LabTestDetails />} />
         </Routes>
         <Footer />
       </BrowserRouter>

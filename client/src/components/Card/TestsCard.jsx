@@ -13,7 +13,7 @@ const CardImage = ({ imgSrc, altText, linkHref }) => (
 
 const CardContent = ({ title, content, id }) => (
   <div className="card-body">
-    <h1 className="card-title text-center mb-4 fw-bold">
+    <h1 className="card-title text-center mb-4 fw-bold fst-italic">
       The Excellence of <span className="text-warning ">{title}</span>
     </h1>
     <p className="card-text  mb-4 fs-5 fst-italic">{content}</p>
