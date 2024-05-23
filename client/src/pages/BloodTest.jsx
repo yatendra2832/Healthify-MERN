@@ -23,33 +23,42 @@ const BloodTest = () => {
     <>
       <div className="bg-primary text-white m-1 border rounded-2 mb-4 ">
         <div className="container">
-          <h1 className="text-center my-2 fw-bold">
+          <h1 className="text-center my-2 fw-bold fst-italic">
             The Excellence of{" "}
-            <span className="text-warning">Blood Test Labs</span>
+            <span className="text-warning ">Blood Test Labs</span>
           </h1>
           <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-md-6 col-12">
-              <p className="fw-bold">
-                1. Accuracy and Precision <hr />
-                2. Expertise <hr />
-                3. Efficiency <hr />
-                4. Patient-Centric Approach <hr />
-                5. Privacy and Confidentiality <hr />
-                6. Cutting-Edge Technology <hr />
-                7. Accreditations and Certifications <hr />
-                8. Contribution to Healthcare <hr />
-                9. Positive Feedback <hr />
-              </p>
-              <button className="btn btn-danger  mb-2  mx-4">Know More</button>
-              <button className="btn btn-warning  mb-2  mx-4">
-                Book Blood Test
-              </button>
+            <div className="col-md-6 col-12 d-flex flex-column justify-content-between">
+              <ul className="list-group fw-bold ">
+                <li className="list-group-item">1. Accuracy and Precision</li>
+                <li className="list-group-item">2. Expertise</li>
+                <li className="list-group-item">3. Efficiency</li>
+                <li className="list-group-item">4. Patient-Centric Approach</li>
+                <li className="list-group-item">
+                  5. Privacy and Confidentiality
+                </li>
+                <li className="list-group-item">6. Cutting-Edge Technology</li>
+                <li className="list-group-item">
+                  7. Accreditations and Certifications
+                </li>
+                <li className="list-group-item">
+                  8. Contribution to Healthcare
+                </li>
+                <li className="list-group-item">9. Positive Feedback</li>
+              </ul>
+              <div className="d-flex justify-content-center mt-4">
+                <button className="btn btn-danger  mb-2 mx-2">Know More</button>
+                <button className="btn btn-warning  mb-2 mx-2">
+                  Book Blood Test
+                </button>
+              </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 col-12 d-flex align-items-center mb-5">
               <img
                 src="/images/Navbar2/bloodtest.jpg"
                 alt="Labs"
-                className=" w-100 rounded-5 my-4"
+                className="w-100 rounded-5 p-4"
+                style={{ objectFit: "cover", height: "100%" }}
               />
             </div>
           </div>
