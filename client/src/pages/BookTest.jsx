@@ -186,7 +186,7 @@ const BookTest = () => {
               <TestsPayment
                 amount={500}
                 checkoutHandler={(amount) =>
-                  checkoutHandler(amount, handlePaymentSuccess)
+                  checkoutHandler(amount, handlePaymentSuccess,formData.testType)
                 }
                 testName={formData.testType}
               />

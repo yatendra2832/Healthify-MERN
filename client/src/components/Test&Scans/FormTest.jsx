@@ -156,7 +156,7 @@ const FormTest = ({ id }) => {
                   className="form-check-label"
                   htmlFor="leadconsentchkMobile"
                 >
-                  You hereby affirm &amp; authorise Healthians to process the
+                  You hereby affirm &amp; authorise Healthify to process the
                   personal data as per the{" "}
                   <Link to={"/terms&condition"} className="link-primary">
                     T&amp;C

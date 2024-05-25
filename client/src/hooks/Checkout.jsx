@@ -7,7 +7,7 @@ const useCheckout = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const checkoutHandler = async (amount, onSuccess) => {
+  const checkoutHandler = async (amount, onSuccess,description) => {
     setLoading(true);
     setError(null);
     try {
@@ -25,7 +25,7 @@ const useCheckout = () => {
         amount: order.amount,
         currency: "INR",
         name: "Healthify",
-        description: "Consultation Fees",
+        description: `${description} Test Booking Payment`,
         image: "/images/homepage/logo2.svg",
         order_id: order.id,
         callback_url: "http://localhost:5000/api/payment/paymentverification",

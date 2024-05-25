@@ -149,53 +149,73 @@ const LabTestDetails = () => {
           Test Details (parameters Included {cardData.parameters})
         </h1>
         <h3 className=" fst-italic fw-bold mt-2">Parameter Names</h3>
-        <div className="container text-center  my-4">
-          <div className="d-flex justify-content-start mt-2">
-            <ul className="list-unstyled">
-              {parameters.map((parameter, index) => (
-                <li
-                  key={index}
-                  className="fs-6 bg-light rounded px-4 py-3 mb-3 shadow"
-                >
-                  <strong>{parameter}</strong>
-                </li>
-              ))}
-            </ul>
+        <div className="container my-4">
+          <div className="row">
+            <div className="col-lg-4 col-md-12 mb-4">
+              <ul className="list-unstyled">
+                {parameters.map((parameter, index) => (
+                  <li
+                    key={index}
+                    className="fs-6 bg-light rounded px-4 py-3 mb-3 shadow-sm"
+                  >
+                    <strong>{parameter}</strong>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="col-lg-8 col-md-12 d-flex justify-content-center align-items-center">
+              <img
+                src="/images/labtest/homesample.jpg"
+                alt="Sample Collection"
+                className="img-fluid rounded-3 shadow-lg h-75"
+              />
+            </div>
           </div>
         </div>
 
-       
-       <div className="container">
-  <h1 className="text-warning fst-italic mt-4">
-    <strong>Bundle of Benefits</strong> on every Health test booking
-  </h1>
-  <div className="row d-flex justify-content-between bg-light m-4 p-4 rounded">
-    <div className="col-md-4 col-sm-12 mb-4">
-      <img src="/images/labtest/icon5.png" alt="" className="img-fluid" />
-      <h4 className="mt-3">Get 100% Cashback Coupons</h4>
-      <p>
-        Earn 100% cashback of equivalent order amount on all health tests.
-      </p>
-    </div>
-    <div className="col-md-4 col-sm-12 mb-4">
-      <img src="/images/labtest/icon6.png" alt="" className="img-fluid" />
-      <h4 className="mt-3">Get Free Dental Check-Up Consultation</h4>
-      <p>
-        Avail Dental check-up consultation worth INR 1000 on all health
-        tests for free.
-      </p>
-    </div>
-    <div className="col-md-4 col-sm-12 mb-4">
-      <img src="/images/labtest/icon7.png" alt="" className="img-fluid" />
-      <h4 className="mt-3">Health Plan at Negligible Prices</h4>
-      <p>
-        Avail benefits like Doctor Consultations, Emotional Wellbeing Survey
-        & more. T&C Apply.
-      </p>
-    </div>
-  </div>
-</div>
-
+        <div className="container">
+          <h1 className="text-warning fst-italic mt-4">
+            <strong>Bundle of Benefits</strong> on every Health test booking
+          </h1>
+          <div className="row d-flex justify-content-between bg-light m-4 p-4 rounded">
+            <div className="col-md-4 col-sm-12 mb-4">
+              <img
+                src="/images/labtest/icon5.png"
+                alt=""
+                className="img-fluid"
+              />
+              <h4 className="mt-3">Get 100% Cashback Coupons</h4>
+              <p>
+                Earn 100% cashback of equivalent order amount on all health
+                tests.
+              </p>
+            </div>
+            <div className="col-md-4 col-sm-12 mb-4">
+              <img
+                src="/images/labtest/icon6.png"
+                alt=""
+                className="img-fluid"
+              />
+              <h4 className="mt-3">Get Free Dental Check-Up Consultation</h4>
+              <p>
+                Avail Dental check-up consultation worth INR 1000 on all health
+                tests for free.
+              </p>
+            </div>
+            <div className="col-md-4 col-sm-12 mb-4">
+              <img
+                src="/images/labtest/icon7.png"
+                alt=""
+                className="img-fluid"
+              />
+              <h4 className="mt-3">Health Plan at Negligible Prices</h4>
+              <p>
+                Avail benefits like Doctor Consultations, Emotional Wellbeing
+                Survey & more. T&C Apply.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
