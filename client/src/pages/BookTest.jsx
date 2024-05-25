@@ -12,6 +12,7 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const locations = [
   { value: "Noida", label: "Noida" },
@@ -41,6 +42,7 @@ const BookTest = () => {
   const [testTypes, setTestTypes] = useState([]);
   const [value, setValue] = useState(0);
   const [isPaymentEnabled, setIsPaymentEnabled] = useState(false);
+  const navigate =useNavigate()
   const [formData, setFormData] = useState({
     userId: "",
     patientName: "",
@@ -143,6 +145,7 @@ const BookTest = () => {
 
       if (response.ok) {
         toast.success("Test Booking Submitted Successfully");
+        navigate('/tests')
       } else {
         alert("Failed to submit form data after payment.");
       }

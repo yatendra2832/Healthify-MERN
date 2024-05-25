@@ -4,6 +4,7 @@ import TestsPayment from "../Test&Scans/TestsPayment";
 import useCheckout from "../../hooks/Checkout";
 import { toast } from "react-toastify";
 import { useAuth } from "../../store/auth";
+import { useNavigate } from 'react-router-dom';
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -18,6 +19,8 @@ const BookBloodTest = () => {
   const [testData, setTestData] = useState("");
   const [value, setValue] = useState(0);
   const [isPaymentEnabled, setIsPaymentEnabled] = useState(false);
+
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: "",
     contact: "",
@@ -127,6 +130,8 @@ const BookBloodTest = () => {
 
       if (response.ok) {
         toast.success("Test Booking Submitted Successfully");
+        navigate('/bloodtest')
+        
       } else {
         alert("Failed to submit form data after payment.");
       }
