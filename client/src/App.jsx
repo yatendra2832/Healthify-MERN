@@ -53,6 +53,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import BookTest from "./pages/BookTest";
 import LabTestDetails from "./components/LabTest/LabTestDetails";
 import BloodSampleCollectionForm from "./components/LabTest/BloodSampleCollectionForm";
+import BookBloodTest from "./components/LabTest/BookBloodTest";
 
 function App() {
   return (
@@ -116,10 +117,8 @@ function App() {
 
           {/* LabTest Routes */}
           <Route path="/bloodtest/:id" element={<LabTestDetails />} />
-          <Route
-            path="bloodtest/booking/:id"
-            element={<BloodSampleCollectionForm />}
-          />
+          <Route path="bloodtest/booking/:id" element={<BookBloodTest />} />
+          {/* <Route path="bloodtest/booking/:id" element={<BloodSampleCollectionForm />} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>
