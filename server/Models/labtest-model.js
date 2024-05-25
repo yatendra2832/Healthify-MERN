@@ -21,6 +21,7 @@ const labtestBookingSchema = new Schema({
     appointmentDate: { type: Date, required: true },
     appointmentTime: { type: String, required: true },
     instructions: { type: String, required: true },
+
 });
 
 // Create the model
