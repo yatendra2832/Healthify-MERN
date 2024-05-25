@@ -10,7 +10,7 @@ const LabTestCard = ({
   parametersNames,
   discountedPrice,
   originalPrice,
-  aboutTest,
+  _id,
 }) => {
   return (
     <>
@@ -43,7 +43,7 @@ const LabTestCard = ({
                 ))}
               </ul>
             </div>
-            <Link to="#" className="mt-4">
+            <Link to={`/bloodtest/${_id}`} className="mt-4">
               +Know More
             </Link>
 
@@ -52,9 +52,11 @@ const LabTestCard = ({
                 originalPrice={originalPrice}
                 offerAmount={discountedPrice}
               />
-              <button className="btn btn-primary w-100 rounded-5">
-                Book Now
-              </button>
+              <Link to={`/bloodtest/booking/${_id}`} >
+                <button className="btn btn-primary w-100 rounded-5">
+                  Book Now
+                </button>
+              </Link>
             </div>
           </div>
         </div>
