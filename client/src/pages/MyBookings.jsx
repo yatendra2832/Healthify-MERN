@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../store/auth";
 import { Link } from "react-router-dom";
-import TestBookingDetails from "../components/UserDashboard/TestBookingdetails";
+import MyTestBookingDetails from "../components/UserDashboard/MyBookings/MyTestBookingdetails";
+import MyLabTestBookingDetails from "../components/UserDashboard/MyBookings/MyLabTestBookingDetails";
+import MyAppointmentDetails from "../components/UserDashboard/MyBookings/MyAppointmentDetails";
 
 const MyBookings = () => {
   const { AuthorizationToken } = useAuth();
   const [myAppointments, setMyAppointments] = useState([]);
   const [myTests, setMyTests] = useState([]);
+  const [myLabtests, setMyLabtests] = useState([]);
   const getAppointmentData = async () => {
     try {
       const response = await fetch(
@@ -28,7 +31,7 @@ const MyBookings = () => {
     }
   };
 
-  const getTestBookingData = async () => {
+  const getTest_ScanBookingData = async () => {
     try {
       const response = await fetch(
         "http://localhost:5000/api/testbooking/mytest",
@@ -47,15 +50,41 @@ const MyBookings = () => {
       console.log("Error at MyBookings (Test): ", error.message);
     }
   };
+
+  const getLabTestBookingData = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/labtestbooking/mytest",
+        {
+          method: "GET",
+          headers: {
+            Authorization: AuthorizationToken,
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setMyLabtests(data);
+      }
+    } catch (error) {
+      console.error(
+        "Error in fetching the details of the labtest booking in booking.jsx: ",
+        error
+      );
+    }
+  };
   useEffect(() => {
     getAppointmentData();
-    getTestBookingData();
+    getTest_ScanBookingData();
+    getLabTestBookingData();
   }, []);
 
   return (
     <>
       <div className="container mt-4 ">
-        {myAppointments.length > 0 || myTests.length > 0 ? (
+        {myAppointments.length > 0 ||
+        myTests.length > 0 ||
+        myLabtests.length > 0 ? (
           <h2 className="text-primary fw-bold text-center mb-4">
             Your Upcoming Appointments and Tests
           </h2>
@@ -70,163 +99,25 @@ const MyBookings = () => {
             </p>
             <Link to={"/doctorconsultation"}>
               {" "}
-              <a href="#" className="btn btn-primary ">
-                Schedule Now
-              </a>
+              <p className="btn btn-primary ">Schedule Now</p>
             </Link>
           </div>
         )}
 
         {myAppointments.map((appointment, index) => (
-          <div key={index} className="card mb-3 border rounded-4 shadow-lg ">
-            <div className="card-body ">
-              <div className="accordion" id={`accordion-${index}`}>
-                <div className="accordion-item">
-                  <h2 className="accordion-header">
-                    <button
-                      className={`accordion-button ${
-                        appointment.isCollapsed ? "" : "collapsed"
-                      }`}
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target={`#panelsStayOpen-collapse-${index}`}
-                      aria-expanded="true"
-                      aria-controls={`panelsStayOpen-collapse-${index}`}
-                    >
-                      <h3 className="card-title text-primary">
-                        <button type="button" className="btn btn-primary">
-                          Appointment{" "}
-                          <span class="badge text-bg-secondary">
-                            {index + 1}
-                          </span>
-                        </button>
-                      </h3>
-                    </button>
-                  </h2>
-                  <div
-                    id={`panelsStayOpen-collapse-${index}`}
-                    className="accordion-collapse collapse"
-                    aria-labelledby={`accordion-${index}`}
-                    data-bs-parent={`#accordion-${index}`}
-                  >
-                    <div className="accordion-body">
-                      <h3 className="card-title text-primary  border-bottom border-2">
-                        Personal Information
-                      </h3>
-                      <p>
-                        <strong>Date of Birth:</strong> {appointment.dob}
-                      </p>
-                      <p>
-                        <strong>Full Name:</strong>
-                        {appointment.fullName}
-                      </p>
-                      <p>
-                        <strong>Gender:</strong> {appointment.gender}
-                      </p>
-
-                      <h3 className="card-title mt-4 text-primary border-bottom border-2">
-                        Contact Information
-                      </h3>
-                      <p>
-                        <strong>Contact Number:</strong>{" "}
-                        {appointment.contactNumber}
-                      </p>
-                      <p>
-                        <strong>Email Address:</strong> {appointment.email}
-                      </p>
-                      <p>
-                        <strong>Home Address:</strong> {appointment.address}
-                      </p>
-                      <h3 className="card-title mt-4 text-primary border-bottom border-2">
-                        Appointment Details
-                      </h3>
-                      <p>
-                        <strong>Reason for Appointment:</strong>{" "}
-                        {appointment.reasonForAppointment}
-                      </p>
-                      <p>
-                        <strong>Preferred Date:</strong>{" "}
-                        {appointment.preferredDate}
-                      </p>
-                      <p>
-                        <strong>Preferred Time:</strong>{" "}
-                        {appointment.preferredTime}
-                      </p>
-                      <p>
-                        <strong>Appointment Type:</strong>{" "}
-                        {appointment.appointmentType}
-                      </p>
-                      <p>
-                        <strong>Preferred Healthcare Provider:</strong>{" "}
-                        {appointment.preferredProvider}
-                      </p>
-                      <h3 className="card-title mt-4 text-primary border-bottom border-2">
-                        Insurance Details
-                      </h3>
-                      <p>
-                        <strong>Insurance Provider:</strong>{" "}
-                        {appointment.insuranceProvider}
-                      </p>
-                      <p>
-                        <strong>Policy Number:</strong>{" "}
-                        {appointment.policyNumber}
-                      </p>
-                      <h3 className="card-title mt-4 text-primary border-bottom border-2">
-                        Medical History
-                      </h3>
-                      <p>
-                        <strong>Current Medications:</strong>{" "}
-                        {appointment.currentMedications}
-                      </p>
-                      <p>
-                        <strong>Allergies:</strong> {appointment.allergies}
-                      </p>
-                      <p>
-                        <strong>Chronic Conditions:</strong>{" "}
-                        {appointment.chronicConditions}
-                      </p>
-                      <p>
-                        <strong>Past Surgeries or Hospitalizations:</strong>{" "}
-                        {appointment.pastSurgeries}
-                      </p>
-                      <p>
-                        <strong>Medical History:</strong>{" "}
-                        {appointment.medicalHistory}
-                      </p>
-                      <h3 className="card-title mt-4 text-primary border-bottom border-2">
-                        Emergency Contact
-                      </h3>
-                      <p>
-                        <strong>Emergency Contact Name:</strong>{" "}
-                        {appointment.name}
-                      </p>
-                      <p>
-                        <strong>Relationship to Patient:</strong>{" "}
-                        {appointment.relationship}
-                      </p>
-                      <p>
-                        <strong>Emergency Contact Phone Number:</strong>{" "}
-                        {appointment.phone}
-                      </p>
-                      <h3 className="card-title mt-4 text-primary border-bottom border-2">
-                        Cancellation Policy
-                      </h3>
-                      <p>
-                        <strong>Read & Agreed to Cancellation Policy:</strong>{" "}
-                        {appointment.cancellationPolicy ? "Yes" : "No"}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* TODO */}
-            </div>
-          </div>
+          <MyAppointmentDetails
+            key={index}
+            appointment={appointment}
+            index={index}
+          />
         ))}
 
         {myTests.map((test, index) => (
-          <TestBookingDetails key={index} test={test} index={index} />
+          <MyTestBookingDetails key={index} test={test} index={index} />
+        ))}
+
+        {myLabtests.map((labtest, index) => (
+          <MyLabTestBookingDetails key={index} labtest={labtest} index={index} />
         ))}
       </div>
     </>
