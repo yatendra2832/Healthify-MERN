@@ -1,5 +1,5 @@
 import React from "react";
-import BottomNavbar from "../components/BottomNavbar";
+import BottomNavbar from "../components/Layout/BottomNavbar";
 import MainCarousel from "../components/CarouselCard/MainCarousel";
 import Slider from "react-slick";
 import TestCarousel from "../components/CarouselCard/TestCarousel";

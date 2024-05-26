@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../store/auth";
-import UserProfile from "./UserDashboard/UserProfile";
+import { useAuth } from "../../store/auth";
+import UserProfile from "../UserDashboard/UserProfile";
 const Navbar1 = () => {
   const { isLoggedIn, user } = useAuth();
   return (

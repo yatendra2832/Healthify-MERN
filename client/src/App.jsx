@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 // Importing Navbar1 and its all pages
-import Navbar1 from "./components/Navbar1";
+import Navbar1 from "./components/Layout/Navbar1";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -16,7 +16,7 @@ import Logout from "./pages/Logout";
 
 import Error from "./pages/Error";
 // Importing Navbar2 and all its pages
-import Navbar2 from "./components/Navbar2";
+import Navbar2 from "./components/Layout/Navbar2";
 import BloodTest from "./pages/BloodTest";
 import DoctorConsultation from "./pages/DoctorConsultation";
 import Xray from "./pages/Xray";
@@ -26,7 +26,7 @@ import Offers from "./pages/Offers";
 import HealthTips from "./pages/HealthTips";
 
 // importing Footer of the website
-import Footer from "./components/Footer";
+import Footer from "./components/Layout/Footer";
 
 // importing the user dashboard
 import UserDashboard from "./pages/UserDashboard";
@@ -49,7 +49,7 @@ import PaymentSuccess from "./components/Payment/PaymentSuccess";
 import AboutTest from "./components/Test&Scans/AboutTest";
 import TermsCondition from "./pages/TermsCondition";
 
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/Layout/ScrollToTop";
 import BookTest from "./pages/BookTest";
 import LabTestDetails from "./components/LabTest/LabTestDetails";
 import BloodSampleCollectionForm from "./components/LabTest/BloodSampleCollectionForm";
