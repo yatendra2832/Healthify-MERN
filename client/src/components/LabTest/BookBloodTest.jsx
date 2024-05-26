@@ -4,7 +4,7 @@ import TestsPayment from "../Test&Scans/TestsPayment";
 import useCheckout from "../../hooks/Checkout";
 import { toast } from "react-toastify";
 import { useAuth } from "../../store/auth";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -20,8 +20,13 @@ const BookBloodTest = () => {
   const [value, setValue] = useState(0);
   const [isPaymentEnabled, setIsPaymentEnabled] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const testName = testData.testName;
   const [formData, setFormData] = useState({
+    testId: "", // New field
+    testName: "", // New field
+    userId: "",
     name: "",
     contact: "",
     email: "",
@@ -61,6 +66,11 @@ const BookBloodTest = () => {
       if (response.ok) {
         const data = await response.json();
         setTestData(data);
+        setFormData((prevData) => ({
+          ...prevData,
+          testId: data._id,
+          testName: data.testName,
+        }));
       }
     } catch (error) {
       console.error(
@@ -130,8 +140,7 @@ const BookBloodTest = () => {
 
       if (response.ok) {
         toast.success("Test Booking Submitted Successfully");
-        navigate('/bloodtest')
-        
+        navigate("/bloodtest");
       } else {
         alert("Failed to submit form data after payment.");
       }
@@ -159,9 +168,7 @@ const BookBloodTest = () => {
         <Box>
           {value === 0 && (
             <Paper elevation={3} sx={{ padding: 2 }}>
-              <h3 className="text-primary fst-italic">
-                Booking {testData.testName}
-              </h3>
+              <h3 className="text-primary fst-italic">Booking {testName}</h3>
 
               <BloodSampleCollectionForm
                 formData={formData}
