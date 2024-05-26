@@ -107,6 +107,14 @@ const Admin_Layout = () => {
                     <GrDocumentTest className="mx-2 fs-5" /> Test Bookings
                   </NavLink>
                 </li>
+                <li className="nav-item">
+                  <NavLink
+                    to="/admin/labtestbookings"
+                    className="nav-link fw-bold fs-6 mx-4 text-primary"
+                  >
+                    <GrDocumentTest className="mx-2 fs-5" /> Blood Test Booking
+                  </NavLink>
+                </li>
               </ul>
             </div>
           </div>

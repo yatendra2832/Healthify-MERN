@@ -2,7 +2,7 @@ const User = require('../Models/user-model')
 const Contact = require('../Models/contact-model')
 const Appointment = require('../Models/appointment-model')
 const TestBooking = require('../Models/testBooking-model')
-
+const LabTest = require('../Models/labtest-model')
 // -------------------------------------------------------------------------------
 // -----------------------------USERS---------------------------------------------
 // getting all users
@@ -153,4 +153,29 @@ const deleteTestById = async (req, res, next) => {
     }
 }
 
-module.exports = { getAllUsers, getAllContacts, getAllAppointments, deleteUserById, deleteContactById, deleteAppointmentById, getUserById, updateUserById, getAppointmentById,getAllTests,deleteTestById }
+// ----------------------------------------------------------------------------------------------------------
+// ----------------------------------------------Lab Tests Controllers----------------------------------------
+const getAllLabTests = async (req, res) => {
+    try {
+        const tests = await LabTest.find();
+        if (!tests || tests.length === 0) {
+            return res.status(404).json({ message: "No Contacts Found" });
+        }
+        return res.status(200).json(tests)
+    } catch (error) {
+        next(error)
+    }
+}
+
+//Deleting a Particular LabTest
+// deleteTestbyid
+const deleteLabTestById = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        await LabTest.deleteOne({ _id: id });
+        return res.status(200).json({ message: "testBooking Deleted Successfully" });
+    } catch (error) {
+        next(error)
+    }
+}
+module.exports = { getAllUsers, getAllContacts, getAllAppointments, deleteUserById, deleteContactById, deleteAppointmentById, getUserById, updateUserById, getAppointmentById, getAllTests, deleteTestById, getAllLabTests, deleteLabTestById }

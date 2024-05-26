@@ -54,6 +54,7 @@ import BookTest from "./pages/BookTest";
 import LabTestDetails from "./components/LabTest/LabTestDetails";
 import BloodSampleCollectionForm from "./components/LabTest/BloodSampleCollectionForm";
 import BookBloodTest from "./components/LabTest/BookBloodTest";
+import AdminLabTestBookings from "./pages/AdminLabTestBooking";
 
 function App() {
   return (
@@ -101,6 +102,7 @@ function App() {
             <Route path="contacts" element={<AdminContacts />} />
             <Route path="appointments" element={<AdminAppointments />} />
             <Route path="testbookings" element={<AdminTestbookings />} />
+            <Route path="labtestbookings" element={<AdminLabTestBookings />} />
             <Route path="users/:id/edit" element={<AdminUpdate />} />
             <Route
               path="appointments/:id"

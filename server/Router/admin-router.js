@@ -41,4 +41,10 @@ router.route('/appointments/:id').get(authMiddleware, adminMiddleware, adminCont
 router.route('/testbookings').get(authMiddleware, adminMiddleware, adminController.getAllTests)
 // Deleting a Particular testbooking
 router.route('/testbooking/delete/:id').delete(authMiddleware, adminMiddleware, adminController.deleteTestById)
+// ----------------------------------------------------------------------------------------------------------
+// --------------------------------------------Lab Tests-------------------------------------------------
+// testbooking Route
+router.route('/labtestbookings').get(authMiddleware, adminMiddleware, adminController.getAllLabTests)
+// Deleting a Particular testbooking
+router.route('/labtestbooking/delete/:id').delete(authMiddleware, adminMiddleware, adminController.deleteLabTestById)
 module.exports = router;
