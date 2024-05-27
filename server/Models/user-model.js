@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    wallet: {
+        type: Number,
+        default: 0 // Default wallet balance is 0
+    },
     isAdmin: {
         type: Boolean,
         default: false
