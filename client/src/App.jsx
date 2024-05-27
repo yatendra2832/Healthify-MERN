@@ -55,6 +55,7 @@ import LabTestDetails from "./components/LabTest/LabTestDetails";
 import BloodSampleCollectionForm from "./components/LabTest/BloodSampleCollectionForm";
 import BookBloodTest from "./components/LabTest/BookBloodTest";
 import AdminLabTestBookings from "./pages/AdminLabTestBooking";
+import WalletComponent from "./components/UserDashboard/MyWallet/WalletComponent";
 
 function App() {
   return (
@@ -95,6 +96,7 @@ function App() {
           <Route path="/userdashboard" element={<UserDashboard />} />
           <Route path="userdashboard/mybookings" element={<MyBookings />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="userdashboard/wallet/:userId" element={<WalletComponent />} />
 
           {/* Admin Panel */}
           <Route path="/admin" element={<Admin_Layout />}>

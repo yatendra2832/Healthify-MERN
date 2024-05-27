@@ -18,7 +18,10 @@ const UserDashboard = () => {
         <div className="container px-2 py-2" id="featured-3">
           <div className="row g-4">
             <div className="col col-md-6 col-lg-4">
-              <Link to={"/userdashboard/mybookings"} className="text-decoration-none">
+              <Link
+                to={"/userdashboard/mybookings"}
+                className="text-decoration-none"
+              >
                 <UserDashboardCard
                   imageSrc="/images/userDashboard/my-booking.png"
                   altText="my booking"
@@ -34,11 +37,16 @@ const UserDashboard = () => {
               />
             </div>
             <div className="col col-md-6 col-lg-4">
-              <UserDashboardCard
-                imageSrc="/images/userDashboard/wallet-svg-2.svg"
-                altText="my report"
-                title="Healthify Wallets"
-              />
+              <Link
+                to={`/userdashboard/wallet/${user._id}`}
+                className="text-decoration-none"
+              >
+                <UserDashboardCard
+                  imageSrc="/images/userDashboard/wallet-svg-2.svg"
+                  altText="mywallet"
+                  title="Healthify Wallets"
+                />
+              </Link>
             </div>
             <div className="col col-md-6 col-lg-4">
               <UserDashboardCard

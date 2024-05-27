@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }) => {
         isLoggedIn: !!token,
         LogoutUser,
         storeTokenInLS,
-        user,
+        user,setUser,
         AuthorizationToken,
         isLoading,
         doctors
