@@ -1,15 +1,31 @@
-import React from "react";
+// UserDashboardCard.js
+import React from 'react';
+import { Card, CardActionArea, CardContent, CardMedia, Typography, Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
-const UserDashboardCard = ({ imageSrc, altText, title }) => {
+const UserDashboardCard = ({ imageSrc, altText, title, icon: Icon }) => {
+  const theme = useTheme();
+  
   return (
-    <div className="feature col mx-4 shadow p-3 mb-5 bg-body-tertiary rounded userCard w-100 h-100 ">
-      <div className="text-center p-2">
-        <img src={imageSrc} alt={altText} width={100} height={100} />
-      </div>
-      <h3 className="fs-2 text-primary text-center p-2">
-        <a href="#" className="text-decoration-none">{title}</a>
-      </h3>
-    </div>
+    <Card sx={{ height: '100%', borderRadius: 2, boxShadow: 3 }}>
+      <CardActionArea sx={{ height: '100%' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', p: 2, bgcolor: theme.palette.primary.light }}>
+          <Icon sx={{ fontSize: 40, color: theme.palette.primary.main }} />
+        </Box>
+        <CardMedia
+          component="img"
+          height="140"
+          image={imageSrc}
+          alt={altText}
+          sx={{ objectFit: 'contain', p: 2 }}
+        />
+        <CardContent>
+          <Typography variant="h6" component="div" align="center">
+            {title}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 
