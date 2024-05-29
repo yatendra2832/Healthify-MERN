@@ -56,6 +56,7 @@ import BloodSampleCollectionForm from "./components/LabTest/BloodSampleCollectio
 import BookBloodTest from "./components/LabTest/BookBloodTest";
 import AdminLabTestBookings from "./pages/AdminLabTestBooking";
 import WalletComponent from "./components/UserDashboard/MyWallet/WalletComponent";
+import SupplementDetails from "./components/Supplements/SupplementDetails";
 
 function App() {
   return (
@@ -96,7 +97,10 @@ function App() {
           <Route path="/userdashboard" element={<UserDashboard />} />
           <Route path="userdashboard/mybookings" element={<MyBookings />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="userdashboard/wallet/:userId" element={<WalletComponent />} />
+          <Route
+            path="userdashboard/wallet/:userId"
+            element={<WalletComponent />}
+          />
 
           {/* Admin Panel */}
           <Route path="/admin" element={<Admin_Layout />}>
@@ -122,7 +126,9 @@ function App() {
           {/* LabTest Routes */}
           <Route path="/bloodtest/:id" element={<LabTestDetails />} />
           <Route path="bloodtest/booking/:id" element={<BookBloodTest />} />
-          {/* <Route path="bloodtest/booking/:id" element={<BloodSampleCollectionForm />} /> */}
+
+          {/* Supplement Routes */}
+          <Route path="/supplement/:id" element={<SupplementDetails />} />
         </Routes>
         <Footer />
       </BrowserRouter>
