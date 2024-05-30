@@ -20,6 +20,10 @@ const supplementSchema = new mongoose.Schema({
     offerAmount: {
         type: String,
         required: true
+    },
+    description: {
+        type: String,
+        required: true
     }
 })
 
