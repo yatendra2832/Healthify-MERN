@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import AyurvedaWellness from "./AyurvedWellness";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import DiscountButton from "../LabTest/DiscountButton";
 import { FaShoppingCart, FaCartPlus } from "react-icons/fa";
+import { CartContext } from "../../store/CartContext";
+import DiscountButton from "../LabTest/DiscountButton";
+import AyurvedaWellness from "./AyurvedWellness";
 
 const SupplementDetails = () => {
   const [supplementData, setSupplementData] = useState("");
   const { id } = useParams();
+  const { addToCart } = useContext(CartContext);
 
   const getSupplementById = async () => {
     try {
@@ -32,22 +34,37 @@ const SupplementDetails = () => {
     getSupplementById();
   }, [id]);
 
+  const handleAddToCart = () => {
+    addToCart({
+      imgSrc: supplementData.imgSrc,
+      title: supplementData.title,
+      about: supplementData.about,
+      originalPrice: supplementData.originalPrice,
+      offerAmount: supplementData.offerAmount,
+      _id: supplementData._id,
+      description: supplementData.description,
+    });
+  };
+
   return (
     <>
-      <div class="container ">
-        <nav aria-label="breadcrumb ">
-          <ol class="breadcrumb bg-light py-2 px-4">
-            <li class="breadcrumb-item">
-              <Link to="/" class="text-dark">
+      <div className="container">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb bg-light py-2 px-4">
+            <li className="breadcrumb-item">
+              <Link to="/" className="text-dark">
                 Home
               </Link>
             </li>
-            <li class="breadcrumb-item">
-              <Link to="/supplement" class="text-dark">
+            <li className="breadcrumb-item">
+              <Link to="/supplement" className="text-dark">
                 Supplement
               </Link>
             </li>
-            <li class="breadcrumb-item active text-primary" aria-current="page">
+            <li
+              className="breadcrumb-item active text-primary"
+              aria-current="page"
+            >
               {supplementData.title}
             </li>
           </ol>
@@ -57,20 +74,19 @@ const SupplementDetails = () => {
       <div className="container mt-2">
         <div className="card shadow-lg p-3 mb-5 bg-white rounded">
           <div className="row g-0">
-            <div className="col-md-6 text-center ">
+            <div className="col-md-6 text-center">
               <img
                 src={supplementData.imgSrc}
                 alt="Supplement"
                 className="img-fluid rounded h-50"
               />
               <div>
-                <h3 className=" fst-italic text-warning">
-                  {" "}
+                <h3 className="fst-italic text-warning">
                   <span className="fs-2 text-primary text-center fw-bold mt-2">
                     Healthify
-                  </span>{" "}
-                  <hr /> Enhance Your Health with Our Natural Supplements <hr />
-                  Premium Supplements for Optimal Health
+                  </span>
+                  <hr />
+                  {supplementData.description}
                 </h3>
               </div>
             </div>
@@ -89,7 +105,10 @@ const SupplementDetails = () => {
                   <button className="btn btn-primary w-100 mb-2">
                     <FaShoppingCart className="me-2" /> Buy Now
                   </button>
-                  <button className="btn btn-warning w-100">
+                  <button
+                    className="btn btn-warning w-100"
+                    onClick={handleAddToCart}
+                  >
                     <FaCartPlus className="me-2" /> Add To Cart
                   </button>
                 </div>

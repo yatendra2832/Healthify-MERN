@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import DiscountButton from "../LabTest/DiscountButton";
 import { Link } from "react-router-dom";
 import { FaShoppingCart, FaCartPlus } from "react-icons/fa";
+import { CartContext } from "../../store/CartContext";
 const SupplementCard = ({
   imgSrc,
   title,
   about,
   originalPrice,
   offerAmount,
-  _id
+  _id,
+  description,
 }) => {
+  const { addToCart } = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    addToCart({
+      imgSrc,
+      title,
+      about,
+      originalPrice,
+      offerAmount,
+      _id,
+      description,
+    });
+  };
+
   return (
     <div className="col-md-6 mb-4">
       <div className="card border-0 shadow-sm h-100">
@@ -27,14 +43,17 @@ const SupplementCard = ({
               offerAmount={offerAmount}
             />
           </div>
-          <div class="mt-auto row">
-            <div class="col-md-6 ">
-              <button class="btn btn-primary mt-1  btn-block w-100">
+          <div className="mt-auto row">
+            <div className="col-md-6 ">
+              <button className="btn btn-primary mt-1  btn-block w-100">
                 <FaShoppingCart className="mr-1" /> Buy Now
               </button>
             </div>
-            <div class="col-md-6 ">
-              <button class="btn btn-warning mt-1  btn-block w-100">
+            <div className="col-md-6 ">
+              <button
+                className="btn btn-warning mt-1  btn-block w-100"
+                onClick={handleAddToCart}
+              >
                 <FaCartPlus className="mr-1" /> Add To Cart
               </button>
             </div>

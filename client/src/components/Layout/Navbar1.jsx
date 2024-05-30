@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../store/auth";
 import UserProfile from "../UserDashboard/UserProfile";
+import { FaShoppingCart } from "react-icons/fa";
+import { CartContext } from "../../store/CartContext";
+
 const Navbar1 = () => {
+  const { cartItems, removeFromCart } = useContext(CartContext);
+
   const { isLoggedIn, user } = useAuth();
   return (
     <nav className="navbar navbar-expand-lg bg-primary border-bottom sticky-top">
@@ -62,6 +67,19 @@ const Navbar1 = () => {
               <li className="nav-item link-opacity-75 link-opacity-100-hover ">
                 <Link to={"/emergency"} className="nav-link text-white">
                   Emergency
+                </Link>
+              </li>
+              <li className="nav-item link-opacity-75 link-opacity-100-hover ">
+                <Link
+                  to={"/cart"}
+                  type="button"
+                  className="btn btn-primary position-relative"
+                >
+                  <FaShoppingCart />
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {cartItems.length}
+                    <span className="visually-hidden">unread messages</span>
+                  </span>
                 </Link>
               </li>
             </ul>
