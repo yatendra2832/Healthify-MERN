@@ -57,7 +57,8 @@ import BookBloodTest from "./components/LabTest/BookBloodTest";
 import AdminLabTestBookings from "./pages/AdminLabTestBooking";
 import WalletComponent from "./components/UserDashboard/MyWallet/WalletComponent";
 import SupplementDetails from "./components/Supplements/SupplementDetails";
-
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 function App() {
   return (
     <>
@@ -129,6 +130,8 @@ function App() {
 
           {/* Supplement Routes */}
           <Route path="/supplement/:id" element={<SupplementDetails />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
         <Footer />
       </BrowserRouter>
