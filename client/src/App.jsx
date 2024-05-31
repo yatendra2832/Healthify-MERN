@@ -130,7 +130,7 @@ function App() {
 
           {/* Supplement Routes */}
           <Route path="/supplement/:id" element={<SupplementDetails />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart/:userId" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
         </Routes>
         <Footer />

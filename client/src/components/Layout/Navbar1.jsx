@@ -71,7 +71,7 @@ const Navbar1 = () => {
               </li>
               <li className="nav-item link-opacity-75 link-opacity-100-hover ">
                 <Link
-                  to={"/cart"}
+                  to={`/cart/${user._id}`}
                   type="button"
                   className="btn btn-primary position-relative"
                 >
