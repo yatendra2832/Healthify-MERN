@@ -1,52 +1,70 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        require: true
+        required: true
     },
     email: {
         type: String,
-        require: true
+        required: true
     },
     phone: {
         type: String,
-        require: true
+        required: true
     },
     password: {
         type: String,
-        require: true
+        required: true
     },
     wallet: {
         type: Number,
-        default: 0 // Default wallet balance is 0
+        default: 0
     },
     isAdmin: {
         type: Boolean,
         default: false
+    },
+    cart: {
+        items: [{
+            productId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'SupplementCard',
+                required: true
+            },
+            quantity: {
+                type: Number,
+                default: 1
+            },
+            price: {
+                type: Number,
+                required: true
+            }
+        }],
+        bill: {
+            type: Number,
+            default: 0
+        }
     }
-})
+});
 
-// secure the passoword with bcrypt
-userSchema.pre('save', async function () {
-    const user = this;
-
+// Secure the password with bcrypt
+userSchema.pre('save', async function (next) {
     try {
-        const saltRound = await bcrypt.genSalt(10);
-        const hash_password = await bcrypt.hash(user.password, saltRound)
-        user.password = hash_password
-
+        if (this.isModified('password')) {
+            const saltRound = await bcrypt.genSalt(10);
+            const hashPassword = await bcrypt.hash(this.password, saltRound);
+            this.password = hashPassword;
+        }
+        next();
     } catch (error) {
-        next(error)
+        next(error);
     }
+});
 
-})
-
-// Compare the password using bcrypt
-
-
-// JWT token verification
+// JWT token generation
 userSchema.methods.generateToken = async function () {
     try {
         return jwt.sign({
@@ -56,20 +74,22 @@ userSchema.methods.generateToken = async function () {
         },
             process.env.JWT_SECRET_KEY,
             { expiresIn: "30d" }
-        )
+        );
     } catch (error) {
         console.error(error);
     }
-}
+};
 
+// Password verification
 userSchema.methods.matchPassword = async function (password) {
     try {
-        return await bcrypt.compare(password, this.password)
+        return await bcrypt.compare(password, this.password);
     } catch (error) {
-        console.error(error)
+        console.error(error);
     }
-}
+};
 
-const User = new mongoose.model('User', userSchema);
+// Check if the model already exists before defining it
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 module.exports = User;
