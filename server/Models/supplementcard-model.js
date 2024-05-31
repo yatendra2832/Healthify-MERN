@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const supplementSchema = new mongoose.Schema({
     title: {
@@ -25,8 +25,9 @@ const supplementSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-})
+});
 
-const Supplement = mongoose.model('Supplementcard', supplementSchema);
+// Check if the model already exists before defining it
+const Supplement = mongoose.models.Supplementcard || mongoose.model('Supplementcard', supplementSchema);
 
-module.exports = Supplement
+module.exports = Supplement;
