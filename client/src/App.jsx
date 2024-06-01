@@ -59,6 +59,7 @@ import WalletComponent from "./components/UserDashboard/MyWallet/WalletComponent
 import SupplementDetails from "./components/Supplements/SupplementDetails";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import OrderPaymentSuccess from "./components/Cart/OrderPaymentSuccess";
 function App() {
   return (
     <>
@@ -132,6 +133,10 @@ function App() {
           <Route path="/supplement/:id" element={<SupplementDetails />} />
           <Route path="/cart/:userId" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route
+            path="/orderpaymentsuccess"
+            element={<OrderPaymentSuccess />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

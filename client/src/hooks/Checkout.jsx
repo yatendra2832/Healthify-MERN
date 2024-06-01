@@ -25,7 +25,7 @@ const useCheckout = () => {
         amount: order.amount,
         currency: "INR",
         name: "Healthify",
-        description: `${description} Test Booking Payment`,
+        description: `${description} `,
         image: "/images/homepage/logo2.svg",
         order_id: order.id,
         callback_url: "http://localhost:5000/api/payment/paymentverification",

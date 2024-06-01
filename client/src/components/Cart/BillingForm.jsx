@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useRef } from "react";
 
-const BillingForm = ({ paymentMethod, handlePaymentMethodChange, handleSubmit, totalPrice }) => {
+const BillingForm = ({
+  paymentMethod,
+  handlePaymentMethodChange,
+  handleSubmit,
+  totalPrice,
+  onPaymentSubmit,
+}) => {
+  const formRef = useRef(null);
+
   return (
-    <form className="needs-validation" noValidate onSubmit={handleSubmit}>
+    <form
+      className="needs-validation"
+      noValidate
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (formRef.current.checkValidity()) {
+          if (paymentMethod === "payNow") {
+            onPaymentSubmit(totalPrice);
+          } else {
+            handleSubmit(e);
+          }
+        } else {
+          formRef.current.classList.add('was-validated');
+        }
+      }}
+      ref={formRef}
+    >
       <div className="row g-3">
         <div className="col-sm-6">
           <label htmlFor="firstName" className="form-label">First name</label>
@@ -88,6 +112,7 @@ const BillingForm = ({ paymentMethod, handlePaymentMethodChange, handleSubmit, t
           value="cashOnDelivery"
           checked={paymentMethod === "cashOnDelivery"}
           onChange={handlePaymentMethodChange}
+          required
         />
         <label className="form-check-label" htmlFor="cashOnDelivery">
           Cash on Delivery
@@ -103,6 +128,7 @@ const BillingForm = ({ paymentMethod, handlePaymentMethodChange, handleSubmit, t
           value="payNow"
           checked={paymentMethod === "payNow"}
           onChange={handlePaymentMethodChange}
+          required
         />
         <label className="form-check-label" htmlFor="payNow">
           Pay Now
