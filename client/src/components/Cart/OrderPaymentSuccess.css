@@ -1,0 +1,68 @@
+.order-status-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .order-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  .order-status::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #ddd;
+    z-index: 0;
+  }
+  
+  .status-step {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+  }
+  
+  .status-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #1589ee;
+    margin-bottom: 5px;
+  }
+  
+  .status-label {
+    display: block;
+    background-color: #075cfb;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .status-label.active {
+    background-color: #f47920;
+  }
+  
+  .status-label.completed {
+    background-color: #20a3f4;
+  }
+  
+  .status-label.blinking {
+    animation: blinking 1s infinite;
+  }
+  
+  @keyframes blinking {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
