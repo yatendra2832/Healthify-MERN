@@ -6,7 +6,7 @@ import useCheckout from "../hooks/Checkout"; // Adjust the import path based on 
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { cartItems, totalPrice, totalItems } = location.state || {
+  const { products,totalItems,totalPrice } = location.state || {
     cartItems: [],
     totalPrice: 0,
     totalItems: 0,
@@ -34,10 +34,10 @@ const Checkout = () => {
       amount,
       (paymentId) => {
         navigate("/orderpaymentsuccess", {
-          state: { paymentId, cartItems, totalPrice },
+          state: { paymentId, products, totalPrice },
         });
       },
-      "Healthify Test Booking"
+      "Healthify Supplements Payment"
     );
   };
 
@@ -57,7 +57,7 @@ const Checkout = () => {
               </span>
             </h4>
             <ul className="list-group mb-3">
-              {cartItems.map((item, index) => (
+              {products.map((item, index) => (
                 <li
                   key={index}
                   className="list-group-item d-flex justify-content-between lh-sm"
@@ -68,9 +68,7 @@ const Checkout = () => {
                       {item.description}
                     </small>
                   </div>
-                  <span className="text-body-secondary">
-                    ₹ {item.offerAmount}
-                  </span>
+                  <span className="text-body-secondary">₹ {item.price}</span>
                 </li>
               ))}
               <li className="list-group-item d-flex justify-content-between">

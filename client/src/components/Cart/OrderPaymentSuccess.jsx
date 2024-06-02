@@ -33,7 +33,7 @@ const generateInvoiceNumber = () => {
 
 const OrderPaymentSuccess = () => {
   const location = useLocation();
-  const { paymentId, cartItems, totalPrice } = location.state || {};
+  const { paymentId, products, totalPrice } = location.state || {};
 
   const receiptVoucher = generateReceiptVoucher();
   const invoiceDate = getCurrentDate();
@@ -53,7 +53,7 @@ const OrderPaymentSuccess = () => {
           <h2 className="text-center">Receipt</h2>
           <p className="text-center">Receipt Voucher: {receiptVoucher}</p>
         </div>
-        {cartItems.map((item, index) => (
+        {products.map((item, index) => (
           <div key={index} className="order-item row mb-2">
             <div className="col-md-4">
               <img

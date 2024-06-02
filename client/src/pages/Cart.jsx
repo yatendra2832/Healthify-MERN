@@ -21,7 +21,9 @@ const Cart = () => {
 
   const fetchCartItems = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/cart/${userId}`,{method:"GET"});
+      const response = await fetch(`http://localhost:5000/api/cart/${userId}`, {
+        method: "GET",
+      });
       if (response.ok) {
         const cartData = await response.json();
         setCartItems(cartData || []);
@@ -39,12 +41,16 @@ const Cart = () => {
     try {
       const productDetails = await Promise.all(
         cartItems.map(async (item) => {
-          const response = await fetch(`http://localhost:5000/api/supplement/${item.productId}`);
+          const response = await fetch(
+            `http://localhost:5000/api/supplement/${item.productId}`
+          );
           if (response.ok) {
             const productData = await response.json();
             return { ...item, ...productData };
           } else {
-            console.error(`Failed to fetch product details for ID: ${item.productId}`);
+            console.error(
+              `Failed to fetch product details for ID: ${item.productId}`
+            );
             return item; // Return the original item if fetch fails
           }
         })
@@ -60,37 +66,13 @@ const Cart = () => {
     0
   );
 
-  const totalItems = products.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  const totalItems = products.reduce((total, item) => total + item.quantity, 0);
 
   const handleCheckout = () => {
-    navigate("/checkout", { state: { cartItems, totalPrice, totalItems } });
+    navigate("/checkout", { state: { products, totalPrice, totalItems } });
   };
 
-  const decrementQuantity = (itemId) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item._id === itemId
-          ? { ...item, quantity: Math.max(item.quantity - 1, 1) }
-          : item
-      )
-    );
-  };
-
-  const incrementQuantity = (itemId) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item._id === itemId ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-
-  const removeFromCart = (itemId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item._id !== itemId));
-  };
-
+  
   return (
     <div className="container my-5">
       <h1 className="text-center text-primary my-4">Shopping Cart</h1>
@@ -112,8 +94,12 @@ const Cart = () => {
                     </div>
                     <div className="col-md-5">
                       <div className="card-body">
-                        <h5 className="card-title text-primary">{item.title}</h5>
-                        <p className="card-text text-muted">{item.description}</p>
+                        <h5 className="card-title text-primary">
+                          {item.title}
+                        </h5>
+                        <p className="card-text text-muted">
+                          {item.description}
+                        </p>
                         <p className="card-text">
                           <strong>₹ {item.price}</strong>
                         </p>
@@ -155,7 +141,10 @@ const Cart = () => {
             <div className="col-12 text-right">
               <p className="h5">Sub-Total: {totalItems} items</p>
               <p className="h4">Total Price: ₹ {totalPrice}</p>
-              <button onClick={handleCheckout} className="btn btn-primary btn-lg">
+              <button
+                onClick={handleCheckout}
+                className="btn btn-primary btn-lg"
+              >
                 Checkout
               </button>
             </div>

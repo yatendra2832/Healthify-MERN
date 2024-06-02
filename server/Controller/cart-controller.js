@@ -4,7 +4,7 @@ const SupplementCard = require('../models/supplementcard-model');
 // Get cart items for a user
 const get_cart_items = async (req, res) => {
     const userId = req.params.userId;
-    console.log("Fetching cart items for user ID:", userId);
+    // console.log("Fetching cart items for user ID:", userId);
 
     try {
         const user = await User.findById(userId);
