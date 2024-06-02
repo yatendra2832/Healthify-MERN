@@ -4,11 +4,11 @@ import App from "./App.jsx";
 import { AuthProvider } from "./store/auth.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CartProvider } from "./store/CartContext.jsx";
+// import { CartProvider } from "./store/CartContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
-    <CartProvider>
+    {/* <CartProvider> */}
       <React.StrictMode>
         <ToastContainer
           position="top-right"
@@ -25,6 +25,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ToastContainer />
         <App />
       </React.StrictMode>
-    </CartProvider>
+    {/* </CartProvider> */}
   </AuthProvider>
 );

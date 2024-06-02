@@ -39,7 +39,7 @@ const add_cart_item = async (req, res) => {
         let item = await SupplementCard.findById(productId);
         if (!item) {
             return res.status(404).send('Item not found');
-        } 
+        }
 
         const price = item.offerAmount;
         const name = item.title;
@@ -59,7 +59,7 @@ const add_cart_item = async (req, res) => {
         user.cart = cart;
 
         await user.save();
-        res.status(201).send(user.cart);
+        res.status(201).json({ message: "Successfull Added to the Cart" });
     } catch (err) {
         console.log(err);
         res.status(500).send("Something went wrong");

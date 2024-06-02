@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { FaShoppingCart, FaCartPlus } from "react-icons/fa";
-import { CartContext } from "../../store/CartContext";
+// import { CartContext } from "../../store/CartContext";
 import DiscountButton from "../LabTest/DiscountButton";
 import AyurvedaWellness from "./AyurvedWellness";
 
 const SupplementDetails = () => {
   const [supplementData, setSupplementData] = useState("");
   const { id } = useParams();
-  const { addToCart } = useContext(CartContext);
+  // const { addToCart } = useContext(CartContext);
 
   const getSupplementById = async () => {
     try {

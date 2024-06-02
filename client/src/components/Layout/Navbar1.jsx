@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../store/auth";
 import UserProfile from "../UserDashboard/UserProfile";
 import { FaShoppingCart } from "react-icons/fa";
-import { CartContext } from "../../store/CartContext";
+// import { CartContext } from "../../store/CartContext";
 
 const Navbar1 = () => {
-  const { cartItems, removeFromCart } = useContext(CartContext);
+  // const { cartItems, removeFromCart } = useContext(CartContext);
 
   const { isLoggedIn, user } = useAuth();
   return (
@@ -76,10 +76,10 @@ const Navbar1 = () => {
                   className="btn btn-primary position-relative"
                 >
                   <FaShoppingCart />
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {/* <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                     {cartItems.length}
                     <span className="visually-hidden">unread messages</span>
-                  </span>
+                  </span> */}
                 </Link>
               </li>
             </ul>

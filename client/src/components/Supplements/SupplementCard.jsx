@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import DiscountButton from "../LabTest/DiscountButton";
+import React from "react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart, FaCartPlus } from "react-icons/fa";
-import { CartContext } from "../../store/CartContext";
+import DiscountButton from "../LabTest/DiscountButton";
+import { toast } from "react-toastify";
 const SupplementCard = ({
   imgSrc,
   title,
@@ -11,19 +11,36 @@ const SupplementCard = ({
   offerAmount,
   _id,
   description,
+  userId
 }) => {
-  const { addToCart } = useContext(CartContext);
+  const handleAddToCart = async () => {
+    if (!userId) {
+      console.error("User ID is not defined");
+      return;
+    }
 
-  const handleAddToCart = () => {
-    addToCart({
-      imgSrc,
-      title,
-      about,
-      originalPrice,
-      offerAmount,
-      _id,
-      description,
-    });
+    try {
+      const response = await fetch(`http://localhost:5000/api/cart/${userId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: _id,
+          quantity: 1, // Assuming you're adding only one item at a time
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        toast.success(data.message)
+      } else {
+        toast.error(error.message)
+        console.error("Failed to add item to cart");
+      }
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+    }
   };
 
   return (
