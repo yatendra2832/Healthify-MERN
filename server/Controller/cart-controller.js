@@ -11,10 +11,9 @@ const get_cart_items = async (req, res) => {
         if (!user) {
             return res.status(404).send('User not found');
         }
-        console.log("User:", user);
+        // console.log("User:", user);
 
         const cart = user.cart;
-        console.log("Cart:", cart);
         if (cart && cart.items.length > 0) {
             res.status(200).json(cart.items);
         } else {
