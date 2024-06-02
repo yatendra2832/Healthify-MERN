@@ -61,6 +61,62 @@ const Cart = () => {
     }
   };
 
+  const updateQuantity = async (productId, newQuantity) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/cart/${userId}/${productId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ quantity: newQuantity }),
+        }
+      );
+      if (response.ok) {
+        const updatedCart = await response.json();
+        setCartItems(updatedCart.items);
+      } else {
+        console.error("Failed to update item quantity");
+      }
+    } catch (error) {
+      console.error("Error updating item quantity:", error);
+    }
+  };
+
+  const incrementQuantity = (productId) => {
+    const item = cartItems.find((item) => item.productId === productId);
+    if (item) {
+      updateQuantity(productId, item.quantity + 1);
+    }
+  };
+
+  const decrementQuantity = (productId) => {
+    const item = cartItems.find((item) => item.productId === productId);
+    if (item && item.quantity > 1) {
+      updateQuantity(productId, item.quantity - 1);
+    }
+  };
+
+  const removeFromCart = async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/cart/${userId}/${productId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        const updatedCart = await response.json();
+        setCartItems(updatedCart.items);
+      } else {
+        console.error("Failed to remove item from cart");
+      }
+    } catch (error) {
+      console.error("Error removing item from cart:", error);
+    }
+  };
+
   const totalPrice = products.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -72,7 +128,6 @@ const Cart = () => {
     navigate("/checkout", { state: { products, totalPrice, totalItems } });
   };
 
-  
   return (
     <div className="container my-5">
       <h1 className="text-center text-primary my-4">Shopping Cart</h1>
@@ -110,7 +165,7 @@ const Cart = () => {
                         <button
                           type="button"
                           className="btn btn-outline-secondary"
-                          onClick={() => decrementQuantity(item._id)}
+                          onClick={() => decrementQuantity(item.productId)}
                         >
                           -
                         </button>
@@ -120,14 +175,14 @@ const Cart = () => {
                         <button
                           type="button"
                           className="btn btn-outline-secondary"
-                          onClick={() => incrementQuantity(item._id)}
+                          onClick={() => incrementQuantity(item.productId)}
                         >
                           +
                         </button>
                       </div>
                       <button
                         className="btn btn-danger mt-2"
-                        onClick={() => removeFromCart(item._id)}
+                        onClick={() => removeFromCart(item.productId)}
                       >
                         Remove
                       </button>
