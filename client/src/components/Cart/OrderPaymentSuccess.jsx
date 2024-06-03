@@ -33,7 +33,7 @@ const generateInvoiceNumber = () => {
 
 const OrderPaymentSuccess = () => {
   const location = useLocation();
-  const { paymentId, products, totalPrice } = location.state || {};
+  const { paymentId, products, totalPrice, formData } = location.state || {};
 
   const receiptVoucher = generateReceiptVoucher();
   const invoiceDate = getCurrentDate();
@@ -41,6 +41,7 @@ const OrderPaymentSuccess = () => {
 
   const currentStage = "Ordered"; // This should be dynamically set based on the actual order status
   const stages = ["Ordered", "Shipped", "On way", "Delivered"];
+  console.log(formData)
 
   return (
     <div className="container mt-2 mb-5 p-2 border rounded shadow-lg bg-light">
@@ -49,9 +50,17 @@ const OrderPaymentSuccess = () => {
         <p className="text-white fst-italic fs-4">Supplement Order</p>
       </div>
       <div className="order-receipt">
-        <div className="receipt-header mb-2">
-          <h2 className="text-center">Receipt</h2>
-          <p className="text-center">Receipt Voucher: {receiptVoucher}</p>
+        <h2 className="text-center">Receipt</h2>
+        <div className="receipt-header mb-2 d-flex justify-content-around">
+          <div className="text-center">
+            {" "}
+            <strong> Receipt Voucher :</strong> {receiptVoucher}
+          </div>
+          <div className="text-center">
+            {" "}
+            <strong>Payment Id :</strong>
+            {paymentId}
+          </div>
         </div>
         {products.map((item, index) => (
           <div key={index} className="order-item row mb-2">
@@ -81,6 +90,9 @@ const OrderPaymentSuccess = () => {
               </p>
               <p>
                 <strong>Receipt Voucher:</strong> {receiptVoucher}
+              </p>
+              <p>
+                <strong>Address:</strong> {formData}
               </p>
             </div>
           </div>
@@ -113,7 +125,9 @@ const OrderPaymentSuccess = () => {
                     ? "active"
                     : ""
                 }`}
-              >{stage}</div>
+              >
+                {stage}
+              </div>
               <span
                 className={`status-label ${
                   currentStage === stage
@@ -122,8 +136,7 @@ const OrderPaymentSuccess = () => {
                     ? "completed"
                     : ""
                 }`}
-              >
-              </span>
+              ></span>
             </div>
           ))}
         </div>

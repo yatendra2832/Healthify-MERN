@@ -6,8 +6,8 @@ import useCheckout from "../hooks/Checkout"; // Adjust the import path based on 
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { products,totalItems,totalPrice } = location.state || {
-    cartItems: [],
+  const { products, totalItems, totalPrice } = location.state || {
+    products: [],
     totalPrice: 0,
     totalItems: 0,
   };
@@ -18,18 +18,20 @@ const Checkout = () => {
     setPaymentMethod(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, formData) => {
     event.preventDefault();
     if (paymentMethod === "payNow") {
       // This part will be handled in the onPaymentSubmit function in BillingForm
     } else if (paymentMethod === "cashOnDelivery") {
-      alert("Checkout with Cash on Delivery");
+      navigate("/orderconfirmation", {
+        state: { formData, products, totalPrice },
+      });
     } else {
       alert("Please select a payment method.");
     }
   };
 
-  const onPaymentSubmit = async (amount) => {
+  const onPaymentSubmit = async (amount, formData) => {
     await checkoutHandler(
       amount,
       (paymentId) => {
