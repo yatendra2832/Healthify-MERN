@@ -6,21 +6,21 @@ const LabTest = require('../Models/labtest-model')
 // -------------------------------------------------------------------------------
 // -----------------------------USERS---------------------------------------------
 // getting all users
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res,next) => {
     try {
-        const users = await User.find().select({ password: 0 });
+        const users = await User.find().select({ password: 0,cart:0 });
         if (!users || users.length === 0) {
             return res.status(404).json({ message: "No Users Found" })
         }
         return res.status(200).json({ users })
     } catch (error) {
+        console.log(error.message);
         next(error);
-
     }
 }
 
 // getting user by id 
-const getUserById = async (req, res) => {
+const getUserById = async (req, res,next) => {
     try {
         const id = req.params.id;
         const data = await User.findOne({ _id: id }, { password: 0 })
@@ -31,7 +31,7 @@ const getUserById = async (req, res) => {
 }
 
 // updating user by id
-const updateUserById = async (req, res) => {
+const updateUserById = async (req, res,next) => {
     try {
         const id = req.params.id;
 
@@ -62,7 +62,7 @@ const deleteUserById = async (req, res, next) => {
 // ---------------------------------- CONTACTS-------------------------------------
 
 // Getting all the contacts
-const getAllContacts = async (req, res) => {
+const getAllContacts = async (req, res,next) => {
     try {
         const contacts = await Contact.find();
         if (!contacts || contacts.length === 0) {
@@ -91,7 +91,7 @@ const deleteContactById = async (req, res, next) => {
 // ----------------------------------------APPOINTMENTS--------------------------------------
 
 // Getting all the appointments data
-const getAllAppointments = async (req, res) => {
+const getAllAppointments = async (req, res,next) => {
     try {
         const appointment = await Appointment.find();
         if (!appointment || appointment.length === 0) {
@@ -116,7 +116,7 @@ const deleteAppointmentById = async (req, res, next) => {
 }
 
 // Getting appointment by id 
-const getAppointmentById = async (req, res) => {
+const getAppointmentById = async (req, res,next) => {
     try {
         const id = req.params.id;
         const data = await Appointment.findOne({ _id: id })
@@ -128,7 +128,7 @@ const getAppointmentById = async (req, res) => {
 
 // ----------------------------------------------------------------------------------------------------------
 // -------------------------------------------------Tests Controllers----------------------------------------
-const getAllTests = async (req, res) => {
+const getAllTests = async (req, res,next) => {
     try {
         const tests = await TestBooking.find();
         if (!tests || tests.length === 0) {
@@ -155,7 +155,7 @@ const deleteTestById = async (req, res, next) => {
 
 // ----------------------------------------------------------------------------------------------------------
 // ----------------------------------------------Lab Tests Controllers----------------------------------------
-const getAllLabTests = async (req, res) => {
+const getAllLabTests = async (req, res,next) => {
     try {
         const tests = await LabTest.find();
         if (!tests || tests.length === 0) {

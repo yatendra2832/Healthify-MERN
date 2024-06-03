@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../store/auth';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../store/auth";
+import { Link } from "react-router-dom";
 
-import { MdDeleteForever } from 'react-icons/md';
-import { FaEdit } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
-import { FaPhoneAlt } from 'react-icons/fa';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { MdDeleteForever } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
 
 const API_ENDPOINTS = {
-  getUsers: 'http://localhost:5000/api/admin/users',
+  getUsers: "http://localhost:5000/api/admin/users",
   deleteUser: (id) => `http://localhost:5000/api/admin/users/delete/${id}`,
 };
 
@@ -20,7 +20,7 @@ const AdminUsers = () => {
   const fetchUsers = async () => {
     try {
       const response = await fetch(API_ENDPOINTS.getUsers, {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: AuthorizationToken,
         },
@@ -36,7 +36,7 @@ const AdminUsers = () => {
   const handleDeleteUser = async (id) => {
     try {
       const response = await fetch(API_ENDPOINTS.deleteUser(id), {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
           Authorization: AuthorizationToken,
         },
@@ -60,7 +60,7 @@ const AdminUsers = () => {
         <thead>
           <tr>
             <th>
-              Name <FaRegUserCircle className="fs-5 mx-1" />{' '}
+              Name <FaRegUserCircle className="fs-5 mx-1" />{" "}
             </th>
             <th>
               Email <MdEmail className="fs-5 mx-1" />
