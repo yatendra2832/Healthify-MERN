@@ -32,9 +32,10 @@ const UserProfile = ({ user }) => {
           </Link>
         </li>
         <li>
-          <a className="dropdown-item" href="#">
-            Settings
-          </a>
+          <Link to={"/userlocation"} className="text-decoration-none dropdown-item">
+            {" "}
+            Location
+          </Link>
         </li>
         <li>
           <Link to={"/profile"} className="text-decoration-none dropdown-item">
@@ -42,6 +43,12 @@ const UserProfile = ({ user }) => {
             Profile
           </Link>
         </li>
+        <li>
+          <a className="dropdown-item" href="#">
+            Settings
+          </a>
+        </li>
+
         <li>
           <hr className="dropdown-divider" />
         </li>

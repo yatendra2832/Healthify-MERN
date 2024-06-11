@@ -61,6 +61,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import OrderPaymentSuccess from "./components/Cart/OrderPaymentSuccess";
 import OrderConfirmation from "./components/Cart/OrderConfirmation";
+import UserLocation from "./components/UserDashboard/UserLocation";
 function App() {
   return (
     <>
@@ -100,6 +101,7 @@ function App() {
           <Route path="/userdashboard" element={<UserDashboard />} />
           <Route path="userdashboard/mybookings" element={<MyBookings />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/userlocation" element={<UserLocation/>}/>
           <Route
             path="userdashboard/wallet/:userId"
             element={<WalletComponent />}
