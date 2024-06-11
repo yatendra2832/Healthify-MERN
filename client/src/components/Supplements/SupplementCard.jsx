@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FaShoppingCart, FaCartPlus } from "react-icons/fa";
 import DiscountButton from "../LabTest/DiscountButton";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 const SupplementCard = ({
   imgSrc,
   title,
@@ -11,8 +13,10 @@ const SupplementCard = ({
   offerAmount,
   _id,
   description,
-  userId
+  userId,
 }) => {
+  const navigate = useNavigate();
+
   const handleAddToCart = async () => {
     if (!userId) {
       console.error("User ID is not defined");
@@ -33,14 +37,32 @@ const SupplementCard = ({
 
       if (response.ok) {
         const data = await response.json();
-        toast.success(data.message)
+        toast.success(data.message);
       } else {
-        toast.error(error.message)
+        toast.error(error.message);
         console.error("Failed to add item to cart");
       }
     } catch (error) {
       console.error("Error adding item to cart:", error);
     }
+  };
+  const products = [
+    {
+      productId: _id,
+      title: title,
+      description: description,
+      price: offerAmount,
+      quantity: 1,
+      imgSrc: imgSrc,
+    },
+  ];
+  const totalPrice = Number(offerAmount); // Ensure this is a number
+  const totalItems = 1;
+
+  const handleCheckout = () => {
+    // console.log(products, totalItems, totalPrice);
+
+    navigate("/checkout", { state: { products, totalPrice, totalItems } });
   };
 
   return (
@@ -62,7 +84,10 @@ const SupplementCard = ({
           </div>
           <div className="mt-auto row">
             <div className="col-md-6 ">
-              <button className="btn btn-primary mt-1  btn-block w-100">
+              <button
+                className="btn btn-primary mt-1  btn-block w-100"
+                onClick={handleCheckout}
+              >
                 <FaShoppingCart className="mr-1" /> Buy Now
               </button>
             </div>

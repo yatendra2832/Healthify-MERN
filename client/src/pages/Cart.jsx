@@ -125,6 +125,7 @@ const Cart = () => {
   const totalItems = products.reduce((total, item) => total + item.quantity, 0);
 
   const handleCheckout = () => {
+    // console.log(products,totalItems,totalPrice);
     navigate("/checkout", { state: { products, totalPrice, totalItems } });
   };
 
