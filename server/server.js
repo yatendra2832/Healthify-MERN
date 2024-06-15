@@ -18,6 +18,7 @@ const labtestcardRouter = require('./Router/labtestcard-router')
 const labtestBookingRouter = require('./Router/labtestBooking-router')
 const supplementRouter = require('./Router/supplement-router')
 const cartRouter = require('./Router/cart-router')
+const smsRouter = require('./Router/send-sms');
 // Middlewares
 //cors policy handling
 const corsOptions = {
@@ -40,6 +41,7 @@ app.use('/api/labtestbooking', labtestBookingRouter)
 app.use('/api/labtestcards', labtestcardRouter)
 app.use('/api/supplement', supplementRouter)
 app.use('/api/cart', cartRouter)
+app.use('/api/sendsms',smsRouter)
 
 
 app.use(errorMiddleware)
