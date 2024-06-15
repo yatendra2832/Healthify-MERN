@@ -109,7 +109,24 @@ const Appointment = () => {
       );
 
       if (response.ok) {
+        const data = await response.json();
+        console.log(data);
         toast.success("Appointment Form Submitted successfully");
+
+        // Send SMS
+        const phoneNumber = "+918750145379"; // Replace with user's phone number in E.164 format
+        const message = `Your appointment on ${data.preferredDate} at ${data.preferredTime} with ${data.preferredProvider} at Healthify has been confirmed. Call +91 8750145379/89/99 for any queries. AppointmentId:${data._id}`;
+
+        await fetch("http://localhost:5000/api/sendsms", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            phoneNumber,
+            message,
+          }),
+        });
         setValue(1); // Switch to the payment tab after successful form submission
         setAppointment({
           fullName: "",
