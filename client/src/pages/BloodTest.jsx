@@ -71,7 +71,7 @@ const BloodTest = () => {
             Popular Tests
           </strong>
         </h1>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 my-4">
+        <div className="row  g-3 my-4">
           {cardsData.map((card, index) => (
             <LabTestCard key={index} {...card} />
           ))}
