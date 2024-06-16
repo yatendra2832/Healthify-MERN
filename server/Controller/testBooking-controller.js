@@ -3,8 +3,8 @@ const TestBooking = require('../Models/testBooking-model')
 const testBooking = async (req, res) => {
     try {
         const response = req.body;
-        await TestBooking.create(response);
-        res.status(200).json({ message: "Test Booking Form Submitted Successfully" })
+        const newTestBooking = await TestBooking.create(response);
+        res.status(200).json({ message: "Test Booking Form Submitted Successfully" , data:newTestBooking })
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error at TestBooking", error: error.message });
     }

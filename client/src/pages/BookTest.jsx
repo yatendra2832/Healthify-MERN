@@ -144,8 +144,25 @@ const BookTest = () => {
       );
 
       if (response.ok) {
+        const data = await response.json()
+        const details = await data.data
+         // Send SMS
+         const phoneNumber = "+918750145379"; // Replace with user's phone number in E.164 format
+         const message = `${details.patientName} your ${details.testType} Test booked for Date ${details.date} at  Healthify has been confirmed. Call +91 8750145379/89/99 for any queries. TestId:${details._id}`;
+ 
+         await fetch("http://localhost:5000/api/sendsms", {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+           },
+           body: JSON.stringify({
+             phoneNumber,
+             message,
+           }),
+         });
         toast.success("Test Booking Submitted Successfully");
         navigate('/tests')
+
       } else {
         alert("Failed to submit form data after payment.");
       }

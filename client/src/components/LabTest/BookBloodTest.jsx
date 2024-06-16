@@ -139,6 +139,23 @@ const BookBloodTest = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
+        const details = await data.data;
+        // console.log(details);
+        // Send SMS
+        const phoneNumber = "+918750145379"; // Replace with user's phone number in E.164 format
+        const message = `Hi ${details.name}, your ${details.testName} blood test is booked for ${details.appointmentDate} at Healthify. Call +91 8750145379 / 89 / 99 for queries. Test ID: ${details._id}. Thank you!`;
+
+        await fetch("http://localhost:5000/api/sendsms", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            phoneNumber,
+            message,
+          }),
+        });
         toast.success("Test Booking Submitted Successfully");
         navigate("/bloodtest");
       } else {

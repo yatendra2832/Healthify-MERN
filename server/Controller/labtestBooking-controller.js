@@ -3,8 +3,8 @@ const LabTest = require('../Models/labtest-model')
 const testBooking = async (req, res) => {
     try {
         const response = req.body;
-        await LabTest.create(response);
-        res.status(200).json({ message: "Lab Test Booking Form Submitted Successfully" })
+       const newLabTest = await LabTest.create(response);
+        res.status(200).json({ message: "Lab Test Booking Form Submitted Successfully" ,data:newLabTest})
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error at TestBooking", error: error.message });
     }

@@ -110,7 +110,7 @@ const Appointment = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         toast.success("Appointment Form Submitted successfully");
 
         // Send SMS
